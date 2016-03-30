@@ -16,6 +16,8 @@ namespace TestsGA
             var pp = new RandomPairFormation();
 
             List<DesignPoint> dd = new List<DesignPoint>();
+            Chromosome hr = new Chromosome(1, 1, 1, "");
+            DesignPoint dss = new DesignPoint(1, 1, hr);
             dd.Add(new DesignPoint(1, 1, new Chromosome(1, 1, 1, "s")));
             dd.Add(new DesignPoint(1, 2, new Chromosome(1, 1, 1, "s")));
             dd.Add(new DesignPoint(1, 3, new Chromosome(1, 1, 1, "s")));
