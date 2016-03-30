@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace TestsGA
 {
     [TestClass]
-    public class UnitTest1
+    public class PairFormationTest
     {
         [TestMethod]
         public void TestMethod1()
@@ -20,7 +20,8 @@ namespace TestsGA
             dd.Add(new DesignPoint(1, 2, new Chromosome(1, 1, 1, "s")));
             dd.Add(new DesignPoint(1, 3, new Chromosome(1, 1, 1, "s")));
 
-            pp.FormatPairs(dd);
+            List<Pair> list = (List<Pair>)pp.FormatPairs(dd);
+            Assert.AreEqual(list.Count, 2);
         }
     }
 }
