@@ -53,6 +53,26 @@ namespace GeneticAlgorithm.Chromosome
         }
         #endregion
 
+        public double GetValue()
+        {
+            var sign = this.Binary.Substring(0, 1);
+            var left = this.Binary.Substring(1, Length);
+            left = left.TrimStart('0');
+            left = left.Length == 0 ? "0" : left;
+            var right = this.Binary.Substring(Length + 1);
+            right = right.TrimStart('0');
+            right = right.Length == 0 ? "0" : right;
+
+            string result = string.Empty;
+
+            if (sign == "0")
+                result += "-";
+
+            result += Convert.ToInt32(left, 2).ToString() + "." + Convert.ToInt32(right, 2).ToString();
+
+            return Convert.ToDouble(result, CultureInfo.InvariantCulture);
+        }
+
         #region Private methods
         private string GetBinary()
         {
@@ -62,18 +82,12 @@ namespace GeneticAlgorithm.Chromosome
 
             result += GetFirstPart(sub[0]);
 
-            if(sub.Length > 1)
+            if (sub.Length > 1)
                 result += GetSecondPart(sub[1]);
             else
                 result += GetSecondPart("0");
 
             return result;
-        }
-
-        private double GetValue()
-        {
-            //throw new NotImplementedException();
-            return BitConverter.Int64BitsToDouble(Convert.ToInt64(this.Binary, 2));
         }
 
         private int GetLength()
@@ -106,13 +120,13 @@ namespace GeneticAlgorithm.Chromosome
 
             string[] subAcc = Accuracy.ToString(CultureInfo.InvariantCulture).Split('.');
 
-            if (subAcc.Length < 1)
+            if (subAcc.Length <= 1)
                 throw new ArgumentException();
 
             int j = 1;
             for (int i = 0; i < subAcc[1].Length; i++)
             {
-                j *= j; 
+                j *= j;
             }
 
             j = j - 1;
