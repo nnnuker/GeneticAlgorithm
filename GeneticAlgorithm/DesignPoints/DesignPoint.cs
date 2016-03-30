@@ -18,6 +18,11 @@ namespace GeneticAlgorithm.DesignPoints
 
         #endregion
 
+        public DesignPoint()
+        {
+
+        }
+
         public DesignPoint(int populationNumber, int id, params IChromosome[] x)
         {
             if (x == null)

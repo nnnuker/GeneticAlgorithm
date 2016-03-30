@@ -7,15 +7,20 @@ namespace GeneticAlgorithm.PairFormation
 {
     public class RandomPairFormation : IPairFormation
     {
+        #region Field
         Random random;
         List<int> usedNumbers;
+        #endregion
 
+        #region Constructor
         public RandomPairFormation()
         {
             random = new Random(DateTime.Now.Millisecond);
             usedNumbers = new List<int>();
         }
+        #endregion  
 
+        #region Public methods
         public IEnumerable<IPair> FormatPairs(IEnumerable<IDesignPoint> designPoints)
         {
             var pairs = new List<IPair>();
@@ -23,13 +28,13 @@ namespace GeneticAlgorithm.PairFormation
 
             int first, second;
 
-            for (int i = 0; i < count/2; i++)
+            for (int i = 0; i < count / 2; i++)
             {
                 do
                 {
                     first = random.Next(count);
                 }
-                while (CheckNumber(first));
+                while (usedNumbers.Contains(first));
 
                 usedNumbers.Add(first);
 
@@ -37,35 +42,23 @@ namespace GeneticAlgorithm.PairFormation
                 {
                     second = random.Next(count);
                 }
-                while (CheckNumber(second));
+                while (usedNumbers.Contains(second));
 
                 usedNumbers.Add(second);
                 pairs.Add(new Pair { First = designPoints.ElementAt(first), Second = designPoints.ElementAt(second) });
             }
-            
+
             if (count % 2 != 0)
             {
-                var i = 0;
-
-                foreach (var usedNumber in usedNumbers)
+                for (int i = 0; i < count; i++)
                 {
-                   if (i != usedNumber)
+                    if (!usedNumbers.Contains(i))
                         pairs.Add(new Pair { First = designPoints.ElementAt(i), Second = null });
                 }
             }
 
             return pairs;
-
         }
-
-        private bool CheckNumber(int number)
-        {
-            foreach (var usedNumber in usedNumbers)
-            {
-                if (number == usedNumber)
-                    return false;
-            }
-            return true;
-        }
+        #endregion
     }
 }
