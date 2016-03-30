@@ -14,7 +14,7 @@ namespace GeneticAlgorithm
 {
     public class GAlgorithm
     {
-        string ss = "ss";
+        string ss = "ss!";
         ICrossover crossover;
         IDescendants descendants;
         IPairFormation pairFormation;
