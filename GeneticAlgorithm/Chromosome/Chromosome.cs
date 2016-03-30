@@ -20,6 +20,11 @@ namespace GeneticAlgorithm.Chromosome
         #endregion
 
         #region Constructors
+        public Chromosome()
+        {
+
+        }
+
         public Chromosome(double accuracy, double left, double right, string name)
         {
             if (accuracy < 0 || left > right)
@@ -49,6 +54,7 @@ namespace GeneticAlgorithm.Chromosome
         #region Private methods
         private string GetBinary()
         {
+            return "";
             GetLength();
 
             string[] sub = (this.Value).ToString(CultureInfo.InvariantCulture).Split('.');
@@ -56,14 +62,14 @@ namespace GeneticAlgorithm.Chromosome
             string result = null;
 
             result += GetFirstPart(sub[0]);
-            result += GetSecondPart(sub[1]);
+            //result += GetSecondPart(sub[1]);
 
             return result;
         }
 
         private double GetValue()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             return BitConverter.Int64BitsToDouble(Convert.ToInt64(this.Binary, 2));
         }
 
@@ -75,7 +81,8 @@ namespace GeneticAlgorithm.Chromosome
 
             var subStr = Convert.ToString(Convert.ToInt32(bigger.ToString(), 10), 2);
 
-            Length = subStr.Length;
+
+            Length = subStr.Length < 4 ? 4 : subStr.Length;
         }
 
         private string GetFirstPart(string sub)
@@ -92,10 +99,10 @@ namespace GeneticAlgorithm.Chromosome
 
         private string GetSecondPart(string sub)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             var binaryStr = Convert.ToString(Convert.ToInt32(sub, 10), 2);
 
-            if (binaryStr.Length < Accuracy)
+            if (binaryStr.Length < 4)
             {
                 binaryStr.PadLeft(Length - binaryStr.Length, '0');
             }
