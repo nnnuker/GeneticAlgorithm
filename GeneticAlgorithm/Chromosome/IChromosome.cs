@@ -12,7 +12,7 @@ namespace GeneticAlgorithm.Chromosome
         double Left { get; set; }
         double Right { get; set; }
         double Value { get; set; }
-        string Binary { get; set; }
+        string Binary { get; }
         double Accuracy { get; set; }
     }
 }
