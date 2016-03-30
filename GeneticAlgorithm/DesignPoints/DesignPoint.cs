@@ -10,72 +10,11 @@ namespace GeneticAlgorithm.DesignPoints
     public class DesignPoint : IDesignPoint
     {
         #region Properties
-        public double FunctionValue
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string X1X2
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int ID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int PopulationNumber
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public List<IChromosome> X
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-
+        public double FunctionValue { get; set; }
+        public string X1X2 { get; set; }
+        public int ID { get; set; }
+        public int PopulationNumber { get; set; }
+        public List<IChromosome> X { get; set; }
 
         #endregion
 
@@ -96,12 +35,18 @@ namespace GeneticAlgorithm.DesignPoints
 
         private double CalculateFunc(params IChromosome[] x)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return 0;
         }
 
         private string GetBinary(params IChromosome[] x)
         {
-            throw new NotImplementedException();
+            string result = string.Empty;
+            foreach (var item in x)
+            {
+                result += item.Binary;
+            }
+            return result;
         }
     }
 }
