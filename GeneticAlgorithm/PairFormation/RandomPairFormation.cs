@@ -23,6 +23,11 @@ namespace GeneticAlgorithm.PairFormation
         #region Public methods
         public IEnumerable<IPair> FormatPairs(IEnumerable<IDesignPoint> designPoints)
         {
+            if (designPoints == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             var pairs = new List<IPair>();
             var count = designPoints.Count();
 
