@@ -9,30 +9,8 @@ namespace GeneticAlgorithm.PairFormation
 {
     public class Pair : IPair
     {
-        public IDesignPoint First
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public IDesignPoint First { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IDesignPoint Second
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IDesignPoint Second { get; set; }
     }
 }
