@@ -9,7 +9,7 @@ namespace GeneticAlgorithm.PairFormation
 {
     public class RandomPairFormation : IPairFormation
     {
-        public IEnumerable<IPair> FormatPairs(IEnumerable<DesignPoint> designPoints)
+        public IEnumerable<IPair> FormatPairs(IEnumerable<IDesignPoint> designPoints)
         {
             throw new NotImplementedException();
         }

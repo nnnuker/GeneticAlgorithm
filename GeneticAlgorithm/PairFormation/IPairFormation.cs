@@ -9,6 +9,6 @@ namespace GeneticAlgorithm.PairFormation
 {
     public interface IPairFormation
     {
-        IEnumerable<IPair> FormatPairs(IEnumerable<DesignPoint> designPoints);
+        IEnumerable<IPair> FormatPairs(IEnumerable<IDesignPoint> designPoints);
     }
 }

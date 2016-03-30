@@ -9,77 +9,18 @@ namespace GeneticAlgorithm.Chromosome
     public class Chromosome : IChromosome
     {
         #region Properties
-        public string Binary
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public double Value
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public double Accuracy { get; set; }
-
-        public double Left
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public double Right
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string Binary { get; }
+        public double Value { get; set; }
+        public double Left { get; set; }
+        public double Right { get; set; }
+        public string Name { get; set; }
         #endregion
 
+        #region Constructors
         public Chromosome(double accuracy, double left, double right, string name)
         {
-            if (accuracy < 0)
+            if (accuracy < 0 || left > right)
                 throw new ArgumentOutOfRangeException();
 
             this.Name = name;
@@ -91,7 +32,7 @@ namespace GeneticAlgorithm.Chromosome
 
         public Chromosome(double accuracy, double left, double right, double value, string name)
         {
-            if (accuracy < 0)
+            if (accuracy < 0 || left > right)
                 throw new ArgumentOutOfRangeException();
 
             this.Name = name;
@@ -101,10 +42,12 @@ namespace GeneticAlgorithm.Chromosome
             this.Value = value;
             this.Binary = GetBinary();
         }
+        #endregion
 
         private string GetBinary()
         {
             throw new NotImplementedException();
+            
         }
     }
 }
