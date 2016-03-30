@@ -57,9 +57,9 @@
     <Compile Include="PairFormation\Pair.cs" />
     <Compile Include="PairFormation\RandomPairFormation.cs" />
     <Compile Include="PairFormation\SeveralBestPairFormation.cs" />
-    <Compile Include="Population\IPopulation.cs" />
-    <Compile Include="Population\NetPopulation.cs" />
-    <Compile Include="Population\RandomPopulation.cs" />
+    <Compile Include="PairFormation\Population\IPopulation.cs" />
+    <Compile Include="PairFormation\Population\NetPopulation.cs" />
+    <Compile Include="PairFormation\Population\RandomPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectPoints\BestSelectPoints.cs" />
     <Compile Include="SelectPoints\ClassicRouletteSelectPoints.cs" />
