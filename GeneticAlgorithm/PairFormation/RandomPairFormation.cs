@@ -8,8 +8,8 @@ namespace GeneticAlgorithm.PairFormation
     public class RandomPairFormation : IPairFormation
     {
         #region Field
-        Random random;
-        List<int> usedNumbers;
+        private Random random;
+        private List<int> usedNumbers;
         #endregion
 
         #region Constructor
@@ -24,9 +24,8 @@ namespace GeneticAlgorithm.PairFormation
         public IEnumerable<IPair> FormatPairs(IEnumerable<IDesignPoint> designPoints)
         {
             if (designPoints == null)
-            {
                 throw new ArgumentNullException();
-            }
+            
 
             var pairs = new List<IPair>();
             var count = designPoints.Count();

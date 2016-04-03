@@ -17,6 +17,7 @@ namespace GeneticAlgorithm.Chromosome
         public double Left { get; set; }
         public double Right { get; set; }
         public string Name { get; set; }
+        public bool IsCorrect { get { return Value >= Left && Value <= Right; } }
         #endregion
 
         #region Constructors
@@ -36,6 +37,20 @@ namespace GeneticAlgorithm.Chromosome
             this.Right = right;
             this.Length = GetLength();
             this.Binary = GetBinary();
+        }
+
+        public Chromosome(double accuracy, double left, double right, string binary, string name)
+        {
+            if (accuracy < 0 || left > right)
+                throw new ArgumentOutOfRangeException();
+
+            this.Name = name;
+            this.Accuracy = accuracy;
+            this.Left = left;
+            this.Right = right;
+            this.Binary = binary;
+            this.Value = GetValue();
+            this.Length = GetLength();
         }
 
         public Chromosome(double accuracy, double left, double right, double value, string name)

@@ -10,9 +10,14 @@ namespace GeneticAlgorithm.Crossover
 {
     public class TwoPointsCrossover : ICrossover
     {
-        public IDesignPoint Crossover(IPair pair)
+        public IEnumerable<IDesignPoint> Crossover(IEnumerable<IPair> pairs)
         {
-            throw new NotImplementedException();
+            return null;
+        }
+
+        public IEnumerable<IDesignPoint> Crossover(IPair pair)
+        {
+            return null;
         }
     }
 }

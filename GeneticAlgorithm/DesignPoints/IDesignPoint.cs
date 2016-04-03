@@ -14,5 +14,9 @@ namespace GeneticAlgorithm.DesignPoints
         List<IChromosome> X { get; set; }
         string X1X2 { get; set; }
         double FunctionValue { get; set; }
+        bool IsAlive { get; }
+        IDesignPoint Copy();
+        void Update(string s);
+
     }
 }
