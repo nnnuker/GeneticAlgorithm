@@ -62,7 +62,7 @@ namespace GeneticAlgorithm.Crossover
             var binaryFirstPair = pair.First.X1X2;
             var bunarySecondPair = pair.Second.X1X2;
 
-            //index = random.Next(2, pair.First.X1X2.Length - 2);
+            index = random.Next(2, pair.First.X1X2.Length - 2);
 
             var newDesignPointFirst = pair.First.Copy();
             var crossoverFirst = string.Concat(binaryFirstPair.Substring(0, index), bunarySecondPair.Substring(index));
