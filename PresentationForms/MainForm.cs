@@ -17,7 +17,6 @@ namespace PresentationForms
         public MainForm()
         {
             InitializeComponent();
-
         }
     }
 }
