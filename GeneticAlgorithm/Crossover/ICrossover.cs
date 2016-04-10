@@ -1,10 +1,12 @@
 ﻿using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.PairFormation;
+using System.Collections.Generic;
 
 namespace GeneticAlgorithm.Crossover
 {
     public interface ICrossover
     {
-        IDesignPoint Crossover(IPair pair);
+        IEnumerable<IDesignPoint> Crossover(IPair pair);
+        IEnumerable<IDesignPoint> Crossover(IEnumerable<IPair> pairs);
     }
 }

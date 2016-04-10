@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ChromosomeTest.cs" />
+    <Compile Include="CrossoverTest.cs" />
+    <Compile Include="DesignPointTest.cs" />
     <Compile Include="PairFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

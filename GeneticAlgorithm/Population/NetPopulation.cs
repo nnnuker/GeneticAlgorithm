@@ -10,7 +10,7 @@ namespace GeneticAlgorithm.Population
 {
     public class NetPopulation : IPopulation
     {
-        public IEnumerable<IDesignPoint> GetPopulation(int N, double accuracy, params IChromosome[] chromosomes)
+        public IEnumerable<IDesignPoint> GetPopulation(int N, int accuracy, string funcExpression, params IChromosome[] chromosomes)
         {
             throw new NotImplementedException();
         }

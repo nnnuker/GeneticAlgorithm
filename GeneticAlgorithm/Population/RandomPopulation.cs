@@ -10,9 +10,33 @@ namespace GeneticAlgorithm.Population
 {
     public class RandomPopulation : IPopulation
     {
-        public IEnumerable<IDesignPoint> GetPopulation(int N, double accuracy, params IChromosome[] chromosomes)
+        private Random random;
+
+        public RandomPopulation()
         {
-            throw new NotImplementedException();
+            random = new Random(DateTime.Today.Millisecond);
+        }
+
+        public IEnumerable<IDesignPoint> GetPopulation(int N, int accuracy, string funcExpression, params IChromosome[] chromosomes)
+        {
+            var list = new List<DesignPoint>();
+            for (int i = 0; i < N; i++)
+            {
+                IChromosome[] chromo = new Chromosome.Chromosome[chromosomes.Count()];
+                for (int j = 0; j < chromosomes.Count(); j++)
+                {
+                    double value;
+                    do
+                    {
+                        value = random.Next((int)chromosomes[j].Left, (int)chromosomes[j].Right + 1) + random.NextDouble();
+                        value = Math.Round(value, accuracy);
+                        
+                    }
+                    while (value < chromosomes[j].Left || value > chromosomes[j].Right);
+                }
+                list.Add(new DesignPoint(1, funcExpression, chromo));
+            }
+            return list;
         }
     }
 }

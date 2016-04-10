@@ -10,6 +10,6 @@ namespace GeneticAlgorithm.Population
 {
     public interface IPopulation
     {
-        IEnumerable<IDesignPoint> GetPopulation(int N, double accuracy, params IChromosome[] chromosomes);
+        IEnumerable<IDesignPoint> GetPopulation(int N, int accuracy, string funcExpression, params IChromosome[] chromosomes);
     }
 }
