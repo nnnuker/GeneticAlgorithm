@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
+using Bestcode.MathParser;
 
 namespace GeneticAlgorithm.DesignPoints
 {
@@ -30,6 +31,7 @@ namespace GeneticAlgorithm.DesignPoints
             }
         }
         public static int Count { get; set; } = 0;
+        public string FuncExpression { get; set; }
 
         #endregion
 
@@ -43,7 +45,7 @@ namespace GeneticAlgorithm.DesignPoints
             Count++;
         }
 
-        public DesignPoint(int populationNumber, params IChromosome[] x): this()
+        public DesignPoint(int populationNumber, string funcExpression, params IChromosome[] x) : this()
         {
             if (x == null)
                 throw new ArgumentNullException();
@@ -54,14 +56,28 @@ namespace GeneticAlgorithm.DesignPoints
             this.PopulationNumber = populationNumber;
             this.ID = Count;
             this.X = new List<IChromosome>(x);
+            this.FuncExpression = funcExpression;
             this.FunctionValue = CalculateFunc(x);
             this.X1X2 = GetBinary(x);
+
         }
 
         private double CalculateFunc(params IChromosome[] x)
         {
-            //throw new NotImplementedException();
-            return 0;
+            try
+            {
+                MathParser parser = new MathParser();
+                for (int i = 0; i < x.Length; i++)
+                {
+                    parser.SetVariable(x[i].Name, x[i].Value, null);
+                }
+                parser.Expression = FuncExpression;
+                return parser.ValueAsDouble;
+            }
+            catch (ParserException e)
+            {
+                return 0;
+            }
         }
 
         private string GetBinary(params IChromosome[] x)

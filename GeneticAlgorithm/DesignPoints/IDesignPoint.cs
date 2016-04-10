@@ -17,6 +17,7 @@ namespace GeneticAlgorithm.DesignPoints
         bool IsAlive { get; }
         IDesignPoint Copy();
         void Update(string s);
+        string FuncExpression { get; set; }
 
     }
 }
