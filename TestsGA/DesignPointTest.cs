@@ -15,14 +15,14 @@ namespace TestsGA
         [TestMethod]
         public void FunctionValueTest()
         {
-            DesignPoint DP = new DesignPoint(1, "x+y+z", new Chromosome(0.1, 1, 2, 1, "x"), new Chromosome(0.1, 1, 2, 2, "y"), new Chromosome(0.1, 1, 2, 3, "z"));
+            DesignPoint DP = new DesignPoint(1, "x+y+z", new Chromosome(1, 1, 2, 1, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
             Assert.AreEqual(DP.FunctionValue, 6);
         }
 
         [TestMethod]
         public void FunctionValue_SpecificFunc()
         {
-            DesignPoint DP = new DesignPoint(1, "x^2+y+z", new Chromosome(0.1, -3, 2, -2, "x"), new Chromosome(0.1, 1, 2, 2, "y"), new Chromosome(0.1, 1, 2, 3, "z"));
+            DesignPoint DP = new DesignPoint(1, "x^2+y+z", new Chromosome(1, -3, 2, -2, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
             Assert.AreEqual(DP.FunctionValue, 9);
         }
     }

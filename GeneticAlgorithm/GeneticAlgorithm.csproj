@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chromosome\Binary.cs" />
     <Compile Include="Chromosome\Chromosome.cs" />
+    <Compile Include="Chromosome\IBinary.cs" />
     <Compile Include="Chromosome\IChromosome.cs" />
     <Compile Include="Crossover\ICrossover.cs" />
     <Compile Include="Crossover\OnePointCrossover.cs" />
@@ -54,6 +56,8 @@
     <Compile Include="Descendants\MutationCrossover.cs" />
     <Compile Include="DesignPoints\DesignPoint.cs" />
     <Compile Include="DesignPoints\IDesignPoint.cs" />
+    <Compile Include="FuncCalculator\FuncCalculatorBasic.cs" />
+    <Compile Include="FuncCalculator\IFuncCalculator.cs" />
     <Compile Include="GAlgorithm.cs" />
     <Compile Include="PairFormation\BestWorsePairFormation.cs" />
     <Compile Include="PairFormation\IPair.cs" />

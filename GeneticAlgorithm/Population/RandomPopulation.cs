@@ -34,7 +34,7 @@ namespace GeneticAlgorithm.Population
                     }
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
                 }
-                list.Add(new DesignPoint(1, funcExpression, chromo));
+                //list.Add(new DesignPoint(1, funcExpression, chromo));
             }
             return list;
         }
