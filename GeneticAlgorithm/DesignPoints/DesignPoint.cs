@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
 using Bestcode.MathParser;
+using GeneticAlgorithm.FuncCalculator;
 
 namespace GeneticAlgorithm.DesignPoints
 {
@@ -12,7 +13,7 @@ namespace GeneticAlgorithm.DesignPoints
     {
         #region Properties
         public double FunctionValue { get; set; }
-        public string X1X2 { get; set; }
+        public IEnumerable<byte> X1X2 { get; set; }
         public int ID { get; set; }
         public int PopulationNumber { get; set; }
         public List<IChromosome> X { get; set; }
@@ -20,20 +21,14 @@ namespace GeneticAlgorithm.DesignPoints
         {
             get
             {
-                foreach (var item in X)
-                {
-                    if (!item.IsCorrect)
-                    {
-                        return false;
-                    }
-                }
-                return true;
+                return X.All(item => item.IsCorrect);
             }
         }
         public static int Count { get; set; } = 0;
-        public string FuncExpression { get; set; }
-
+        public IFuncCalculator FuncCalculator { get; set; }
         #endregion
+
+        #region Constructors
 
         static DesignPoint()
         {
@@ -45,7 +40,7 @@ namespace GeneticAlgorithm.DesignPoints
             Count++;
         }
 
-        public DesignPoint(int populationNumber, string funcExpression, params IChromosome[] x) : this()
+        public DesignPoint(int populationNumber, IFuncCalculator funcCalculator, params IChromosome[] x) : this()
         {
             if (x == null)
                 throw new ArgumentNullException();
@@ -56,54 +51,32 @@ namespace GeneticAlgorithm.DesignPoints
             this.PopulationNumber = populationNumber;
             this.ID = Count;
             this.X = new List<IChromosome>(x);
-            this.FuncExpression = funcExpression;
-            this.FunctionValue = CalculateFunc(x);
+            this.FuncCalculator = funcCalculator;
+            this.FunctionValue = funcCalculator.CalculateFunc(x);
             this.X1X2 = GetBinary(x);
-
         }
 
-        private double CalculateFunc(params IChromosome[] x)
-        {
-            try
-            {
-                MathParser parser = new MathParser();
-                for (int i = 0; i < x.Length; i++)
-                {
-                    parser.SetVariable(x[i].Name, x[i].Value, null);
-                }
-                parser.Expression = FuncExpression;
-                return parser.ValueAsDouble;
-            }
-            catch (ParserException e)
-            {
-                return 0;
-            }
-        }
+        #endregion
 
-        private string GetBinary(params IChromosome[] x)
-        {
-            string result = string.Empty;
-            foreach (var item in x)
-            {
-                result += item.Binary;
-            }
-            return result;
-        }
+        #region Public methods
 
-        public void Update(string crossover)
+        public void Update(IEnumerable<byte> crossover)
         {
             this.X1X2 = crossover;
             var lengthPreviousX = 0;
             var newChromosomes = new List<IChromosome>();
             foreach (var item in X)
             {
+                var newChromo = item.Clone();
                 var lengthCurrentX = item.Binary.Length;
-                var binaryChromosome = crossover.Substring(lengthPreviousX, lengthCurrentX);
-                newChromosomes.Add(new Chromosome.Chromosome(item.Accuracy, item.Left, item.Right, binaryChromosome, item.Name));
+                var list = crossover.ToList();
+                var binaryChromosome = list.GetRange(lengthPreviousX, lengthCurrentX);
+                newChromo.Binary.SetValue(binaryChromosome);
+                newChromosomes.Add(newChromo);
                 lengthPreviousX += lengthCurrentX;
             }
             this.X = newChromosomes;
-            this.FunctionValue = CalculateFunc(X.ToArray());
+            this.FunctionValue = FuncCalculator.CalculateFunc(X.ToArray());
         }
 
         public IDesignPoint Copy()
@@ -111,11 +84,29 @@ namespace GeneticAlgorithm.DesignPoints
             return new DesignPoint
             {
                 FunctionValue = this.FunctionValue,
+                FuncCalculator = this.FuncCalculator,
                 X = this.X,
                 PopulationNumber = this.PopulationNumber,
                 X1X2 = this.X1X2,
                 ID = Count
             };
         }
+
+        #endregion
+
+        #region Private methods
+
+        private IEnumerable<byte> GetBinary(params IChromosome[] x)
+        {
+            var list = new List<byte>();
+            foreach (var chromosome in x)
+                list.AddRange(chromosome.Binary.BinaryValue);
+            return list;
+        }
+
+        #endregion
+
+
+        
     }
 }

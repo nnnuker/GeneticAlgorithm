@@ -14,40 +14,29 @@ namespace TestsGA
         [TestMethod]
         public void BinaryFormat()
         {
-            Chromosome chromosome = new Chromosome(0.1, -4, 4, 5.5, "X");
-            Assert.AreEqual("101010101", chromosome.Binary);
+            Chromosome chromosome = new Chromosome(1, -4, 4, 5.5, "X");
+            Assert.AreEqual("101010101", chromosome.Binary.ToString());
         }
 
         [TestMethod]
         public void BinaryFormatMinus()
         {
-            Chromosome chromosome = new Chromosome(0.1, -4, 4, -5.5, "X");
-            Assert.AreEqual("001010101", chromosome.Binary);
+            Chromosome chromosome = new Chromosome(1, -4, 4, -5.5, "X");
+            Assert.AreEqual("001010101", chromosome.Binary.ToString());
         }
 
         [TestMethod]
         public void BigNumber()
         {
-            Chromosome chromosome = new Chromosome(0.1, -35, 4, -5.5, "X");
-            Assert.AreEqual("00001010101", chromosome.Binary);
+            Chromosome chromosome = new Chromosome(1, -35, 4, -5.5, "X");
+            Assert.AreEqual("00001010101", chromosome.Binary.ToString());
         }
 
         [TestMethod]
         public void Integer()
         {
-            Chromosome chromosome = new Chromosome(0.1, -35, 4, 5, "X");
-            Assert.AreEqual("10001010000", chromosome.Binary);
-        }
-
-        [TestMethod]
-        public void ConvertToDouble()
-        {
-            Chromosome chromosome = new Chromosome(0.1, -12315, 534846, 42424, "X");
-            Chromosome chromosome1 = new Chromosome(0.1, -35, 4, -5.5, "X");
-            Chromosome chromosome2 = new Chromosome(0.1, -4, 4, 5.5, "X");
-            Assert.AreEqual(42424, chromosome.GetValue());
-            Assert.AreEqual(-5.5, chromosome1.GetValue());
-            Assert.AreEqual(5.5, chromosome2.GetValue());
+            Chromosome chromosome = new Chromosome(1, -35, 4, 5, "X");
+            Assert.AreEqual("10001010000", chromosome.Binary.ToString());
         }
     }
 }
