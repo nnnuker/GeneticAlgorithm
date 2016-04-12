@@ -22,7 +22,6 @@ namespace GeneticAlgorithm.Chromosome
         #region Properties
 
         public double Value => value;
-
         public IEnumerable<byte> BinaryValue => binaryValue;
         public int Length => binaryValue.Count();
 
@@ -56,14 +55,9 @@ namespace GeneticAlgorithm.Chromosome
             return string.Join(string.Empty, BinaryValue);
         }
 
-        public void SetValue(IEnumerable<byte> binaryValue)
+        public double Update(IEnumerable<byte> binaryValue)
         {
-            
-        }
-
-        public IBinary GetBinary()
-        {
-            return this;
+            throw new NotImplementedException();
         }
 
         #endregion

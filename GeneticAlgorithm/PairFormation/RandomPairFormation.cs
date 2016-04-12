@@ -39,7 +39,6 @@ namespace GeneticAlgorithm.PairFormation
                     first = random.Next(count);
                 }
                 while (usedNumbers.Contains(first));
-
                 usedNumbers.Add(first);
 
                 do
@@ -47,8 +46,8 @@ namespace GeneticAlgorithm.PairFormation
                     second = random.Next(count);
                 }
                 while (usedNumbers.Contains(second));
-
                 usedNumbers.Add(second);
+
                 pairs.Add(new Pair { First = designPoints.ElementAt(first), Second = designPoints.ElementAt(second) });
             }
 

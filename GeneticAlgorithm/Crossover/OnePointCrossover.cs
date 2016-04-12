@@ -51,28 +51,30 @@ namespace GeneticAlgorithm.Crossover
             if (pair == null)
                 throw new ArgumentNullException();
 
-            var result = new List<DesignPoint>();
+            var result = new List<IDesignPoint>();
 
-            //if (pair.Second == null)
-            //{
-            //    result.Add((DesignPoint)pair.First.Copy());
-            //    return result;
-            //}
+            if (pair.Second == null)
+            {
+                result.Add(pair.First.Copy());
+                return result;
+            }
 
-            //var binaryFirstPair = pair.First.X1X2;
-            //var binarySecondPair = pair.Second.X1X2;
+            var binaryFirstPair = pair.First.X1X2.ToList();
+            var binarySecondPair = pair.Second.X1X2.ToList();
 
-            //index = random.Next(2, pair.First.X1X2.Length - 2);
+            index = random.Next(2, pair.First.X1X2.Count() - 2);
 
-            //var newDesignPointFirst = pair.First.Copy();
-            //var crossoverFirst = string.Concat(binaryFirstPair.Substring(0, index), binarySecondPair.Substring(index));
-            //newDesignPointFirst.Update(crossoverFirst);
-            //result.Add((DesignPoint)newDesignPointFirst);
+            var newDesignPointFirst = pair.First.Copy();
+            var crossoverFirst = new List<byte>().Concat(binaryFirstPair.GetRange(0, index));
+            crossoverFirst.Concat(binarySecondPair.GetRange(index, pair.First.X1X2.Count()));
+            newDesignPointFirst.Update(crossoverFirst);
+            result.Add(newDesignPointFirst);
 
-            //var newDesignPointSecond = pair.First.Copy();
-            //var crossoverSecond = string.Concat(binarySecondPair.Substring(0, index), binaryFirstPair.Substring(index));
-            //newDesignPointSecond.Update(crossoverSecond);
-            //result.Add((DesignPoint)newDesignPointSecond);
+            var newDesignPointSecond = pair.First.Copy();
+            var crossoverSecond = new List<byte>().Concat(binarySecondPair.GetRange(0, index));
+            crossoverFirst.Concat(binaryFirstPair.GetRange(index, pair.First.X1X2.Count()));
+            newDesignPointSecond.Update(crossoverSecond);
+            result.Add(newDesignPointSecond);
 
             return result;
         }
