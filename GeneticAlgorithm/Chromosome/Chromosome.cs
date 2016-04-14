@@ -71,8 +71,5 @@ namespace GeneticAlgorithm.Chromosome
         }
 
         #endregion
-
-
-
     }
 }

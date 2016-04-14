@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
 
-namespace GeneticAlgorithm.FuncCalculator.TruncationAlgorithm
+namespace GeneticAlgorithm.Chromosome
 {
-    class Axis : IChromosome
+    public class Axis : IChromosome
     {
         public int Accuracy { get; set; }
         public bool IsCorrect => Value >= Left && Value <= Right;

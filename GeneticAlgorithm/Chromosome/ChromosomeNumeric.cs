@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithm.Chromosome
 {
-    class ChromosomeNumeric : IChromosome
+    public class ChromosomeNumeric : IChromosome
     {       
         public bool IsCorrect => Value >= Left && Value <= Right;
 
