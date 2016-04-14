@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Chromosome\Binary.cs" />
     <Compile Include="Chromosome\Chromosome.cs" />
+    <Compile Include="Chromosome\ChromosomeNumeric.cs" />
     <Compile Include="Chromosome\IBinary.cs" />
     <Compile Include="Chromosome\IChromosome.cs" />
     <Compile Include="Crossover\ICrossover.cs" />
@@ -56,8 +57,14 @@
     <Compile Include="Descendants\MutationCrossover.cs" />
     <Compile Include="DesignPoints\DesignPoint.cs" />
     <Compile Include="DesignPoints\IDesignPoint.cs" />
+    <Compile Include="FactoryPoint\CreateDesignPoint.cs" />
+    <Compile Include="FactoryPoint\CreatePoint.cs" />
+    <Compile Include="FactoryPoint\IFactoryPoints.cs" />
     <Compile Include="FuncCalculator\FuncCalculatorBasic.cs" />
+    <Compile Include="FuncCalculator\FuncCalculatorTruncation.cs" />
     <Compile Include="FuncCalculator\IFuncCalculator.cs" />
+    <Compile Include="Chromosome\Axis.cs" />
+    <Compile Include="DesignPoints\Point.cs" />
     <Compile Include="GAlgorithm.cs" />
     <Compile Include="PairFormation\BestWorsePairFormation.cs" />
     <Compile Include="PairFormation\IPair.cs" />
@@ -69,8 +76,11 @@
     <Compile Include="Population\NetPopulation.cs" />
     <Compile Include="Population\RandomPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FuncCalculator\TruncationAlgorithm\SearchMethods\IMethod.cs" />
     <Compile Include="SelectPoints\BestSelectPoints.cs" />
+    <Compile Include="SelectPoints\CalculateDegreese.cs" />
     <Compile Include="SelectPoints\ClassicRouletteSelectPoints.cs" />
+    <Compile Include="SelectPoints\DegreesWithIDesignPoint.cs" />
     <Compile Include="SelectPoints\ISelectPoints.cs" />
     <Compile Include="SelectPoints\RangSelectPoints.cs" />
     <Compile Include="SelectPoints\RouletteSelectPoints.cs" />

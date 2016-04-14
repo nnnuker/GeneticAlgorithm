@@ -68,10 +68,10 @@ namespace GeneticAlgorithm.DesignPoints
             foreach (var item in X)
             {
                 var newChromo = item.Clone();
-                var lengthCurrentX = item.Binary.Length;
+                var lengthCurrentX = item.Binary.Count();
                 var list = crossover.ToList();
                 var binaryChromosome = list.GetRange(lengthPreviousX, lengthCurrentX);
-                newChromo.Binary.SetValue(binaryChromosome);
+                newChromo.Update(binaryChromosome);
                 newChromosomes.Add(newChromo);
                 lengthPreviousX += lengthCurrentX;
             }
@@ -79,7 +79,7 @@ namespace GeneticAlgorithm.DesignPoints
             this.FunctionValue = FuncCalculator.CalculateFunc(X.ToArray());
         }
 
-        public IDesignPoint Copy()
+        public IDesignPoint Clone()
         {
             return new DesignPoint
             {
@@ -100,7 +100,7 @@ namespace GeneticAlgorithm.DesignPoints
         {
             var list = new List<byte>();
             foreach (var chromosome in x)
-                list.AddRange(chromosome.Binary.BinaryValue);
+                list.AddRange(chromosome.Binary);
             return list;
         }
 

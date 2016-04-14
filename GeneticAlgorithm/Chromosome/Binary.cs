@@ -11,6 +11,8 @@ namespace GeneticAlgorithm.Chromosome
         #region Fields
 
         private int? pointAt;
+        private int firstPartLength;
+        private int secondPartLength;
         private readonly double value;
         private readonly int accuracy;
         private readonly double left;
@@ -22,7 +24,6 @@ namespace GeneticAlgorithm.Chromosome
         #region Properties
 
         public double Value => value;
-
         public IEnumerable<byte> BinaryValue => binaryValue;
         public int Length => binaryValue.Count();
 
@@ -56,14 +57,12 @@ namespace GeneticAlgorithm.Chromosome
             return string.Join(string.Empty, BinaryValue);
         }
 
-        public void SetValue(IEnumerable<byte> binaryValue)
+        public double Update(IEnumerable<byte> binaryValue)
         {
-            
-        }
+            if (firstPartLength + secondPartLength < binaryValue.Count())
+                throw new ArgumentException();
 
-        public IBinary GetBinary()
-        {
-            return this;
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -87,11 +86,11 @@ namespace GeneticAlgorithm.Chromosome
                 pointAt = binaryValue.Count;
                 var str = minus.ToString(CultureInfo.InvariantCulture);
                 var intFraction = int.Parse(str.Substring(str.IndexOf('.') + 1));
-                binaryValue.AddRange(GetSecondPart(intFraction));
+                binaryValue.AddRange(GetSecondPart(intFraction, accuracy));
             }
             else
             {
-                binaryValue.AddRange(new List<byte>() { 0, 0, 0, 0 });
+                binaryValue.AddRange(GetSecondPart(0, accuracy));
             }
         }
 
@@ -112,11 +111,18 @@ namespace GeneticAlgorithm.Chromosome
                 binaryStr = binaryStr.Insert(0, "0");
             }
 
+            firstPartLength = binaryStr.Length;
+
             return binaryStr.ToCharArray().Select(y => (byte)char.GetNumericValue(y));
         }
 
-        private IEnumerable<byte> GetSecondPart(int val)
+        private IEnumerable<byte> GetSecondPart(int val, int accuracy)
         {
+            if (accuracy == 0)
+            {
+                return new List<byte> { };
+            }
+
             var binaryStr = Convert.ToString(val, 2);
 
             int j = 1;
@@ -133,6 +139,8 @@ namespace GeneticAlgorithm.Chromosome
             {
                 binaryStr = binaryStr.Insert(0, "0");
             }
+
+            secondPartLength = binaryStr.Length;
 
             return binaryStr.ToCharArray().Select(y => (byte)char.GetNumericValue(y));
         }

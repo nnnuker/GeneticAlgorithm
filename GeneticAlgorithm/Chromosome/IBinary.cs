@@ -7,7 +7,6 @@ namespace GeneticAlgorithm.Chromosome
         double Value { get; }
         IEnumerable<byte> BinaryValue { get; }
         int Length { get; }
-        IBinary GetBinary();
-        void SetValue(IEnumerable<byte> binaryValue);
+        double Update(IEnumerable<byte> binaryValue);
     }
 }

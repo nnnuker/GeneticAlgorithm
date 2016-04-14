@@ -5,6 +5,7 @@ using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.Chromosome;
 using System.Collections.Generic;
 using System.Linq;
+using GeneticAlgorithm.FuncCalculator;
 
 namespace TestsGA
 {
@@ -18,11 +19,12 @@ namespace TestsGA
 
             List<DesignPoint> listDesignPoint = new List<DesignPoint>();
 
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+
 
             IEnumerable<IPair> listResult = randomPF.FormatPairs(listDesignPoint);
             Assert.AreEqual(listResult.Count(), 3, "Count pairs not equal");
@@ -35,11 +37,12 @@ namespace TestsGA
 
             List<DesignPoint> listDesignPoint = new List<DesignPoint>();
 
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
-            listDesignPoint.Add(new DesignPoint(1, "X1", new Chromosome(1, 1, 1, "X1")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDesignPoint.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+
 
             IEnumerable<IPair> listResult = randomPF.FormatPairs(listDesignPoint);
 
