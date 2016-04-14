@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.FuncCalculator;
 using GeneticAlgorithm.Chromosome;
-using GeneticAlgorithm.FuncCalculator.TruncationAlgorithm;
 
 namespace GeneticAlgorithm.FactoryPoint
 {
