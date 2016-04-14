@@ -9,6 +9,6 @@ namespace GeneticAlgorithm.SelectPoints
 {
     public interface ISelectPoints
     {
-        IEnumerable<IDesignPoint> SelectPoints(IEnumerable<IDesignPoint> designPoints);
+        IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints);
     }
 }
