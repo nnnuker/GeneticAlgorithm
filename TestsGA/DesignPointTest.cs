@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.Chromosome;
+using GeneticAlgorithm.FuncCalculator;
 
 namespace TestsGA
 {
@@ -15,14 +16,16 @@ namespace TestsGA
         [TestMethod]
         public void FunctionValueTest()
         {
-            DesignPoint DP = new DesignPoint(1, "x+y+z", new Chromosome(1, 1, 2, 1, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
+            IFuncCalculator funcCalulator = new FuncCalculatorBasic("x+y+z");
+            IDesignPoint DP = new DesignPoint(1, funcCalulator, new Chromosome(1, 1, 2, 1, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
             Assert.AreEqual(DP.FunctionValue, 6);
         }
 
         [TestMethod]
         public void FunctionValue_SpecificFunc()
         {
-            DesignPoint DP = new DesignPoint(1, "x^2+y+z", new Chromosome(1, -3, 2, -2, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
+            IFuncCalculator funcCalulator = new FuncCalculatorBasic("x^2+y+z");
+            DesignPoint DP = new DesignPoint(1, funcCalulator, new Chromosome(1, -3, 2, -2, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
             Assert.AreEqual(DP.FunctionValue, 9);
         }
     }
