@@ -19,7 +19,7 @@ namespace GeneticAlgorithm.Population
             random = new Random(DateTime.Today.Millisecond);
         }
 
-        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, IFuncCalculator funcCalculator, int populationNumber = 1, params IChromosome[] chromosomes)
+        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, int populationNumber = 1, params IChromosome[] chromosomes)
         {
             var list = new List<IDesignPoint>();
             for (int i = 0; i < N; i++)
@@ -37,7 +37,7 @@ namespace GeneticAlgorithm.Population
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
                     chromo[j].Value = value;
                 }
-                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, funcCalculator, chromo));
+                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, chromo));
             }
             return list;
         }

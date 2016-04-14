@@ -9,7 +9,7 @@ namespace GeneticAlgorithm.PairFormation
     {
         #region Field
         private readonly Random random;
-        private List<int> usedNumbers;
+        private readonly List<int> usedNumbers;
         #endregion
 
         #region Constructor

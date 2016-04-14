@@ -12,7 +12,7 @@ namespace GeneticAlgorithm.Population
 {
     public class NetPopulation : IPopulation
     {
-        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, IFuncCalculator funcCalculator, int populationNumber, params IChromosome[] chromosomes)
+        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, int populationNumber, params IChromosome[] chromosomes)
         {
             throw new NotImplementedException();
         }
