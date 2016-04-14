@@ -64,7 +64,7 @@ namespace GeneticAlgorithm.Chromosome
 
         public void Update(IEnumerable<byte> binary)
         {
-            if (binary == null)
+            if (binary == null || this.binary == null)
                 this.binary = new Binary(Value, Accuracy, Left, Right);
 
             Value = this.binary.Update(binary);

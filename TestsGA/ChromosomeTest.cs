@@ -67,6 +67,26 @@ namespace TestsGA
         }
 
         [TestMethod]
+        public void UpdateBinary()
+        {
+            IChromosome chromosome = new Chromosome(1, -35, 4, 4, "X");
+
+            chromosome.Update(new List<byte> { 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0 });
+
+            Assert.AreEqual(10.2, chromosome.Value);
+        }
+
+        [TestMethod]
+        public void UpdateBinary_NumericValue()
+        {
+            IChromosome chromosome = new Chromosome(1, -35, 4, 4.7, "X");
+
+            chromosome.Update(new List<byte> { 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0 });
+
+            Assert.AreEqual(10, chromosome.Value);
+        }
+
+        [TestMethod]
         public void NumericChromosome_Binary()
         {
             IChromosome chromosome = new ChromosomeNumeric(1, 20, 10, "N");

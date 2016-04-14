@@ -10,14 +10,13 @@ namespace GeneticAlgorithm.Chromosome
     {
         #region Fields
 
-        private int? pointAt;
         private int firstPartLength;
         private int secondPartLength;
-        private readonly double value;
+        private double value;
         private readonly int accuracy;
         private readonly double left;
         private readonly double right;
-        private readonly List<byte> binaryValue = new List<byte>();
+        private List<byte> binaryValue = new List<byte>();
 
         #endregion
 
@@ -59,10 +58,27 @@ namespace GeneticAlgorithm.Chromosome
 
         public double Update(IEnumerable<byte> binaryValue)
         {
-            if (firstPartLength + secondPartLength < binaryValue.Count())
+            if (firstPartLength + secondPartLength + 1 != binaryValue.Count())
                 throw new ArgumentException();
 
-            throw new NotImplementedException();
+            var list = binaryValue.ToList();
+
+            var firstPart = list.GetRange(1, firstPartLength);
+
+            var first = Convert.ToInt32(string.Join(string.Empty, firstPart), 2);
+
+            var secondPart = list.GetRange(firstPartLength + 1, secondPartLength);
+
+            var second = Convert.ToInt32(string.Join(string.Empty, secondPart), 2);
+
+            string sign = list[0] == 1 ? "" : "-";
+
+            var result = Convert.ToDouble($"{sign}{first.ToString()}.{second.ToString()}", CultureInfo.InvariantCulture);
+
+            this.binaryValue = list;
+            this.value = result;
+
+            return result;
         }
 
         #endregion
@@ -83,7 +99,6 @@ namespace GeneticAlgorithm.Chromosome
             var minus = absValue - floor;
             if (minus > 0)
             {
-                pointAt = binaryValue.Count;
                 var str = minus.ToString(CultureInfo.InvariantCulture);
                 var intFraction = int.Parse(str.Substring(str.IndexOf('.') + 1));
                 binaryValue.AddRange(GetSecondPart(intFraction, accuracy));
