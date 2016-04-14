@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithm.FactoryPoint
 {
-    class CreateDesignPoint
+    public class CreateDesignPoint
     {
         public IDesignPoint CreateFactoryPoint(int populationNumber, IFuncCalculator funcCalculator, IChromosome[] chromo)
         {

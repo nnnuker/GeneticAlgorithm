@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.DesignPoints;
 
 namespace GeneticAlgorithm.SelectPoints
 {
     public class RouletteSelectPoints : ISelectPoints
     {
-        Random rand;
+        private readonly Random rand;
 
         public RouletteSelectPoints()
         {
@@ -49,12 +47,7 @@ namespace GeneticAlgorithm.SelectPoints
 
         private IEnumerable<IDesignPoint> GetIEnumerableIDesignPoint (IEnumerable<DegreesWithIDesignPoint> listDegreeseWithIDesignPoints)
         {
-            var result = new List<IDesignPoint>();
-            foreach (var item in listDegreeseWithIDesignPoints)
-            {
-                result.Add(item.DesignPoint);
-            }
-            return result;
+            return listDegreeseWithIDesignPoints.Select(item => item.DesignPoint).ToList();
         }
     }
 }

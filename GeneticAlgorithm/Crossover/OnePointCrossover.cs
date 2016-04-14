@@ -12,7 +12,7 @@ namespace GeneticAlgorithm.Crossover
     public class OnePointCrossover : ICrossover
     {
         #region Field
-        private Random random;
+        private readonly Random random;
         private int index;
         #endregion
 

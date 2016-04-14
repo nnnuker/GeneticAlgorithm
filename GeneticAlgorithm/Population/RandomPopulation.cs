@@ -12,7 +12,7 @@ namespace GeneticAlgorithm.Population
 {
     public class RandomPopulation : IPopulation
     {
-        private Random random;
+        private readonly Random random;
 
         public RandomPopulation()
         {

@@ -9,7 +9,7 @@ using GeneticAlgorithm.Chromosome;
 
 namespace GeneticAlgorithm.FactoryPoint
 {
-    class CreatePoint : IFactoryPoints
+    public class CreatePoint : IFactoryPoints
     {
         public IDesignPoint CreateFactoryPoint(int populationNumber, IFuncCalculator funcCalculator, IChromosome[] chromo)
         {

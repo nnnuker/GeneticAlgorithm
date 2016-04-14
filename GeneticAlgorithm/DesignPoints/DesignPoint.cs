@@ -65,11 +65,12 @@ namespace GeneticAlgorithm.DesignPoints
             this.X1X2 = crossover;
             var lengthPreviousX = 0;
             var newChromosomes = new List<IChromosome>();
+            var list = crossover.ToList();
             foreach (var item in X)
             {
                 var newChromo = item.Clone();
                 var lengthCurrentX = item.Binary.Count();
-                var list = crossover.ToList();
+                
                 var binaryChromosome = list.GetRange(lengthPreviousX, lengthCurrentX);
                 newChromo.Update(binaryChromosome);
                 newChromosomes.Add(newChromo);

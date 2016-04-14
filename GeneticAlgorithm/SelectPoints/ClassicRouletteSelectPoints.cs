@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.DesignPoints;
 
 namespace GeneticAlgorithm.SelectPoints
 {
     public class ClassicRouletteSelectPoints : ISelectPoints
     {
-        Random rand;
+        private readonly Random rand;
 
         public ClassicRouletteSelectPoints()
         {
