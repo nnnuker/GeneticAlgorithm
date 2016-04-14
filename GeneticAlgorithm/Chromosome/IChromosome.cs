@@ -13,8 +13,9 @@ namespace GeneticAlgorithm.Chromosome
         double Left { get; set; }
         double Right { get; set; }
         double Value { get; set; }
-        IBinary Binary { get; }
         bool IsCorrect { get; }
+        IEnumerable<byte> Binary { get; }
+        void Update(IEnumerable<byte> binary);
         IChromosome Clone();
     }
 }

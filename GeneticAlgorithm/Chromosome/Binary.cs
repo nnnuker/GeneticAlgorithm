@@ -10,19 +10,19 @@ namespace GeneticAlgorithm.Chromosome
     {
         #region Fields
 
-        private int? pointAt;
-        private readonly double value;
+        private int firstPartLength;
+        private int secondPartLength;
+        private double value;
         private readonly int accuracy;
         private readonly double left;
         private readonly double right;
-        private readonly List<byte> binaryValue = new List<byte>();
+        private List<byte> binaryValue = new List<byte>();
 
         #endregion
 
         #region Properties
 
         public double Value => value;
-
         public IEnumerable<byte> BinaryValue => binaryValue;
         public int Length => binaryValue.Count();
 
@@ -56,14 +56,29 @@ namespace GeneticAlgorithm.Chromosome
             return string.Join(string.Empty, BinaryValue);
         }
 
-        public void SetValue(IEnumerable<byte> binaryValue)
+        public double Update(IEnumerable<byte> binaryValue)
         {
-            
-        }
+            if (firstPartLength + secondPartLength + 1 != binaryValue.Count())
+                throw new ArgumentException();
 
-        public IBinary GetBinary()
-        {
-            return this;
+            var list = binaryValue.ToList();
+
+            var firstPart = list.GetRange(1, firstPartLength);
+
+            var first = Convert.ToInt32(string.Join(string.Empty, firstPart), 2);
+
+            var secondPart = list.GetRange(firstPartLength + 1, secondPartLength);
+
+            var second = Convert.ToInt32(string.Join(string.Empty, secondPart), 2);
+
+            string sign = list[0] == 1 ? "" : "-";
+
+            var result = Convert.ToDouble($"{sign}{first.ToString()}.{second.ToString()}", CultureInfo.InvariantCulture);
+
+            this.binaryValue = list;
+            this.value = result;
+
+            return result;
         }
 
         #endregion
@@ -84,14 +99,13 @@ namespace GeneticAlgorithm.Chromosome
             var minus = absValue - floor;
             if (minus > 0)
             {
-                pointAt = binaryValue.Count;
                 var str = minus.ToString(CultureInfo.InvariantCulture);
                 var intFraction = int.Parse(str.Substring(str.IndexOf('.') + 1));
-                binaryValue.AddRange(GetSecondPart(intFraction));
+                binaryValue.AddRange(GetSecondPart(intFraction, accuracy));
             }
             else
             {
-                binaryValue.AddRange(new List<byte>() { 0, 0, 0, 0 });
+                binaryValue.AddRange(GetSecondPart(0, accuracy));
             }
         }
 
@@ -112,11 +126,18 @@ namespace GeneticAlgorithm.Chromosome
                 binaryStr = binaryStr.Insert(0, "0");
             }
 
+            firstPartLength = binaryStr.Length;
+
             return binaryStr.ToCharArray().Select(y => (byte)char.GetNumericValue(y));
         }
 
-        private IEnumerable<byte> GetSecondPart(int val)
+        private IEnumerable<byte> GetSecondPart(int val, int accuracy)
         {
+            if (accuracy == 0)
+            {
+                return new List<byte> { };
+            }
+
             var binaryStr = Convert.ToString(val, 2);
 
             int j = 1;
@@ -133,6 +154,8 @@ namespace GeneticAlgorithm.Chromosome
             {
                 binaryStr = binaryStr.Insert(0, "0");
             }
+
+            secondPartLength = binaryStr.Length;
 
             return binaryStr.ToCharArray().Select(y => (byte)char.GetNumericValue(y));
         }

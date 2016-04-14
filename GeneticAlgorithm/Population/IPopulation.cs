@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.DesignPoints;
+using GeneticAlgorithm.FuncCalculator;
+using GeneticAlgorithm.FactoryPoint;
 
 namespace GeneticAlgorithm.Population
 {
     public interface IPopulation
     {
-        IEnumerable<IDesignPoint> GetPopulation(int N, int accuracy, string funcExpression, params IChromosome[] chromosomes);
+        IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, IFuncCalculator funcCalculator, int populationNumber, params IChromosome[] chromosomes);
     }
 }

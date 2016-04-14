@@ -9,7 +9,7 @@ namespace GeneticAlgorithm.SelectPoints
 {
     public class TourSelectPoints : ISelectPoints
     {
-        public IEnumerable<IDesignPoint> SelectPoints(IEnumerable<IDesignPoint> designPoints)
+        public IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints)
         {
             throw new NotImplementedException();
         }

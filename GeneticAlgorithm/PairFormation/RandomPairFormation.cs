@@ -8,7 +8,7 @@ namespace GeneticAlgorithm.PairFormation
     public class RandomPairFormation : IPairFormation
     {
         #region Field
-        private Random random;
+        private readonly Random random;
         private List<int> usedNumbers;
         #endregion
 
@@ -26,7 +26,6 @@ namespace GeneticAlgorithm.PairFormation
             if (designPoints == null)
                 throw new ArgumentNullException();
             
-
             var pairs = new List<IPair>();
             var count = designPoints.Count();
 
@@ -39,7 +38,6 @@ namespace GeneticAlgorithm.PairFormation
                     first = random.Next(count);
                 }
                 while (usedNumbers.Contains(first));
-
                 usedNumbers.Add(first);
 
                 do
@@ -47,8 +45,8 @@ namespace GeneticAlgorithm.PairFormation
                     second = random.Next(count);
                 }
                 while (usedNumbers.Contains(second));
-
                 usedNumbers.Add(second);
+
                 pairs.Add(new Pair { First = designPoints.ElementAt(first), Second = designPoints.ElementAt(second) });
             }
 

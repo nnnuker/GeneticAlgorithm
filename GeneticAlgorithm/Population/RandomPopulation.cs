@@ -5,36 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.DesignPoints;
+using GeneticAlgorithm.FuncCalculator;
+using GeneticAlgorithm.FactoryPoint;
 
 namespace GeneticAlgorithm.Population
 {
     public class RandomPopulation : IPopulation
     {
-        private Random random;
+        private readonly Random random;
 
         public RandomPopulation()
         {
             random = new Random(DateTime.Today.Millisecond);
         }
 
-        public IEnumerable<IDesignPoint> GetPopulation(int N, int accuracy, string funcExpression, params IChromosome[] chromosomes)
+        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, IFuncCalculator funcCalculator, int populationNumber = 1, params IChromosome[] chromosomes)
         {
-            var list = new List<DesignPoint>();
+            var list = new List<IDesignPoint>();
             for (int i = 0; i < N; i++)
             {
-                IChromosome[] chromo = new Chromosome.Chromosome[chromosomes.Count()];
+                var chromo = new IChromosome[chromosomes.Count()];
                 for (int j = 0; j < chromosomes.Count(); j++)
                 {
+                    chromo[j] = chromosomes[j].Clone();
                     double value;
                     do
                     {
                         value = random.Next((int)chromosomes[j].Left, (int)chromosomes[j].Right + 1) + random.NextDouble();
-                        value = Math.Round(value, accuracy);
-                        
+                        value = Math.Round(value, chromosomes[j].Accuracy);
                     }
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
+                    chromo[j].Value = value;
                 }
-                //list.Add(new DesignPoint(1, funcExpression, chromo));
+                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, funcCalculator, chromo));
             }
             return list;
         }

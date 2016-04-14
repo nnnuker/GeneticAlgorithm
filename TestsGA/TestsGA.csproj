@@ -56,6 +56,7 @@
     <Compile Include="DesignPointTest.cs" />
     <Compile Include="PairFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectPointTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeneticAlgorithm\GeneticAlgorithm.csproj">

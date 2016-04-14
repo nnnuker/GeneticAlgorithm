@@ -1,17 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.DesignPoints;
 
 namespace GeneticAlgorithm.SelectPoints
 {
     public class RouletteSelectPoints : ISelectPoints
     {
-        public IEnumerable<IDesignPoint> SelectPoints(IEnumerable<IDesignPoint> designPoints)
+        private readonly Random rand;
+
+        public RouletteSelectPoints()
         {
-            throw new NotImplementedException();
+            rand = new Random(DateTime.Today.Millisecond);
+        }
+
+        public IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints)
+        {
+            if (n > designPoints.Count())
+                throw new ArgumentException();
+
+            int circle = 360;
+            var listDegreeseWithIDesignPoints = CalculateDegreese.Calculate(designPoints, circle).ToList();
+
+            var result = new List<IDesignPoint>();
+
+            for (int i = 0; i < n; i++)
+            {
+                var newPoint = rand.Next(0, circle + 1);
+                double currentValueDegrees = 0;
+
+                for (int j = 0; j < listDegreeseWithIDesignPoints.Count; j++)
+                {
+                    currentValueDegrees += listDegreeseWithIDesignPoints[j].Degreese;
+                    if (newPoint <= currentValueDegrees)
+                    {
+                        result.Add(listDegreeseWithIDesignPoints[j].DesignPoint);
+                        listDegreeseWithIDesignPoints.RemoveAt(j);
+                        var newDesignPoints = GetIEnumerableIDesignPoint(listDegreeseWithIDesignPoints);
+                        listDegreeseWithIDesignPoints = CalculateDegreese.Calculate(newDesignPoints, circle).ToList();
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
+        private IEnumerable<IDesignPoint> GetIEnumerableIDesignPoint (IEnumerable<DegreesWithIDesignPoint> listDegreeseWithIDesignPoints)
+        {
+            return listDegreeseWithIDesignPoints.Select(item => item.DesignPoint).ToList();
         }
     }
 }
