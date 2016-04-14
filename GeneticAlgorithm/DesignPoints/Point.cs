@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.DesignPoints;
+using GeneticAlgorithm.FuncCalculator;
 
-namespace GeneticAlgorithm.FuncCalculator.TruncationAlgorithm
-{
-    class Point : IDesignPoint
+namespace GeneticAlgorithm.DesignPoints
+{ 
+    public class Point : IDesignPoint
     {
         public bool IsAlive
         {
@@ -47,7 +48,7 @@ namespace GeneticAlgorithm.FuncCalculator.TruncationAlgorithm
             
         }
 
-        public IDesignPoint Copy()
+        public IDesignPoint Clone()
         {
             return new Point
             {

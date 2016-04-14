@@ -55,7 +55,7 @@ namespace GeneticAlgorithm.Crossover
 
             if (pair.Second == null)
             {
-                result.Add(pair.First.Copy());
+                result.Add(pair.First.Clone());
                 return result;
             }
 
@@ -64,13 +64,13 @@ namespace GeneticAlgorithm.Crossover
 
             index = random.Next(2, pair.First.X1X2.Count() - 2);
 
-            var newDesignPointFirst = pair.First.Copy();
+            var newDesignPointFirst = pair.First.Clone();
             var crossoverFirst = new List<byte>().Concat(binaryFirstPair.GetRange(0, index));
             crossoverFirst.Concat(binarySecondPair.GetRange(index, pair.First.X1X2.Count()));
             newDesignPointFirst.Update(crossoverFirst);
             result.Add(newDesignPointFirst);
 
-            var newDesignPointSecond = pair.First.Copy();
+            var newDesignPointSecond = pair.First.Clone();
             var crossoverSecond = new List<byte>().Concat(binarySecondPair.GetRange(0, index));
             crossoverFirst.Concat(binaryFirstPair.GetRange(index, pair.First.X1X2.Count()));
             newDesignPointSecond.Update(crossoverSecond);

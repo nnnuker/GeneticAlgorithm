@@ -79,7 +79,7 @@ namespace GeneticAlgorithm.DesignPoints
             this.FunctionValue = FuncCalculator.CalculateFunc(X.ToArray());
         }
 
-        public IDesignPoint Copy()
+        public IDesignPoint Clone()
         {
             return new DesignPoint
             {
