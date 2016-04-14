@@ -11,12 +11,11 @@ namespace GeneticAlgorithm
 {
     public class GAlgorithm
     {
-        ICrossover crossover;
         IDescendants descendants;
         IPairFormation pairFormation;
         IPopulation population;
         ISelectPoints selectPoints;
-        private IEnumerable<IDesignPoint> listDesignPoints;
+        private readonly IEnumerable<IDesignPoint> listDesignPoints;
         public delegate void NewPopulation();
         private NewPopulation newPopulation;
 
@@ -28,18 +27,17 @@ namespace GeneticAlgorithm
             }
         }
 
-        public GAlgorithm() : this(null, null, null, null, null, null)
+        public GAlgorithm() : this(null, null, null, null, null)
         {
 
         }
 
-        public GAlgorithm(IPopulation population, ISelectPoints selectPoints, IPairFormation pairFormation, ICrossover crossover,
+        public GAlgorithm(IPopulation population, ISelectPoints selectPoints, IPairFormation pairFormation,
             IDescendants descendants, NewPopulation newPopulation)
         {
-            if (crossover == null || descendants == null || pairFormation == null || population == null || selectPoints == null)
+            if (descendants == null || pairFormation == null || population == null || selectPoints == null)
                 throw new ArgumentNullException();
 
-            this.crossover = crossover;
             this.descendants = descendants;
             this.pairFormation = pairFormation;
             this.population = population;

@@ -66,6 +66,9 @@
     <Compile Include="Chromosome\Axis.cs" />
     <Compile Include="DesignPoints\Point.cs" />
     <Compile Include="GAlgorithm.cs" />
+    <Compile Include="Mutation\IMutation.cs" />
+    <Compile Include="Mutation\MutationBinary.cs" />
+    <Compile Include="Mutation\MutationNumeric.cs" />
     <Compile Include="PairFormation\BestWorsePairFormation.cs" />
     <Compile Include="PairFormation\IPair.cs" />
     <Compile Include="PairFormation\IPairFormation.cs" />
