@@ -69,11 +69,20 @@ namespace GeneticAlgorithm.Chromosome
 
             var secondPart = list.GetRange(firstPartLength + 1, secondPartLength);
 
-            var second = Convert.ToInt32(string.Join(string.Empty, secondPart), 2);
+            var join = string.Join(string.Empty, secondPart);
+
+            string sec = string.Empty;
+
+            if (join != string.Empty)
+            {
+                int second = Convert.ToInt32(join, 2);
+
+                sec = "." + second.ToString();
+            }
 
             string sign = list[0] == 1 ? "" : "-";
 
-            var result = Convert.ToDouble($"{sign}{first.ToString()}.{second.ToString()}", CultureInfo.InvariantCulture);
+            var result = Convert.ToDouble($"{sign}{first.ToString()}{sec}", CultureInfo.InvariantCulture);
 
             this.binaryValue = list;
             this.value = result;
