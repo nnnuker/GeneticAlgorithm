@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ChromosomeTest.cs" />
     <Compile Include="DesignPointTest.cs" />
+    <Compile Include="MutationTest.cs" />
     <Compile Include="PairFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectPointTest.cs" />
