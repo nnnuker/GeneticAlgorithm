@@ -15,7 +15,7 @@ namespace TestsGA
     public class MutationTest
     {
         [TestMethod]
-        public void MutationCoount()
+        public void MutationCount()
         {
             var listDP = new List<IDesignPoint>();
             listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
