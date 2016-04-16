@@ -7,8 +7,8 @@ namespace GeneticAlgorithm.Mutation
 {
     public class MutationBinary : IMutation
     {
-        private double mutationCoefficient;
-        private Random rnd;
+        private readonly double mutationCoefficient;
+        private readonly Random rnd;
 
         public MutationBinary() : this(0)
         {
@@ -47,10 +47,7 @@ namespace GeneticAlgorithm.Mutation
 
                         if (comparerCoefficient <= mutationCoefficient)
                         {
-                            if (itemOldBinary == 0)
-                                newBinary.Add(1);
-                            else
-                                newBinary.Add(0);
+                            newBinary.Add(itemOldBinary != 0 ? (byte)0 : (byte)1);
                         }
                         else
                         {
