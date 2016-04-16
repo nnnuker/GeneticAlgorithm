@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.DesignPoints;
-using GeneticAlgorithm.FuncCalculator;
 using GeneticAlgorithm.FactoryPoint;
 
 namespace GeneticAlgorithm.Population
@@ -13,13 +10,25 @@ namespace GeneticAlgorithm.Population
     public class RandomPopulation : IPopulation
     {
         private readonly Random random;
+        private readonly IFactoryPoints factoryPoint;
+        private readonly int N;
+        private readonly int populationNumber;
+        private readonly IChromosome[] chromosomes;
 
         public RandomPopulation()
         {
             random = new Random(DateTime.Today.Millisecond);
         }
 
-        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, IFuncCalculator funcCalculator, int populationNumber = 1, params IChromosome[] chromosomes)
+        public RandomPopulation(IFactoryPoints factoryPoint, int N, int populationNumber = 1, params IChromosome[] chromosomes):this()
+        {
+            this.factoryPoint = factoryPoint;
+            this.N = N;
+            this.populationNumber = populationNumber;
+            this.chromosomes = chromosomes;
+        }
+
+        public IEnumerable<IDesignPoint> GetPopulation()
         {
             var list = new List<IDesignPoint>();
             for (int i = 0; i < N; i++)
@@ -37,7 +46,7 @@ namespace GeneticAlgorithm.Population
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
                     chromo[j].Value = value;
                 }
-                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, funcCalculator, chromo));
+                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, chromo));
             }
             return list;
         }

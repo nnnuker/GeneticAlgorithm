@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GeneticAlgorithm.Crossover;
 using GeneticAlgorithm.Descendants;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.PairFormation;
@@ -11,42 +10,51 @@ namespace GeneticAlgorithm
 {
     public class GAlgorithm
     {
-        ICrossover crossover;
+        #region Fields
+
         IDescendants descendants;
-        IPairFormation pairFormation;
         IPopulation population;
         ISelectPoints selectPoints;
-        private IEnumerable<IDesignPoint> listDesignPoints;
-        public delegate void NewPopulation();
+        private readonly IEnumerable<IDesignPoint> listDesignPoints;
         private NewPopulation newPopulation;
 
-        public IEnumerable<IDesignPoint> ListDesignPoints
+        #endregion
+
+        #region Delegate
+
+        public delegate void NewPopulation();
+
+        #endregion
+
+        #region Property
+
+        public IEnumerable<IDesignPoint> ListDesignPoints => listDesignPoints;
+
+        #endregion
+
+        #region Constructors
+
+        public GAlgorithm() : this(null, null, null, null)
         {
-            get
-            {
-                return listDesignPoints;
-            }
+
         }
 
-        public GAlgorithm() : this(null, null, null, null, null, null)
-        {
-
-        }
-
-        public GAlgorithm(IPopulation population, ISelectPoints selectPoints, IPairFormation pairFormation, ICrossover crossover,
+        public GAlgorithm(IPopulation population, ISelectPoints selectPoints,
             IDescendants descendants, NewPopulation newPopulation)
         {
-            if (crossover == null || descendants == null || pairFormation == null || population == null || selectPoints == null)
+            if (descendants == null || population == null || selectPoints == null || newPopulation == null)
                 throw new ArgumentNullException();
 
-            this.crossover = crossover;
             this.descendants = descendants;
-            this.pairFormation = pairFormation;
             this.population = population;
             this.selectPoints = selectPoints;
-            this.listDesignPoints = new List<IDesignPoint>();
             this.newPopulation = newPopulation;
+            this.listDesignPoints = population.GetPopulation();
         }
+
+        #endregion
+
+        #region Public methods
 
         public void MoveNext()
         {
@@ -67,5 +75,13 @@ namespace GeneticAlgorithm
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region Private methods
+
+
+        #endregion
+
     }
 }

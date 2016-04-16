@@ -11,8 +11,23 @@ namespace GeneticAlgorithm.FactoryPoint
 {
     public class CreatePoint : IFactoryPoints
     {
-        public IDesignPoint CreateFactoryPoint(int populationNumber, IFuncCalculator funcCalculator, IChromosome[] chromo)
+        private readonly IFuncCalculator funcCalculator;
+
+        public CreatePoint()
         {
+            
+        }
+
+        public CreatePoint(IFuncCalculator funcCalculator)
+        {
+            if (funcCalculator == null) throw new ArgumentNullException(nameof(funcCalculator));
+
+            this.funcCalculator = funcCalculator;
+        }
+
+        public IDesignPoint CreateFactoryPoint(int populationNumber, IChromosome[] chromo)
+        {
+            if (chromo == null) throw new ArgumentNullException(nameof(chromo));
             return new Point(populationNumber, funcCalculator, chromo);
         }
     }

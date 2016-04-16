@@ -12,6 +12,6 @@ namespace GeneticAlgorithm.Population
 {
     public interface IPopulation
     {
-        IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, IFuncCalculator funcCalculator, int populationNumber, params IChromosome[] chromosomes);
+        IEnumerable<IDesignPoint> GetPopulation();
     }
 }

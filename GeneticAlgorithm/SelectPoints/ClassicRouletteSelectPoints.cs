@@ -31,7 +31,7 @@ namespace GeneticAlgorithm.SelectPoints
 
                 foreach (var item in listDegreeseWithIDesignPoints)
                 {
-                    currentValueDegrees += item.Degreese;
+                    currentValueDegrees += item.Degrees;
                     if (newPoint <= currentValueDegrees)
                     {
                         result.Add(item.DesignPoint);

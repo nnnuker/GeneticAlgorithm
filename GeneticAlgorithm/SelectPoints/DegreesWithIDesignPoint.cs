@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithm.SelectPoints
 {
-    class DegreesWithIDesignPoint
+    internal class DegreesWithIDesignPoint
     {
         public IDesignPoint DesignPoint { get; set; }
-        public double Degreese { get; set; }
+        public double Degrees { get; set; }
 
         public DegreesWithIDesignPoint()
         {
-
         }
 
-        public DegreesWithIDesignPoint(IDesignPoint designPoint, double degreese)
+        public DegreesWithIDesignPoint(IDesignPoint designPoint, double degrees)
         {
             this.DesignPoint = designPoint;
-            this.Degreese = degreese;
+            this.Degrees = degrees;
         }
     }
 }

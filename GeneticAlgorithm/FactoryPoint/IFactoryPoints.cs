@@ -11,6 +11,6 @@ namespace GeneticAlgorithm.FactoryPoint
 {
     public interface IFactoryPoints
     {
-        IDesignPoint CreateFactoryPoint(int populationNumber, IFuncCalculator funcCalculator, IChromosome[] chromo);
+        IDesignPoint CreateFactoryPoint(int populationNumber, IChromosome[] chromo);
     }
 }
