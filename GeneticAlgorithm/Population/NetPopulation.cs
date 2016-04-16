@@ -12,7 +12,26 @@ namespace GeneticAlgorithm.Population
 {
     public class NetPopulation : IPopulation
     {
-        public IEnumerable<IDesignPoint> GetPopulation(IFactoryPoints factoryPoint, int N, int populationNumber, params IChromosome[] chromosomes)
+        private readonly Random random;
+        private readonly IFactoryPoints factoryPoint;
+        private readonly int N;
+        private readonly int populationNumber;
+        private readonly IChromosome[] chromosomes;
+
+        public NetPopulation()
+        {
+            random = new Random(DateTime.Today.Millisecond);
+        }
+
+        public NetPopulation(IFactoryPoints factoryPoint, int N, int populationNumber = 1, params IChromosome[] chromosomes):this()
+        {
+            this.factoryPoint = factoryPoint;
+            this.N = N;
+            this.populationNumber = populationNumber;
+            this.chromosomes = chromosomes;
+        }
+
+        public IEnumerable<IDesignPoint> GetPopulation()
         {
             throw new NotImplementedException();
         }
