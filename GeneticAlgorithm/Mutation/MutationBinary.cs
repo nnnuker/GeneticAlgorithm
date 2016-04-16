@@ -7,8 +7,8 @@ namespace GeneticAlgorithm.Mutation
 {
     public class MutationBinary : IMutation
     {
-        private double mutationCoefficient;
-        private Random rnd;
+        private readonly double mutationCoefficient;
+        private readonly Random rnd;
 
         public MutationBinary() : this(0)
         {
@@ -33,34 +33,25 @@ namespace GeneticAlgorithm.Mutation
             foreach (var itemDP in designPoints)
             {
                 var newDesignPoint = itemDP.Clone();
-                var newListChromosome = new List<IChromosome>();
+                var newBinary = new List<byte>();
 
-                foreach (var itemX in newDesignPoint.X)
+                foreach (var itemBianry in newDesignPoint.X1X2)
                 {
-                    var newChomosome = itemX.Clone();
-                    var oldBinary = newChomosome.Binary;
-                    var newBinary = new List<byte>();
+                    var comparerCoefficient = rnd.Next(0, maxValueRnd);
 
-                    foreach (var itemOldBinary in oldBinary)
+                    if (comparerCoefficient <= mutationCoefficient)
                     {
-                        var comparerCoefficient = rnd.Next(0, maxValueRnd);
-
-                        if (comparerCoefficient <= mutationCoefficient)
-                        {
-                            if (itemOldBinary == 0)
-                                newBinary.Add(1);
-                            else
-                                newBinary.Add(0);
-                        }
+                        if (itemBianry == 0)
+                            newBinary.Add(1);
                         else
-                        {
-                            newBinary.Add(itemOldBinary);
-                        }
+                            newBinary.Add(0);
                     }
-                    newChomosome.Update(newBinary);
-                    newListChromosome.Add(newChomosome);
+                    else
+                    {
+                        newBinary.Add(itemBianry);
+                    }
                 }
-                newDesignPoint.X = newListChromosome;
+                newDesignPoint.Update(newBinary);
                 result.Add(newDesignPoint);
             }
             return result;
