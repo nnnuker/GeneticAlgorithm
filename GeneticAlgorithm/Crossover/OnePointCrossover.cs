@@ -62,17 +62,17 @@ namespace GeneticAlgorithm.Crossover
             var binaryFirstPair = pair.First.X1X2.ToList();
             var binarySecondPair = pair.Second.X1X2.ToList();
 
-            index = random.Next(2, pair.First.X1X2.Count() - 2);
+            index = random.Next(2, pair.First.X1X2.Count() - 1);
 
             var newDesignPointFirst = pair.First.Clone();
             var crossoverFirst = new List<byte>().Concat(binaryFirstPair.GetRange(0, index));
-            crossoverFirst.Concat(binarySecondPair.GetRange(index, pair.First.X1X2.Count()));
+            crossoverFirst = crossoverFirst.Concat(binarySecondPair.GetRange(index, pair.Second.X1X2.Count() - index));
             newDesignPointFirst.Update(crossoverFirst);
             result.Add(newDesignPointFirst);
 
-            var newDesignPointSecond = pair.First.Clone();
+            var newDesignPointSecond = pair.Second.Clone();
             var crossoverSecond = new List<byte>().Concat(binarySecondPair.GetRange(0, index));
-            crossoverFirst.Concat(binaryFirstPair.GetRange(index, pair.First.X1X2.Count()));
+            crossoverSecond = crossoverSecond.Concat(binaryFirstPair.GetRange(index, pair.First.X1X2.Count() - index));
             newDesignPointSecond.Update(crossoverSecond);
             result.Add(newDesignPointSecond);
 
