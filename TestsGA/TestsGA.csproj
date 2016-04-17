@@ -58,6 +58,8 @@
     <Compile Include="PairFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectPointTest.cs" />
+    <Compile Include="GAlgorithmTest.cs" />
+    <Compile Include="OnePointCrossoverTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeneticAlgorithm\GeneticAlgorithm.csproj">
