@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithm.FactoryPoint
 {
-    public class CreateDesignPoint
+    public class CreateDesignPoint : IFactoryPoints
     {
         private readonly IFuncCalculator funcCalculator;
 
         public CreateDesignPoint()
         {
-            
+
         }
 
         public CreateDesignPoint(IFuncCalculator funcCalculator)
