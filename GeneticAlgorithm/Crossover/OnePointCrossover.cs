@@ -16,6 +16,8 @@ namespace GeneticAlgorithm.Crossover
         private int index;
         #endregion
 
+        public int PopulationNumber { get; set; } = 1;
+
         #region Constructor
         public OnePointCrossover()
         {
@@ -36,8 +38,8 @@ namespace GeneticAlgorithm.Crossover
         {
             if (pairs == null)
                 throw new ArgumentNullException();
-
             var result = new List<IDesignPoint>();
+
             foreach (var item in pairs)
             {
                 var itemDesignPoints = Crossover(item);
@@ -45,6 +47,8 @@ namespace GeneticAlgorithm.Crossover
             }
             return result;
         }
+
+        
 
         public IEnumerable<IDesignPoint> Crossover(IPair pair)
         {
@@ -65,12 +69,14 @@ namespace GeneticAlgorithm.Crossover
             index = random.Next(2, pair.First.X1X2.Count() - 1);
 
             var newDesignPointFirst = pair.First.Clone();
+            newDesignPointFirst.PopulationNumber = PopulationNumber;
             var crossoverFirst = new List<byte>().Concat(binaryFirstPair.GetRange(0, index));
             crossoverFirst = crossoverFirst.Concat(binarySecondPair.GetRange(index, pair.Second.X1X2.Count() - index));
             newDesignPointFirst.Update(crossoverFirst);
             result.Add(newDesignPointFirst);
 
             var newDesignPointSecond = pair.Second.Clone();
+            newDesignPointSecond.PopulationNumber = PopulationNumber;
             var crossoverSecond = new List<byte>().Concat(binarySecondPair.GetRange(0, index));
             crossoverSecond = crossoverSecond.Concat(binaryFirstPair.GetRange(index, pair.First.X1X2.Count() - index));
             newDesignPointSecond.Update(crossoverSecond);

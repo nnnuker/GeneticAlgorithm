@@ -9,20 +9,19 @@ namespace GeneticAlgorithm.PairFormation
     {
         #region Field
         private readonly Random random;
-        private readonly List<int> usedNumbers;
         #endregion
 
         #region Constructor
         public RandomPairFormation()
         {
             random = new Random(DateTime.Now.Millisecond);
-            usedNumbers = new List<int>();
         }
         #endregion  
 
         #region Public methods
         public IEnumerable<IPair> FormatPairs(IEnumerable<IDesignPoint> designPoints)
         {
+            var usedNumbers = new List<int>();
             if (designPoints == null)
                 throw new ArgumentNullException();
             

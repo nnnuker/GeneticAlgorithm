@@ -64,7 +64,7 @@ namespace GeneticAlgorithm
 
             listOfCurrentDesignPoints = descendants.GetDescendants(listOfCurrentDesignPoints).ToList();
 
-            listOfAllDesignPoints.AddRange(listOfCurrentDesignPoints);
+            listOfAllDesignPoints.AddRange(descendants.GetAllDesignPoints);
 
             populationNumber++;
         }
