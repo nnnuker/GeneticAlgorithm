@@ -109,7 +109,9 @@ namespace GeneticAlgorithm.Chromosome
             if (minus > 0)
             {
                 var str = minus.ToString(CultureInfo.InvariantCulture);
-                var intFraction = int.Parse(str.Substring(str.IndexOf('.') + 1));
+                var round = Math.Round(double.Parse(str, CultureInfo.InvariantCulture), 9).ToString(CultureInfo.InvariantCulture);
+                var parse = round.Substring(round.IndexOf('.') + 1);
+                var intFraction = int.Parse(parse);
                 binaryValue.AddRange(GetSecondPart(intFraction, accuracy));
             }
             else
