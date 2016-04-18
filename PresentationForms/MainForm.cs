@@ -71,7 +71,7 @@ namespace PresentationForms
             IFactoryPoints factoryPoint = new CreateDesignPoint(funcCalculator);
 
             IChromosome chromoX = new Chromosome(1, -4, 4, 0, "X");
-            IChromosome chromoY = new Chromosome(1, -10, 10, 0, "Y");
+            IChromosome chromoY = new Chromosome(1, -9, 9, 0, "Y");
 
             IPopulation population = new RandomPopulation(factoryPoint, 20, 1, chromoX, chromoY);
 

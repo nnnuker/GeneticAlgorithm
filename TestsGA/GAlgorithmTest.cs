@@ -59,7 +59,7 @@ namespace TestsGA
             IFactoryPoints factoryPoint = new CreateDesignPoint(funcCalculator);
 
             IChromosome chromoX = new Chromosome(1, -4, 4, 0, "x");
-            IChromosome chromoY = new Chromosome(1, -10, 10, 0, "y");
+            IChromosome chromoY = new Chromosome(1, -9, 9, 0, "y");
 
             IPopulation population = new RandomPopulation(factoryPoint, 20, 1, chromoX, chromoY);
 
@@ -76,7 +76,7 @@ namespace TestsGA
 
             ga.MoveToEnd();
 
-            var result = ga.ListOfAllDesignPoints;
+            var result = ga.ListOfAllDesignPoints.Where(x=>(x.X[1].Value.ToString().Length > 3 || x.X[0].Value.ToString().Length > 3) && x.IsAlive);
 
             //Assert.AreEqual(20, result.Count());
         }
