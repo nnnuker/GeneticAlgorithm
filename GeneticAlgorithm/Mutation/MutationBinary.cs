@@ -61,6 +61,7 @@ namespace GeneticAlgorithm.Mutation
                     newListChromosome.Add(newChomosome);
                 }
                 newDesignPoint.X = newListChromosome;
+                newDesignPoint.FunctionValue = newDesignPoint.FuncCalculator.CalculateFunc(newListChromosome.ToArray());
                 result.Add(newDesignPoint);
             }
             return result;
