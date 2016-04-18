@@ -58,7 +58,7 @@ namespace GeneticAlgorithm
         {
             listOfCurrentDesignPoints = listOfCurrentDesignPoints.Where(x => x.IsAlive).ToList();
 
-            int percent = (int)Math.Round(((double)listOfCurrentDesignPoints.Count * (double)n) / 100.0);
+            var percent = (int)Math.Round(((double)listOfCurrentDesignPoints.Count * (double)n) / 100.0);
 
             listOfCurrentDesignPoints = selectPoints.SelectPoints(percent, listOfCurrentDesignPoints).ToList();
 
@@ -71,7 +71,7 @@ namespace GeneticAlgorithm
 
         public void MoveToEnd()
         {
-            for (int i = populationNumber; i < end; i++)
+            for (var i = populationNumber; i < end; i++)
             {
                 MoveNext();
             }
