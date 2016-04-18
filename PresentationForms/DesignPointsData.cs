@@ -17,7 +17,7 @@ namespace PresentationForms
 
         public void Add(DesignPointViewModel designPoint)
         {
-            grid.Rows.Insert(0, this.GetFulldId(designPoint), designPoint.X, designPoint.Y, designPoint.IsAlive, designPoint.Binary);
+            grid.Rows.Insert(0, this.GetFulldId(designPoint), designPoint.X, designPoint.Y, designPoint.IsAlive, designPoint.Binary, designPoint.Value);
             if (designPoint.IsAlive == false)
             {
                 grid.Rows[0].DefaultCellStyle.BackColor = Color.Red;
@@ -55,6 +55,9 @@ namespace PresentationForms
             grid.Columns[healthCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             grid.Columns[healthCol].FillWeight = 0.1f;
             var binCol = grid.Columns.Add("Binary", "Binary");
+            grid.Columns[binCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            grid.Columns[binCol].FillWeight = 0.5f;
+            var valueCol = grid.Columns.Add("Value", "Value");
             grid.Columns[binCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             grid.Columns[binCol].FillWeight = 0.5f;
         }

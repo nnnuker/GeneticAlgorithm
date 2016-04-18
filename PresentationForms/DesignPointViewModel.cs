@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GeneticAlgorithm.DesignPoints;
 
 namespace PresentationForms
@@ -15,9 +16,11 @@ namespace PresentationForms
 
         public double Y { get { return designPoint.X.ToList().First(x => x.Name == "Y").Value; } }
 
-        public string Binary => designPoint.X1X2.ToString();
+        public string Binary => string.Join(string.Empty, designPoint.X1X2.ToArray()); 
 
         public bool IsAlive => designPoint.IsAlive;
+
+        public double Value => designPoint.FunctionValue;
 
         public DesignPointViewModel(IDesignPoint designPoint)
         {

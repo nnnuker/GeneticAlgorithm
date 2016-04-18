@@ -18,7 +18,7 @@ namespace GeneticAlgorithm
         private IPopulation population;
         private readonly ISelectPoints selectPoints;
         private readonly List<IDesignPoint> listOfAllDesignPoints;
-        private List<IDesignPoint> listOfCurrentDesignPoints;
+        public List<IDesignPoint> listOfCurrentDesignPoints;
         private int populationNumber;
 
         #endregion
