@@ -5,6 +5,7 @@ namespace GeneticAlgorithm.Descendants
 {
     public interface IDescendants
     {
-        IEnumerable<IDesignPoint> GetDescendants(IEnumerable<IDesignPoint> designPoints); 
+        IEnumerable<IDesignPoint> GetAllDesignPoints { get; }
+        IEnumerable<IDesignPoint> GetDescendants(IEnumerable<IDesignPoint> designPoints);
     }
 }

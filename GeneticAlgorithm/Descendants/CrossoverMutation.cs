@@ -18,12 +18,19 @@ namespace GeneticAlgorithm.Descendants
         private static IMutation mutation;
         private static IPairFormation pairFormation;
         private readonly NewPopulation newPopulation;
+        private static List<IDesignPoint> listOfAllDesignPoints;
 
         #endregion
 
         #region Delegate
 
         public delegate IEnumerable<IDesignPoint> NewPopulation(IEnumerable<IDesignPoint> designPoints);
+
+        #endregion
+
+        #region Property
+
+        public IEnumerable<IDesignPoint> GetAllDesignPoints => listOfAllDesignPoints;
 
         #endregion
 
@@ -45,6 +52,7 @@ namespace GeneticAlgorithm.Descendants
             CrossoverMutation.mutation = mutation;
             CrossoverMutation.pairFormation = pairFormation;
             this.newPopulation = newPopulation;
+            listOfAllDesignPoints = new List<IDesignPoint>();
         }
 
         #endregion
@@ -53,20 +61,27 @@ namespace GeneticAlgorithm.Descendants
 
         public IEnumerable<IDesignPoint> GetDescendants(IEnumerable<IDesignPoint> designPoints)
         {
+            listOfAllDesignPoints = new List<IDesignPoint>();
             return newPopulation(designPoints);
         }
 
         public static IEnumerable<IDesignPoint> ParentMutationCrossover(IEnumerable<IDesignPoint> designPoints)
         {
-            List<IDesignPoint> list = new List<IDesignPoint>();
+            var list = new List<IDesignPoint>();
 
             var pairs = pairFormation.FormatPairs(designPoints);
+
+            crossover.PopulationNumber++;
 
             var crossovered = crossover.Crossover(pairs);
 
             list.AddRange(crossovered);
 
+            mutation.PopulationNumber = crossover.PopulationNumber;
+
             list.AddRange(mutation.Mutate(crossovered));
+
+            listOfAllDesignPoints.AddRange(list);
 
             return list;
         }
@@ -75,9 +90,19 @@ namespace GeneticAlgorithm.Descendants
         {
             var pairs = pairFormation.FormatPairs(designPoints);
 
+            crossover.PopulationNumber++;
+
             var crossovered = crossover.Crossover(pairs);
 
-            return mutation.Mutate(crossovered);
+            listOfAllDesignPoints.AddRange(crossovered);
+
+            mutation.PopulationNumber = crossover.PopulationNumber;
+
+            var mutated = mutation.Mutate(crossovered);
+
+            listOfAllDesignPoints.AddRange(mutated);
+
+            return mutated;
         }
 
         #endregion

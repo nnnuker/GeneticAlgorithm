@@ -20,8 +20,9 @@ namespace GeneticAlgorithm.DesignPoints
         }
         public IEnumerable<byte> X1X2 { get; set; }
 
-        public static int Count { get; set; } = 0;
+        public static int CountID { get; set; } = 0;
         public IFuncCalculator FuncCalculator { get; set; }
+
         public double FunctionValue { get; set; }
         public int ID { get; set; }
         public int PopulationNumber { get; set; }
@@ -29,7 +30,7 @@ namespace GeneticAlgorithm.DesignPoints
 
         public Point()
         {
-            Count++;
+            CountID++;
         }
 
         public Point(int populationNumber, IFuncCalculator funcCalculator, params IChromosome[] x) : this()
@@ -41,7 +42,7 @@ namespace GeneticAlgorithm.DesignPoints
                 throw new ArgumentOutOfRangeException();
 
             this.PopulationNumber = populationNumber;
-            this.ID = Count;
+            this.ID = CountID;
             this.X = new List<IChromosome>(x);
             this.FuncCalculator = funcCalculator;
             this.FunctionValue = funcCalculator.CalculateFunc(x);
@@ -57,7 +58,7 @@ namespace GeneticAlgorithm.DesignPoints
                 X = this.X,
                 PopulationNumber = this.PopulationNumber,
                 X1X2 = this.X1X2,
-                ID = Count
+                ID = CountID
             };
         }
 

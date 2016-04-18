@@ -22,6 +22,8 @@ namespace GeneticAlgorithm.Mutation
             rndNumeric = new Random(DateTime.Today.Millisecond);
         }
 
+        public int PopulationNumber { get; set; }
+
         public IEnumerable<IDesignPoint> Mutate(IEnumerable<IDesignPoint> designPoints)
         {
             if (designPoints == null)
@@ -34,6 +36,7 @@ namespace GeneticAlgorithm.Mutation
             foreach (var itemDP in designPoints)
             {
                 var newDesignPoint = itemDP.Clone();
+                newDesignPoint.PopulationNumber = PopulationNumber;
                 var newBinary = new List<byte>();
                 var currentX = 0;
 

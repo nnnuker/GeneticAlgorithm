@@ -15,6 +15,8 @@ namespace GeneticAlgorithm.Crossover
             return null;
         }
 
+        public int PopulationNumber { get; set; }
+
         public IEnumerable<IDesignPoint> Crossover(IPair pair)
         {
             return null;
