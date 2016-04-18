@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tBoxX1Left = new System.Windows.Forms.TextBox();
             this.tBoxX1Right = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tBoxX2Left = new System.Windows.Forms.TextBox();
             this.tBoxX2Right = new System.Windows.Forms.TextBox();
             this.tBoxN = new System.Windows.Forms.TextBox();
@@ -42,90 +40,210 @@
             this.tBoxPercent = new System.Windows.Forms.TextBox();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tBoxAccuracy = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tBoxMutation = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.bOneStep = new System.Windows.Forms.Button();
+            this.bToEnd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tBoxX1Left
             // 
-            this.tBoxX1Left.Location = new System.Drawing.Point(305, 12);
+            this.tBoxX1Left.Location = new System.Drawing.Point(415, 12);
             this.tBoxX1Left.Name = "tBoxX1Left";
             this.tBoxX1Left.Size = new System.Drawing.Size(100, 20);
             this.tBoxX1Left.TabIndex = 0;
             // 
             // tBoxX1Right
             // 
-            this.tBoxX1Right.Location = new System.Drawing.Point(475, 12);
+            this.tBoxX1Right.Location = new System.Drawing.Point(585, 12);
             this.tBoxX1Right.Name = "tBoxX1Right";
             this.tBoxX1Right.Size = new System.Drawing.Size(100, 20);
             this.tBoxX1Right.TabIndex = 1;
             // 
             // tBoxX2Left
             // 
-            this.tBoxX2Left.Location = new System.Drawing.Point(305, 39);
+            this.tBoxX2Left.Location = new System.Drawing.Point(415, 39);
             this.tBoxX2Left.Name = "tBoxX2Left";
             this.tBoxX2Left.Size = new System.Drawing.Size(100, 20);
             this.tBoxX2Left.TabIndex = 3;
             // 
             // tBoxX2Right
             // 
-            this.tBoxX2Right.Location = new System.Drawing.Point(475, 38);
+            this.tBoxX2Right.Location = new System.Drawing.Point(585, 38);
             this.tBoxX2Right.Name = "tBoxX2Right";
             this.tBoxX2Right.Size = new System.Drawing.Size(100, 20);
             this.tBoxX2Right.TabIndex = 4;
             // 
             // tBoxN
             // 
-            this.tBoxN.Location = new System.Drawing.Point(475, 64);
+            this.tBoxN.Location = new System.Drawing.Point(585, 64);
             this.tBoxN.Name = "tBoxN";
             this.tBoxN.Size = new System.Drawing.Size(100, 20);
             this.tBoxN.TabIndex = 5;
             // 
             // tBoxExeEnd
             // 
-            this.tBoxExeEnd.Location = new System.Drawing.Point(475, 91);
+            this.tBoxExeEnd.Location = new System.Drawing.Point(585, 116);
             this.tBoxExeEnd.Name = "tBoxExeEnd";
             this.tBoxExeEnd.Size = new System.Drawing.Size(100, 20);
             this.tBoxExeEnd.TabIndex = 6;
             // 
             // tBoxPercent
             // 
-            this.tBoxPercent.Location = new System.Drawing.Point(475, 118);
+            this.tBoxPercent.Location = new System.Drawing.Point(585, 91);
             this.tBoxPercent.Name = "tBoxPercent";
             this.tBoxPercent.Size = new System.Drawing.Size(100, 20);
             this.tBoxPercent.TabIndex = 7;
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart.Legends.Add(legend2);
             this.chart.Location = new System.Drawing.Point(13, 13);
             this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 2;
-            this.chart.Series.Add(series1);
-            this.chart.Size = new System.Drawing.Size(286, 367);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.YValuesPerPoint = 2;
+            this.chart.Series.Add(series2);
+            this.chart.Size = new System.Drawing.Size(306, 435);
             this.chart.TabIndex = 8;
             this.chart.Text = "chart1";
             // 
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(305, 144);
+            this.dataGridView.Location = new System.Drawing.Point(345, 175);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(270, 236);
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.Size = new System.Drawing.Size(341, 273);
             this.dataGridView.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(522, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "<= X1 <=";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(522, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "<= X2 <=";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(522, 71);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "N";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(522, 98);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(24, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "n %";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(522, 121);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "End";
+            // 
+            // tBoxAccuracy
+            // 
+            this.tBoxAccuracy.Location = new System.Drawing.Point(415, 65);
+            this.tBoxAccuracy.Name = "tBoxAccuracy";
+            this.tBoxAccuracy.Size = new System.Drawing.Size(100, 20);
+            this.tBoxAccuracy.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(352, 75);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Accuracy";
+            // 
+            // tBoxMutation
+            // 
+            this.tBoxMutation.Location = new System.Drawing.Point(415, 91);
+            this.tBoxMutation.Name = "tBoxMutation";
+            this.tBoxMutation.Size = new System.Drawing.Size(100, 20);
+            this.tBoxMutation.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(355, 97);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(13, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "µ";
+            // 
+            // bOneStep
+            // 
+            this.bOneStep.Location = new System.Drawing.Point(497, 146);
+            this.bOneStep.Name = "bOneStep";
+            this.bOneStep.Size = new System.Drawing.Size(75, 23);
+            this.bOneStep.TabIndex = 19;
+            this.bOneStep.Text = "Go";
+            this.bOneStep.UseVisualStyleBackColor = true;
+            this.bOneStep.Click += new System.EventHandler(this.bOneStep_Click);
+            // 
+            // bToEnd
+            // 
+            this.bToEnd.Location = new System.Drawing.Point(585, 146);
+            this.bToEnd.Name = "bToEnd";
+            this.bToEnd.Size = new System.Drawing.Size(75, 23);
+            this.bToEnd.TabIndex = 20;
+            this.bToEnd.Text = "Finish";
+            this.bToEnd.UseVisualStyleBackColor = true;
+            this.bToEnd.Click += new System.EventHandler(this.bToEnd_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 392);
+            this.ClientSize = new System.Drawing.Size(698, 460);
+            this.Controls.Add(this.bToEnd);
+            this.Controls.Add(this.bOneStep);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.tBoxMutation);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tBoxAccuracy);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.tBoxPercent);
@@ -148,7 +266,6 @@
 
         private System.Windows.Forms.TextBox tBoxX1Left;
         private System.Windows.Forms.TextBox tBoxX1Right;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox tBoxX2Left;
         private System.Windows.Forms.TextBox tBoxX2Right;
         private System.Windows.Forms.TextBox tBoxN;
@@ -156,6 +273,17 @@
         private System.Windows.Forms.TextBox tBoxPercent;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tBoxAccuracy;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tBoxMutation;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button bOneStep;
+        private System.Windows.Forms.Button bToEnd;
     }
 }
 

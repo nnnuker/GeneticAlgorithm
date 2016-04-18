@@ -18,5 +18,15 @@ namespace PresentationForms
         {
             InitializeComponent();
         }
+
+        private void bToEnd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bOneStep_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
