@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.Crossover;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.Mutation;
@@ -12,32 +9,74 @@ namespace GeneticAlgorithm.Descendants
 {
     public class MutationCrossover : IDescendants
     {
-        private readonly ICrossover crossover;
-        private readonly IMutation mutation;
-        private readonly IPairFormation pairFormation;
+        #region Fields
 
-        public MutationCrossover()
+        private static ICrossover crossover;
+        private static IMutation mutation;
+        private static IPairFormation pairFormation;
+        private readonly NewPopulation newPopulation;
+
+        #endregion
+
+        #region Delegate
+
+        public delegate IEnumerable<IDesignPoint> NewPopulation(IEnumerable<IDesignPoint> designPoints);
+
+        #endregion
+
+        #region Constructors
+
+        public MutationCrossover() : this(null, null, null, null)
         {
-            
         }
 
-        public MutationCrossover(ICrossover crossover, IMutation mutation, IPairFormation pairFormation)
+        public MutationCrossover(ICrossover crossover, IMutation mutation, IPairFormation pairFormation,
+            NewPopulation newPopulation)
         {
             if (crossover == null) throw new ArgumentNullException(nameof(crossover));
             if (mutation == null) throw new ArgumentNullException(nameof(mutation));
             if (pairFormation == null) throw new ArgumentNullException(nameof(pairFormation));
-            this.crossover = crossover;
-            this.mutation = mutation;
-            this.pairFormation = pairFormation;
+            if (newPopulation == null) throw new ArgumentNullException(nameof(newPopulation));
+
+            MutationCrossover.crossover = crossover;
+            MutationCrossover.mutation = mutation;
+            MutationCrossover.pairFormation = pairFormation;
+            this.newPopulation = newPopulation;
         }
 
+        #endregion
+
+        #region Public method
+
         public IEnumerable<IDesignPoint> GetDescendants(IEnumerable<IDesignPoint> designPoints)
+        {
+            return newPopulation(designPoints);
+        }
+
+        public static IEnumerable<IDesignPoint> ParentMutationCrossover(IEnumerable<IDesignPoint> designPoints)
+        {
+            List<IDesignPoint> list = new List<IDesignPoint>();
+
+            var pairs = pairFormation.FormatPairs(designPoints);
+
+            var crossovered = crossover.Crossover(pairs);
+
+            list.AddRange(crossovered);
+
+            list.AddRange(mutation.Mutate(crossovered));
+
+            return list;
+        }
+
+        public static IEnumerable<IDesignPoint> ParentDescendants(IEnumerable<IDesignPoint> designPoints)
         {
             var mutated = mutation.Mutate(designPoints);
 
             var pairs = pairFormation.FormatPairs(mutated);
 
-            return crossover.Crossover(pairs); 
+            return crossover.Crossover(pairs);
         }
+
+        #endregion
     }
 }

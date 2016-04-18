@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeneticAlgorithm.Descendants;
 using GeneticAlgorithm.DesignPoints;
-using GeneticAlgorithm.PairFormation;
 using GeneticAlgorithm.Population;
 using GeneticAlgorithm.SelectPoints;
 
@@ -12,44 +12,42 @@ namespace GeneticAlgorithm
     {
         #region Fields
 
-        IDescendants descendants;
-        IPopulation population;
-        ISelectPoints selectPoints;
-        private readonly IEnumerable<IDesignPoint> listDesignPoints;
-        private NewPopulation newPopulation;
-
-        #endregion
-
-        #region Delegate
-
-        public delegate void NewPopulation();
+        private readonly int end;
+        private readonly int n;
+        private readonly IDescendants descendants;
+        private IPopulation population;
+        private readonly ISelectPoints selectPoints;
+        private readonly List<IDesignPoint> listOfAllDesignPoints;
+        private List<IDesignPoint> listOfCurrentDesignPoints;
+        private int populationNumber;
 
         #endregion
 
         #region Property
 
-        public IEnumerable<IDesignPoint> ListDesignPoints => listDesignPoints;
+        public IEnumerable<IDesignPoint> ListOfAllDesignPoints => listOfAllDesignPoints;
 
         #endregion
 
         #region Constructors
 
-        public GAlgorithm() : this(null, null, null, null)
+        public GAlgorithm() : this(0, 0, null, null, null)
         {
 
         }
 
-        public GAlgorithm(IPopulation population, ISelectPoints selectPoints,
-            IDescendants descendants, NewPopulation newPopulation)
+        public GAlgorithm(int end, int n, IPopulation population, ISelectPoints selectPoints,
+            IDescendants descendants)
         {
-            if (descendants == null || population == null || selectPoints == null || newPopulation == null)
+            if (descendants == null || population == null || selectPoints == null)
                 throw new ArgumentNullException();
 
+            this.end = end;
+            this.n = n;
             this.descendants = descendants;
             this.population = population;
             this.selectPoints = selectPoints;
-            this.newPopulation = newPopulation;
-            this.listDesignPoints = population.GetPopulation();
+            this.listOfAllDesignPoints = listOfCurrentDesignPoints = population.GetPopulation().ToList();
         }
 
         #endregion
@@ -58,28 +56,26 @@ namespace GeneticAlgorithm
 
         public void MoveNext()
         {
-            throw new NotImplementedException();
+            listOfCurrentDesignPoints = listOfCurrentDesignPoints.Where(x => x.IsAlive).ToList();
+
+            int percent = (int)Math.Round(((double)listOfCurrentDesignPoints.Count * (double)n) / 100.0);
+
+            listOfCurrentDesignPoints = selectPoints.SelectPoints(percent, listOfCurrentDesignPoints).ToList();
+
+            listOfCurrentDesignPoints = descendants.GetDescendants(listOfCurrentDesignPoints).ToList();
+
+            listOfAllDesignPoints.AddRange(listOfCurrentDesignPoints);
+
+            populationNumber++;
         }
 
         public void MoveToEnd()
         {
-            throw new NotImplementedException();
+            for (int i = populationNumber; i < end; i++)
+            {
+                MoveNext();
+            }
         }
-
-        public void ParentMutationCrossover()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ParentDescendants()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Private methods
-
 
         #endregion
 
