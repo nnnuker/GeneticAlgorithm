@@ -79,7 +79,9 @@ namespace GeneticAlgorithm.Descendants
 
             mutation.PopulationNumber = crossover.PopulationNumber;
 
-            list.AddRange(mutation.Mutate(crossovered));
+            mutation.Mutate(crossovered);
+
+            list.AddRange(mutation.MutateDesignPoints);
 
             listOfAllDesignPoints.AddRange(list);
 
@@ -98,11 +100,11 @@ namespace GeneticAlgorithm.Descendants
 
             mutation.PopulationNumber = crossover.PopulationNumber;
 
-            var mutated = mutation.Mutate(crossovered);
+            mutation.Mutate(crossovered);
 
-            listOfAllDesignPoints.AddRange(mutated);
+            listOfAllDesignPoints.AddRange(mutation.AllDesignPoints);
 
-            return mutated;
+            return mutation.AllDesignPoints;
         }
 
         #endregion

@@ -18,6 +18,8 @@ namespace GeneticAlgorithm.DesignPoints
                 return X.All(item => item.IsCorrect);
             }
         }
+
+        public bool IsMutate { get; set; }
         public IEnumerable<byte> X1X2 { get; set; }
 
         public static int CountID { get; set; } = 0;
