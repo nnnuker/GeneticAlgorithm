@@ -32,33 +32,30 @@ namespace GeneticAlgorithm.Mutation
             if (designPoints == null)
                 throw new ArgumentException();
 
-            var maxValueRnd = 101;
+            AllDesignPoints = new List<IDesignPoint>();
+            MutateDesignPoints = new List<IDesignPoint>();
+
+            int maxValueRnd = 101;
 
             foreach (var itemDP in designPoints)
             {
                 var comparerCoefficient = rnd.Next(0, maxValueRnd);
 
-                if (comparerCoefficient <= mutationCoefficient)
-                {
-                    var newDesignPoint = itemDP.Clone();
-                    newDesignPoint.PopulationNumber = PopulationNumber;
-
-                    var newListBinary = new List<byte>();
-
-                    foreach (var itemX in newDesignPoint.X1X2)
-                    {
-                        newListBinary.Add(itemX != 0 ? (byte) 0 : (byte) 1);
-                    }
-
-                    newDesignPoint.Update(newListBinary);
-                    newDesignPoint.IsMutate = true;
-                    AllDesignPoints.Add(newDesignPoint);
-                    MutateDesignPoints.Add(newDesignPoint);
-                }
-                else
+                if (comparerCoefficient > mutationCoefficient)
                 {
                     AllDesignPoints.Add(itemDP);
+                    continue;
                 }
+
+                var newDesignPoint = itemDP.Clone();
+                newDesignPoint.PopulationNumber = PopulationNumber;
+
+                var newListBinary = newDesignPoint.X1X2.Select(itemX => itemX != 0 ? (byte) 0 : (byte) 1).ToList();
+
+                newDesignPoint.Update(newListBinary);
+                newDesignPoint.IsMutate = true;
+                AllDesignPoints.Add(newDesignPoint);
+                MutateDesignPoints.Add(newDesignPoint);
             }
         }
     }

@@ -7,7 +7,7 @@ namespace PresentationForms
 {
     public class DesignPointsData
     {
-        private DataGridView grid;
+        private readonly DataGridView grid;
 
         public DesignPointsData(DataGridView grid)
         {
@@ -20,11 +20,16 @@ namespace PresentationForms
         public void Add(DesignPointViewModel designPoint)
         {
             grid.Rows.Insert(grid.Rows.Count - 1, this.GetFulldId(designPoint), designPoint.X, designPoint.Y, designPoint.Binary, designPoint.Value);
-            if (designPoint.IsAlive == false)
+            if (designPoint.IsMutate && designPoint.IsAlive)
+            {
+                grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Violet;
+            }
+            if (!designPoint.IsAlive)
             {
                 grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.DarkSalmon;
             }
             
+
         }
 
         public void AddPopulation(IEnumerable<DesignPointViewModel> designPoints)
