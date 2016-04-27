@@ -26,65 +26,76 @@ namespace PresentationForms
     {
         private DesignPointsData dataAdapter;
         private DesignPointsGraph graphAdapter;
-        private BindingList<DesignPointViewModel> gridDataSource = new BindingList<DesignPointViewModel>();
         private GAlgorithm algorithm;
 
         public MainForm()
         {
             InitializeComponent();
-
-            dataAdapter = new DesignPointsData(dataGridView);
-            graphAdapter = new DesignPointsGraph(chart);
-
-            Initialize();
-            AppData();
         }
 
         private void bToEnd_Click(object sender, EventArgs e)
         {
-
+            algorithm.MoveToEnd();
+            AppData();
         }
 
         private void bOneStep_Click(object sender, EventArgs e)
         {
-            if (algorithm == null)
-            {
-                Initialize();
-            }
-
             algorithm.MoveNext();
             AppData();
         }
 
         private void AppData()
         {
-            var res = algorithm.listOfCurrentDesignPoints.Select(x => new DesignPointViewModel(x));
+            var res = algorithm.CurrentDesignPoints.Select(x => new DesignPointViewModel(x));
             dataAdapter.AddPopulation(res);
             graphAdapter.AddRange(res);
         }
 
-        private void Initialize()
+        private void Initialize(int accuracy, int N, int m, int percent, int end, int minX, int maxX, 
+            int minY, int maxY, string formula)
         {
-
-            IFuncCalculator funcCalculator = new FuncCalculatorBasic("X+Y");
+            IFuncCalculator funcCalculator = new FuncCalculatorBasic(formula);
 
             IFactoryPoints factoryPoint = new CreateDesignPoint(funcCalculator);
 
-            IChromosome chromoX = new Chromosome(1, -4, 4, 0, "X");
-            IChromosome chromoY = new Chromosome(1, -9, 9, 0, "Y");
+            IChromosome chromoX = new Chromosome(accuracy, minX, maxX, 0, "X");
+            IChromosome chromoY = new Chromosome(accuracy, minY, maxY, 0, "Y");
 
-            IPopulation population = new RandomPopulation(factoryPoint, 20, 1, chromoX, chromoY);
+            IPopulation population = new RandomPopulation(factoryPoint, N, 1, chromoX, chromoY);
 
             ISelectPoints selectPoints = new ClassicRouletteSelectPoints();
 
             ICrossover crossover = new OnePointCrossover();
-            IMutation mutation = new MutationBinary(10);
+            IMutation mutation = new MutationBinary(m);
             IPairFormation pairFormation = new RandomPairFormation();
 
             IDescendants descendants = new CrossoverMutation(crossover, mutation, pairFormation,
                 CrossoverMutation.ParentDescendants);
 
-            algorithm = new GAlgorithm(10, 80, population, selectPoints, descendants);
+            algorithm = new GAlgorithm(end, percent, population, selectPoints, descendants);
+        }
+
+        private void bInitialize_Click(object sender, EventArgs e)
+        {
+            var addRange = 1;
+            var leftX1 = (int)double.Parse(tBoxX1Left.Text);
+            var rightX1 = (int)double.Parse(tBoxX1Right.Text);
+            var leftX2 = (int)double.Parse(tBoxX2Left.Text);
+            var rightX2 = (int)double.Parse(tBoxX2Right.Text);
+
+            dataAdapter = new DesignPointsData(dataGridView);
+            graphAdapter = new DesignPointsGraph(chart, leftX1 - addRange, rightX1 + addRange,
+                leftX2 - addRange, rightX2 + addRange);
+
+            var accuracy = int.Parse(tBoxAccuracy.Text);
+            var N = int.Parse(tBoxN.Text);
+            var m = int.Parse(tBoxMutation.Text);
+            var percent = int.Parse(tBoxPercent.Text);
+            var end = int.Parse(tBoxExeEnd.Text);
+
+            Initialize(accuracy, N, m, percent, end, leftX1, rightX1, leftX2, rightX2, tBoxFormula.Text);
+            AppData();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GeneticAlgorithm.DesignPoints;
 using System;
+using System.Linq;
 using GeneticAlgorithm.Chromosome;
 
 namespace GeneticAlgorithm.Mutation
@@ -9,6 +10,9 @@ namespace GeneticAlgorithm.Mutation
     {
         private readonly double mutationCoefficient;
         private readonly Random rnd;
+        public int PopulationNumber { get; set; } = 1;
+        public List<IDesignPoint> AllDesignPoints { get; set; }
+        public List<IDesignPoint> MutateDesignPoints { get; set; }
 
         public MutationBinary() : this(0)
         {
@@ -19,52 +23,40 @@ namespace GeneticAlgorithm.Mutation
         {
             this.mutationCoefficient = mutationCoefficient;
             rnd = new Random(DateTime.Today.Millisecond);
+            AllDesignPoints = new List<IDesignPoint>();
+            MutateDesignPoints = new List<IDesignPoint>();
         }
-
-        public int PopulationNumber { get; set; } = 1;
-
-        public IEnumerable<IDesignPoint> Mutate(IEnumerable<IDesignPoint> designPoints)
+        
+        public void Mutate(IEnumerable<IDesignPoint> designPoints)
         {
             if (designPoints == null)
                 throw new ArgumentException();
 
-            var maxValueRnd = 101;
+            AllDesignPoints = new List<IDesignPoint>();
+            MutateDesignPoints = new List<IDesignPoint>();
 
-            var result = new List<IDesignPoint>();
+            int maxValueRnd = 101;
 
             foreach (var itemDP in designPoints)
             {
+                var comparerCoefficient = rnd.Next(0, maxValueRnd);
+
+                if (comparerCoefficient > mutationCoefficient)
+                {
+                    AllDesignPoints.Add(itemDP);
+                    continue;
+                }
+
                 var newDesignPoint = itemDP.Clone();
                 newDesignPoint.PopulationNumber = PopulationNumber;
-                var newListChromosome = new List<IChromosome>();
 
-                foreach (var itemX in newDesignPoint.X)
-                {
-                    var newChomosome = itemX.Clone();
-                    var oldBinary = newChomosome.Binary;
-                    var newBinary = new List<byte>();
+                var newListBinary = newDesignPoint.X1X2.Select(itemX => itemX != 0 ? (byte) 0 : (byte) 1).ToList();
 
-                    foreach (var itemOldBinary in oldBinary)
-                    {
-                        var comparerCoefficient = rnd.Next(0, maxValueRnd);
-
-                        if (comparerCoefficient <= mutationCoefficient)
-                        {
-                            newBinary.Add(itemOldBinary != 0 ? (byte)0 : (byte)1);
-                        }
-                        else
-                        {
-                            newBinary.Add(itemOldBinary);
-                        }
-                    }
-                    newChomosome.Update(newBinary);
-                    newListChromosome.Add(newChomosome);
-                }
-                newDesignPoint.X = newListChromosome;
-                newDesignPoint.FunctionValue = newDesignPoint.FuncCalculator.CalculateFunc(newListChromosome.ToArray());
-                result.Add(newDesignPoint);
+                newDesignPoint.Update(newListBinary);
+                newDesignPoint.IsMutate = true;
+                AllDesignPoints.Add(newDesignPoint);
+                MutateDesignPoints.Add(newDesignPoint);
             }
-            return result;
         }
     }
 }

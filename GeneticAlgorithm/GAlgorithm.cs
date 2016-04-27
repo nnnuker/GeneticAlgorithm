@@ -18,14 +18,21 @@ namespace GeneticAlgorithm
         private IPopulation population;
         private readonly ISelectPoints selectPoints;
         private readonly List<IDesignPoint> listOfAllDesignPoints;
-        public List<IDesignPoint> listOfCurrentDesignPoints;
+        private List<IDesignPoint> listOfCurrentDesignPoints;
         private int populationNumber;
+        private List<IDesignPoint> currentDesignPoints;
 
         #endregion
 
         #region Property
 
         public IEnumerable<IDesignPoint> ListOfAllDesignPoints => listOfAllDesignPoints;
+
+        public List<IDesignPoint> CurrentDesignPoints
+        {
+            get { return currentDesignPoints; }
+            set { currentDesignPoints = value; }
+        }
 
         #endregion
 
@@ -47,7 +54,8 @@ namespace GeneticAlgorithm
             this.descendants = descendants;
             this.population = population;
             this.selectPoints = selectPoints;
-            this.listOfAllDesignPoints = listOfCurrentDesignPoints = population.GetPopulation().ToList();
+            this.listOfAllDesignPoints = listOfCurrentDesignPoints 
+                = currentDesignPoints = population.GetPopulation().ToList();
         }
 
         #endregion
@@ -64,7 +72,9 @@ namespace GeneticAlgorithm
 
             listOfCurrentDesignPoints = descendants.GetDescendants(listOfCurrentDesignPoints).ToList();
 
-            listOfAllDesignPoints.AddRange(descendants.GetAllDesignPoints);
+            currentDesignPoints = descendants.GetAllDesignPoints.ToList();
+
+            listOfAllDesignPoints.AddRange(currentDesignPoints);
 
             populationNumber++;
         }

@@ -77,6 +77,11 @@ namespace GeneticAlgorithm.Chromosome
             {
                 int second = Convert.ToInt32(join, 2);
 
+                if (second > 9)
+                {
+                    int j = 0;
+                }
+
                 sec = "." + second.ToString();
             }
 

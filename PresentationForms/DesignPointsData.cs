@@ -7,32 +7,50 @@ namespace PresentationForms
 {
     public class DesignPointsData
     {
-        private DataGridView grid;
+        private readonly DataGridView grid;
 
         public DesignPointsData(DataGridView grid)
         {
+            grid.Rows.Clear();
+            grid.Columns.Clear();
             this.grid = grid;
             this.AddColumns();
         }
 
         public void Add(DesignPointViewModel designPoint)
         {
-            grid.Rows.Insert(0, this.GetFulldId(designPoint), designPoint.X, designPoint.Y, designPoint.IsAlive, designPoint.Binary, designPoint.Value);
-            if (designPoint.IsAlive == false)
+            grid.Rows.Insert(grid.Rows.Count - 1, this.GetFulldId(designPoint), designPoint.X, designPoint.Y, designPoint.Binary, designPoint.Value);
+            if (designPoint.IsMutate && designPoint.IsAlive)
             {
-                grid.Rows[0].DefaultCellStyle.BackColor = Color.Red;
+                grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Violet;
             }
+            if (!designPoint.IsAlive)
+            {
+                grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.DarkSalmon;
+            }
+            
+
         }
 
         public void AddPopulation(IEnumerable<DesignPointViewModel> designPoints)
         {
-            foreach (var ind in designPoints.ToList().OrderBy(x => x.IsAlive).ThenByDescending(x => x.Id))
+            if (designPoints.Count() == 0)
+            {
+                return;
+            }
+
+            foreach (var ind in designPoints.ToList().OrderBy(x => x.Id))
             {
                 this.Add(ind);
             }
 
-            grid.Rows.Insert(designPoints.Count());
-            grid.Rows[designPoints.Count()].DefaultCellStyle.BackColor = Color.Black;
+            var val = designPoints.Where(y => y.IsAlive).OrderBy(x => x.Value).First();
+            grid.Rows.Insert(grid.Rows.Count - 1, this.GetFulldId(val), val.X, val.Y, 
+                val.Binary, val.Value);
+            grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Gold;
+
+            grid.Rows.Insert(grid.Rows.Count - 1);
+            grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.LightGreen;
         }
 
         private string GetFulldId(DesignPointViewModel designPointViewModel)
@@ -51,15 +69,12 @@ namespace PresentationForms
             var yCol = grid.Columns.Add("Y", "Y");
             grid.Columns[yCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             grid.Columns[yCol].FillWeight = 0.1f;
-            var healthCol = grid.Columns.Add("Health", "Health");
-            grid.Columns[healthCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            grid.Columns[healthCol].FillWeight = 0.1f;
             var binCol = grid.Columns.Add("Binary", "Binary");
             grid.Columns[binCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             grid.Columns[binCol].FillWeight = 0.5f;
             var valueCol = grid.Columns.Add("Value", "Value");
-            grid.Columns[binCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            grid.Columns[binCol].FillWeight = 0.5f;
+            grid.Columns[valueCol].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            grid.Columns[valueCol].FillWeight = 0.1f;
         }
 
     }
