@@ -9,10 +9,12 @@ namespace GeneticAlgorithm.Mutation
         private readonly double mutationCoefficient;
         private readonly Random rndCoefficient;
         private readonly Random rndNumeric;
+        public int PopulationNumber { get; set; }
+        public List<IDesignPoint> AllDesignPoints { get; set; }
+        public List<IDesignPoint> MutateDesignPoints { get; set; }
 
         public MutationNumeric() : this(0)
         {
-
         }
 
         public MutationNumeric(double mutationCoefficient)
@@ -20,45 +22,48 @@ namespace GeneticAlgorithm.Mutation
             this.mutationCoefficient = mutationCoefficient;
             rndCoefficient = new Random(DateTime.Today.Millisecond);
             rndNumeric = new Random(DateTime.Today.Millisecond);
+            AllDesignPoints = new List<IDesignPoint>();
+            MutateDesignPoints = new List<IDesignPoint>();
         }
 
-        public int PopulationNumber { get; set; }
-
-        public IEnumerable<IDesignPoint> Mutate(IEnumerable<IDesignPoint> designPoints)
+        public void Mutate(IEnumerable<IDesignPoint> designPoints)
         {
             if (designPoints == null)
                 throw new ArgumentException();
 
             var maxValueRnd = 101;
 
-            var result = new List<IDesignPoint>();
-
             foreach (var itemDP in designPoints)
             {
-                var newDesignPoint = itemDP.Clone();
-                newDesignPoint.PopulationNumber = PopulationNumber;
-                var newBinary = new List<byte>();
-                var currentX = 0;
+                var comparerCoefficient = rndCoefficient.Next(0, maxValueRnd);
 
-                foreach (var itemBianry in newDesignPoint.X1X2)
+                if (comparerCoefficient <= mutationCoefficient)
                 {
-                    var comparerCoefficient = rndCoefficient.Next(0, maxValueRnd);
+                    var newDesignPoint = itemDP.Clone();
+                    newDesignPoint.PopulationNumber = PopulationNumber;
 
-                    if (comparerCoefficient <= mutationCoefficient)
+                    var newListBinary = new List<byte>();
+                    var currentX = 0;
+
+                    foreach (var itemX in newDesignPoint.X1X2)
                     {
-                        var newNumeric = rndNumeric.Next((int)newDesignPoint.X[currentX].Left, (int)newDesignPoint.X[currentX].Right + 1);
-                        newBinary.Add((byte)newNumeric);
+                        var newNumeric = rndNumeric.Next((int) newDesignPoint.X[currentX].Left,
+                            (int) newDesignPoint.X[currentX].Right + 1);
+                        newListBinary.Add((byte) newNumeric);
+                        currentX++;
                     }
-                    else
-                    {
-                        newBinary.Add(itemBianry);
-                    }
-                    currentX++;
+
+                    newDesignPoint.Update(newListBinary);
+                    newDesignPoint.IsMutate = true;
+                    AllDesignPoints.Add(newDesignPoint);
+                    MutateDesignPoints.Add(newDesignPoint);
                 }
-                newDesignPoint.Update(newBinary);
-                result.Add(newDesignPoint);
+                else
+                {
+                    AllDesignPoints.Add(itemDP);
+                }
             }
-            return result;
         }
     }
 }
+

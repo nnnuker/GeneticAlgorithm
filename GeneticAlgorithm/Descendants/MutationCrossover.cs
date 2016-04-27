@@ -68,11 +68,11 @@ namespace GeneticAlgorithm.Descendants
 
             mutation.PopulationNumber++;
 
-            var mutated = mutation.Mutate(designPoints);
+            mutation.Mutate(designPoints);
 
-            list.AddRange(mutated);
+            list.AddRange(mutation.AllDesignPoints);
 
-            var pairs = pairFormation.FormatPairs(mutated);
+            var pairs = pairFormation.FormatPairs(list);
 
             crossover.PopulationNumber = mutation.PopulationNumber;
 
@@ -89,11 +89,11 @@ namespace GeneticAlgorithm.Descendants
         {
             mutation.PopulationNumber++;
 
-            var mutated = mutation.Mutate(designPoints);
+            mutation.Mutate(designPoints);
 
-            listOfAllDesignPoints.AddRange(mutated);
+            listOfAllDesignPoints.AddRange(mutation.AllDesignPoints);
 
-            var pairs = pairFormation.FormatPairs(mutated);
+            var pairs = pairFormation.FormatPairs(mutation.AllDesignPoints);
 
             crossover.PopulationNumber = mutation.PopulationNumber;
 

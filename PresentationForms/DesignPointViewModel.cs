@@ -20,6 +20,8 @@ namespace PresentationForms
 
         public bool IsAlive => designPoint.IsAlive;
 
+        public bool IsMutate => designPoint.IsMutate;
+
         public double Value => designPoint.FunctionValue;
 
         public DesignPointViewModel(IDesignPoint designPoint)

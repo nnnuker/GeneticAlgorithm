@@ -12,25 +12,25 @@ namespace PresentationForms
         private Color deadColor = Color.Gray;
         private Color invalidColor = Color.Red;
         private Color healthyColor = Color.Green;
-        private MarkerStyle deadMarker = MarkerStyle.Cross;
+        private MarkerStyle deadMarker = MarkerStyle.Circle;
         private MarkerStyle healthyMarker = MarkerStyle.Circle;
 
         public ChartArea Area { get; set; }
 
-        public DesignPointsGraph(Chart graph)
+        public DesignPointsGraph(Chart graph, int minX, int maxX, int minY, int maxY)
         {
             this.graph = graph;
             this.graph.ChartAreas.Clear();
             this.graph.Series.Clear();
             this.graph.Legends.Clear();
             Area = this.graph.ChartAreas.Add("graph");
-            Area.AxisX.Minimum = -20;
-            Area.AxisX.Maximum = 20;
-            Area.AxisX.Interval = 2;
-            Area.AxisY.Minimum = -20;
-            Area.AxisY.Maximum = 20;
-            Area.AxisY.Interval = 2;
-            series = this.graph.Series.Add("individuals");
+            Area.AxisX.Minimum = minX;
+            Area.AxisX.Maximum = maxX;
+            Area.AxisX.Interval = 1;
+            Area.AxisY.Minimum = minY;
+            Area.AxisY.Maximum = maxY;
+            Area.AxisY.Interval = 1;
+            series = this.graph.Series.Add("designPoint");
             series.ChartType = SeriesChartType.Point;
             series.MarkerSize = 10;
         }

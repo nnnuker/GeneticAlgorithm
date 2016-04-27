@@ -24,6 +24,7 @@ namespace GeneticAlgorithm.DesignPoints
                 return X.All(item => item.IsCorrect);
             }
         }
+        public bool IsMutate { get; set; }
         public static int CountID { get; set; } = 0;
         public IFuncCalculator FuncCalculator { get; set; }
 
@@ -55,6 +56,7 @@ namespace GeneticAlgorithm.DesignPoints
             this.FuncCalculator = funcCalculator;
             this.FunctionValue = funcCalculator.CalculateFunc(x);
             this.X1X2 = GetBinary(x);
+            this.IsMutate = false;
         }
 
         #endregion
@@ -71,7 +73,7 @@ namespace GeneticAlgorithm.DesignPoints
             {
                 var newChromo = item.Clone();
                 var lengthCurrentX = item.Binary.Count();
-                
+
                 var binaryChromosome = list.GetRange(lengthPreviousX, lengthCurrentX);
                 newChromo.Update(binaryChromosome);
                 newChromosomes.Add(newChromo);
@@ -90,7 +92,8 @@ namespace GeneticAlgorithm.DesignPoints
                 X = this.X,
                 PopulationNumber = this.PopulationNumber,
                 X1X2 = this.X1X2,
-                ID = CountID
+                ID = CountID,
+                IsMutate = this.IsMutate
             };
         }
 
@@ -109,6 +112,6 @@ namespace GeneticAlgorithm.DesignPoints
         #endregion
 
 
-        
+
     }
 }

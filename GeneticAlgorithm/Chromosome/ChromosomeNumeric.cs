@@ -19,7 +19,7 @@ namespace GeneticAlgorithm.Chromosome
         {
             get
             {
-                List<byte> binary = new List<byte>();
+                var binary = new List<byte>();
                 binary.Add((byte)Value);
                 return binary;
             }

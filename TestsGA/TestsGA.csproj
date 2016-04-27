@@ -60,6 +60,7 @@
     <Compile Include="SelectPointTest.cs" />
     <Compile Include="GAlgorithmTest.cs" />
     <Compile Include="OnePointCrossoverTest.cs" />
+    <Compile Include="TwoPointsCrossoverTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeneticAlgorithm\GeneticAlgorithm.csproj">
