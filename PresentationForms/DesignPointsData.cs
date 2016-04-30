@@ -28,20 +28,23 @@ namespace PresentationForms
             {
                 grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.DarkSalmon;
             }
-            
-
         }
 
-        public void AddPopulation(IEnumerable<DesignPointViewModel> designPoints)
+        public bool AddPopulation(IEnumerable<DesignPointViewModel> designPoints)
         {
             if (designPoints.Count() == 0)
             {
-                return;
+                return false;
             }
 
             foreach (var ind in designPoints.ToList().OrderBy(x => x.Id))
             {
                 this.Add(ind);
+            }
+
+            if (designPoints.Count(y => y.IsAlive) == 0)
+            {
+                return false;
             }
 
             var val = designPoints.Where(y => y.IsAlive).OrderBy(x => x.Value).First();
@@ -51,6 +54,18 @@ namespace PresentationForms
 
             grid.Rows.Insert(grid.Rows.Count - 1);
             grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.LightGreen;
+
+            return true;
+        }
+
+        public void AddBest(DesignPointViewModel designPoint)
+        {
+            grid.Rows.Insert(grid.Rows.Count - 1);
+            grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Green;
+
+            grid.Rows.Insert(grid.Rows.Count - 1, this.GetFulldId(designPoint), designPoint.X, designPoint.Y,
+                designPoint.Binary, designPoint.Value);
+            grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Gold;
         }
 
         private string GetFulldId(DesignPointViewModel designPointViewModel)
