@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.Crossover;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.Mutation;
@@ -72,12 +69,14 @@ namespace GeneticAlgorithm.Descendants
             var pairs = pairFormation.FormatPairs(designPoints);
 
             crossover.PopulationNumber++;
+            crossover.PopulationId = 1;
 
             var crossovered = crossover.Crossover(pairs);
 
             list.AddRange(crossovered);
 
             mutation.PopulationNumber = crossover.PopulationNumber;
+            mutation.PopulationId = crossover.PopulationId;
 
             mutation.Mutate(crossovered);
 
@@ -93,10 +92,12 @@ namespace GeneticAlgorithm.Descendants
             var pairs = pairFormation.FormatPairs(designPoints);
 
             crossover.PopulationNumber++;
+            crossover.PopulationId = 1;
 
             var crossovered = crossover.Crossover(pairs);
 
             mutation.PopulationNumber = crossover.PopulationNumber;
+            mutation.PopulationId = crossover.PopulationId;
 
             mutation.Mutate(crossovered);
 

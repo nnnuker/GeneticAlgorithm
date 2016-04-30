@@ -13,12 +13,15 @@ namespace GeneticAlgorithm.Crossover
         private int index;
         #endregion
 
-        public int PopulationNumber { get; set; } = 1;
+        public int PopulationNumber { get; set; }
+        public int PopulationId { get; set; }
 
         #region Constructor
         public OnePointCrossover()
         {
             random = new Random(DateTime.Now.Millisecond);
+            PopulationNumber = 1;
+            PopulationId = 1;
         }
 
         public OnePointCrossover(int index): this()
@@ -78,6 +81,9 @@ namespace GeneticAlgorithm.Crossover
         {
             var newDesignPointFirst = first.Clone();
             newDesignPointFirst.PopulationNumber = PopulationNumber;
+            newDesignPointFirst.ID = PopulationId;
+
+            PopulationId++;
 
             var crossoverFirst = new List<byte>().Concat(first.X1X2.ToList().GetRange(0, index));
             crossoverFirst = crossoverFirst.Concat(second.X1X2.ToList().GetRange(index, second.X1X2.Count() - index));

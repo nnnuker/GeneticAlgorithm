@@ -2,7 +2,6 @@
 using GeneticAlgorithm.DesignPoints;
 using System;
 using System.Linq;
-using GeneticAlgorithm.Chromosome;
 
 namespace GeneticAlgorithm.Mutation
 {
@@ -11,6 +10,7 @@ namespace GeneticAlgorithm.Mutation
         private readonly double mutationCoefficient;
         private readonly Random rnd;
         public int PopulationNumber { get; set; } = 1;
+        public int PopulationId { get; set; }
         public List<IDesignPoint> AllDesignPoints { get; set; }
         public List<IDesignPoint> MutateDesignPoints { get; set; }
 
@@ -49,6 +49,8 @@ namespace GeneticAlgorithm.Mutation
 
                 var newDesignPoint = itemDP.Clone();
                 newDesignPoint.PopulationNumber = PopulationNumber;
+                newDesignPoint.ID = PopulationId;
+                PopulationId++;
 
                 var newListBinary = newDesignPoint.X1X2.Select(itemX => itemX != 0 ? (byte) 0 : (byte) 1).ToList();
 

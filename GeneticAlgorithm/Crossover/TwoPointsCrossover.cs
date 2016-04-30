@@ -16,7 +16,8 @@ namespace GeneticAlgorithm.Crossover
 
         #region Property
 
-        public int PopulationNumber { get; set; } = 1;
+        public int PopulationNumber { get; set; }
+        public int PopulationId { get; set; }
 
         #endregion
 
@@ -24,6 +25,8 @@ namespace GeneticAlgorithm.Crossover
         public TwoPointsCrossover()
         {
             random = new Random(DateTime.Now.Millisecond);
+            PopulationNumber = 1;
+            PopulationId = 1;
         }
 
         public TwoPointsCrossover(int index1, int index2) : this()
@@ -89,6 +92,8 @@ namespace GeneticAlgorithm.Crossover
         {
             var newDesignPointFirst = first.Clone();
             newDesignPointFirst.PopulationNumber = PopulationNumber;
+            newDesignPointFirst.ID = PopulationId;
+            PopulationId++;
 
             var firstBinary = first.X1X2.ToList();
             var secondBinary = second.X1X2.ToList();

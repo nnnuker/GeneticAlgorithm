@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.Chromosome;
-using Bestcode.MathParser;
 using GeneticAlgorithm.FuncCalculator;
 
 namespace GeneticAlgorithm.DesignPoints
@@ -25,7 +22,6 @@ namespace GeneticAlgorithm.DesignPoints
             }
         }
         public bool IsMutate { get; set; }
-        public static int CountID { get; set; } = 0;
         public IFuncCalculator FuncCalculator { get; set; }
 
         #endregion
@@ -39,10 +35,9 @@ namespace GeneticAlgorithm.DesignPoints
 
         public DesignPoint()
         {
-            CountID++;
         }
 
-        public DesignPoint(int populationNumber, IFuncCalculator funcCalculator, params IChromosome[] x) : this()
+        public DesignPoint(int populationNumber, int id, IFuncCalculator funcCalculator, params IChromosome[] x) : this()
         {
             if (x == null)
                 throw new ArgumentNullException();
@@ -51,7 +46,7 @@ namespace GeneticAlgorithm.DesignPoints
                 throw new ArgumentOutOfRangeException();
 
             this.PopulationNumber = populationNumber;
-            this.ID = CountID;
+            this.ID = id;
             this.X = new List<IChromosome>(x);
             this.FuncCalculator = funcCalculator;
             this.FunctionValue = funcCalculator.CalculateFunc(x);
@@ -92,7 +87,7 @@ namespace GeneticAlgorithm.DesignPoints
                 X = this.X,
                 PopulationNumber = this.PopulationNumber,
                 X1X2 = this.X1X2,
-                ID = CountID,
+                ID = this.ID,
                 IsMutate = this.IsMutate
             };
         }
@@ -110,8 +105,5 @@ namespace GeneticAlgorithm.DesignPoints
         }
 
         #endregion
-
-
-
     }
 }
