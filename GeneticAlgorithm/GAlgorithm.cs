@@ -24,7 +24,7 @@ namespace GeneticAlgorithm
 
         #endregion
 
-        #region Property
+        #region Properties
 
         public IEnumerable<IDesignPoint> ListOfAllDesignPoints => listOfAllDesignPoints;
 
@@ -33,6 +33,8 @@ namespace GeneticAlgorithm
             get { return currentDesignPoints; }
             set { currentDesignPoints = value; }
         }
+
+        public int PopulationNumber => populationNumber;
 
         #endregion
 

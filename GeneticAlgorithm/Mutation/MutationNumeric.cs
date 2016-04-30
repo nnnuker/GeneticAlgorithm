@@ -10,6 +10,7 @@ namespace GeneticAlgorithm.Mutation
         private readonly Random rndCoefficient;
         private readonly Random rndNumeric;
         public int PopulationNumber { get; set; }
+        public int PopulationId { get; set; }
         public List<IDesignPoint> AllDesignPoints { get; set; }
         public List<IDesignPoint> MutateDesignPoints { get; set; }
 
@@ -41,6 +42,8 @@ namespace GeneticAlgorithm.Mutation
                 {
                     var newDesignPoint = itemDP.Clone();
                     newDesignPoint.PopulationNumber = PopulationNumber;
+                    newDesignPoint.ID = PopulationId;
+                    PopulationId++;
 
                     var newListBinary = new List<byte>();
                     var currentX = 0;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using GeneticAlgorithm;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.Crossover;
@@ -46,7 +45,7 @@ namespace TestsGA
 
             var result = ga.ListOfAllDesignPoints;
 
-            Assert.AreEqual(20, result.Count());
+            Assert.AreEqual(15, result.Count());
         }
 
         [TestMethod]

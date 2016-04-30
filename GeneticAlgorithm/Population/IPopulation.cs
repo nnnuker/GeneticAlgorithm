@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GeneticAlgorithm.Chromosome;
+﻿using System.Collections.Generic;
 using GeneticAlgorithm.DesignPoints;
-using GeneticAlgorithm.FuncCalculator;
-using GeneticAlgorithm.FactoryPoint;
 
 namespace GeneticAlgorithm.Population
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.Crossover;
 using GeneticAlgorithm.DesignPoints;
@@ -17,10 +16,10 @@ namespace TestsGA
         {
             IFuncCalculator funcCalulator = new FuncCalculatorBasic("x^2+y+z");
 
-            DesignPoint DP1 = new DesignPoint(1, funcCalulator, new Chromosome(1, -3, 2, -2, "x"), 
+            DesignPoint DP1 = new DesignPoint(1, 0, funcCalulator, new Chromosome(1, -3, 2, -2, "x"), 
                 new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 0, "z"));
 
-            DesignPoint DP2 = new DesignPoint(1, funcCalulator, new Chromosome(1, -3, 2, 0, "x"), 
+            DesignPoint DP2 = new DesignPoint(1, 0, funcCalulator, new Chromosome(1, -3, 2, 0, "x"), 
                 new Chromosome(1, 1, 2, 1.5, "y"), new Chromosome(1, 1, 2, 0, "z"));
 
             IPair pair = new Pair

@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GeneticAlgorithm;
 using GeneticAlgorithm.Chromosome;
@@ -24,19 +16,30 @@ namespace PresentationForms
 {
     public partial class MainForm : Form
     {
+        #region Fields
+
         private DesignPointsData dataAdapter;
         private DesignPointsGraph graphAdapter;
         private GAlgorithm algorithm;
+
+        #endregion
+
+        #region Constructor
 
         public MainForm()
         {
             InitializeComponent();
         }
 
+        #endregion
+
         private void bToEnd_Click(object sender, EventArgs e)
         {
-            algorithm.MoveToEnd();
-            AppData();
+            for (int i = algorithm.PopulationNumber; i < int.Parse(tBoxExeEnd.Text); i++)
+            {
+                algorithm.MoveNext();
+                AppData();
+            }
         }
 
         private void bOneStep_Click(object sender, EventArgs e)

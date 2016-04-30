@@ -2,10 +2,6 @@
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.FuncCalculator;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeneticAlgorithm.FactoryPoint
 {
@@ -24,10 +20,10 @@ namespace GeneticAlgorithm.FactoryPoint
             this.funcCalculator = funcCalculator;
         }
 
-        public IDesignPoint CreateFactoryPoint(int populationNumber, IChromosome[] chromo)
+        public IDesignPoint CreateFactoryPoint(int populationNumber, int id, IChromosome[] chromo)
         {
             if (chromo == null) throw new ArgumentNullException(nameof(chromo));
-            return new DesignPoint(populationNumber, funcCalculator, chromo);
+            return new DesignPoint(populationNumber, id, funcCalculator, chromo);
         }
     }
 }

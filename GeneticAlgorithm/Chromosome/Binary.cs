@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -76,11 +75,6 @@ namespace GeneticAlgorithm.Chromosome
             if (join != string.Empty)
             {
                 int second = Convert.ToInt32(join, 2);
-
-                if (second > 9)
-                {
-                    int j = 0;
-                }
 
                 sec = "." + second.ToString();
             }
