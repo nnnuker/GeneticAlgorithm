@@ -82,6 +82,7 @@ namespace GeneticAlgorithm.Crossover
             var newDesignPointFirst = first.Clone();
             newDesignPointFirst.PopulationNumber = PopulationNumber;
             newDesignPointFirst.ID = PopulationId;
+            newDesignPointFirst.IsMutate = false;
 
             PopulationId++;
 
