@@ -67,6 +67,7 @@ namespace GeneticAlgorithm.Descendants
             var list = new List<IDesignPoint>();
 
             mutation.PopulationNumber++;
+            mutation.PopulationId = 1;
 
             mutation.Mutate(designPoints);
 
@@ -75,6 +76,7 @@ namespace GeneticAlgorithm.Descendants
             var pairs = pairFormation.FormatPairs(list);
 
             crossover.PopulationNumber = mutation.PopulationNumber;
+            crossover.PopulationId = mutation.PopulationId;
 
             var crossovered = crossover.Crossover(pairs);
 
@@ -88,6 +90,7 @@ namespace GeneticAlgorithm.Descendants
         public static IEnumerable<IDesignPoint> ParentDescendants(IEnumerable<IDesignPoint> designPoints)
         {
             mutation.PopulationNumber++;
+            mutation.PopulationId = 1;
 
             mutation.Mutate(designPoints);
 
@@ -96,6 +99,7 @@ namespace GeneticAlgorithm.Descendants
             var pairs = pairFormation.FormatPairs(mutation.AllDesignPoints);
 
             crossover.PopulationNumber = mutation.PopulationNumber;
+            crossover.PopulationId = mutation.PopulationId;
 
             var crossovered = crossover.Crossover(pairs);
 

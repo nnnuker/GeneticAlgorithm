@@ -30,6 +30,7 @@ namespace GeneticAlgorithm.Population
 
         public IEnumerable<IDesignPoint> GetPopulation()
         {
+            int id = 1;
             var list = new List<IDesignPoint>();
             for (int i = 0; i < N; i++)
             {
@@ -46,7 +47,8 @@ namespace GeneticAlgorithm.Population
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
                     chromo[j].Value = value;
                 }
-                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, chromo));
+                list.Add(factoryPoint.CreateFactoryPoint(populationNumber, id, chromo));
+                id++;
             }
             return list;
         }

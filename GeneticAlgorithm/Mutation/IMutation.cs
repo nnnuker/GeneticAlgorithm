@@ -6,6 +6,7 @@ namespace GeneticAlgorithm.Mutation
     public interface IMutation
     {
         int PopulationNumber { get; set; }
+        int PopulationId { get; set; }
         List<IDesignPoint> AllDesignPoints  { get; set; }
         List<IDesignPoint> MutateDesignPoints  { get; set; }
         

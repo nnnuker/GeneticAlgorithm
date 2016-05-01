@@ -64,5 +64,19 @@ namespace PresentationForms
                 }
             }
         }
+
+        public void AddBest(DesignPointViewModel designPoint)
+        {
+            foreach (var p in series.Points)
+            {
+                p.MarkerStyle = deadMarker;
+                p.Color = deadColor;
+            }
+
+            var point = series.Points.FirstOrDefault(x => x.XValue == designPoint.X && x.YValues[0] == designPoint.Y);
+
+            point.MarkerStyle = healthyMarker;
+            point.Color = Color.Gold;
+        }
     }
 }

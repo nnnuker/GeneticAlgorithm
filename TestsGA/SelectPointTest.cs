@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.SelectPoints;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.FuncCalculator;
@@ -18,9 +15,9 @@ namespace TestsGA
         public void ClassicRouletteSelectPointsCountN()
         {
             var listDP = new List<IDesignPoint>();
-            listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
-            listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 20, "X"), new Chromosome(0, 5, 20, 20, "Y")));
-            listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 15, "X"), new Chromosome(0, 5, 20, 15, "Y")));
+            listDP.Add(new DesignPoint(1, 0, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDP.Add(new DesignPoint(1, 0, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 20, "X"), new Chromosome(0, 5, 20, 20, "Y")));
+            listDP.Add(new DesignPoint(1, 0, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 15, "X"), new Chromosome(0, 5, 20, 15, "Y")));
             var classicRoulette = new ClassicRouletteSelectPoints();
 
             var expected = 2;
@@ -32,9 +29,9 @@ namespace TestsGA
         public void RouletteSelectPointsCountN()
         {
             var listDP = new List<IDesignPoint>();
-            listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
-            listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 20, "X"), new Chromosome(0, 5, 20, 20, "Y")));
-            listDP.Add(new DesignPoint(1, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 15, "X"), new Chromosome(0, 5, 20, 15, "Y")));
+            listDP.Add(new DesignPoint(1, 0, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 20, 15, "X"), new Chromosome(0, 5, 20, 10, "Y")));
+            listDP.Add(new DesignPoint(1, 0, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 20, "X"), new Chromosome(0, 5, 20, 20, "Y")));
+            listDP.Add(new DesignPoint(1, 0, new FuncCalculatorBasic("X+Y"), new Chromosome(0, 10, 30, 15, "X"), new Chromosome(0, 5, 20, 15, "Y")));
             var roulette = new RouletteSelectPoints();
 
             var expected = 3;

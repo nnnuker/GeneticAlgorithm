@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.PairFormation;
-using GeneticAlgorithm.Chromosome;
 
 namespace GeneticAlgorithm.Crossover
 {
@@ -16,12 +13,15 @@ namespace GeneticAlgorithm.Crossover
         private int index;
         #endregion
 
-        public int PopulationNumber { get; set; } = 1;
+        public int PopulationNumber { get; set; }
+        public int PopulationId { get; set; }
 
         #region Constructor
         public OnePointCrossover()
         {
             random = new Random(DateTime.Now.Millisecond);
+            PopulationNumber = 1;
+            PopulationId = 1;
         }
 
         public OnePointCrossover(int index): this()
@@ -48,8 +48,6 @@ namespace GeneticAlgorithm.Crossover
             return result;
         }
 
-        
-
         public IEnumerable<IDesignPoint> Crossover(IPair pair)
         {
             if (pair == null)
@@ -63,26 +61,35 @@ namespace GeneticAlgorithm.Crossover
                 return result;
             }
 
-            var binaryFirstPair = pair.First.X1X2.ToList();
-            var binarySecondPair = pair.Second.X1X2.ToList();
-
-            index = random.Next(2, pair.First.X1X2.Count() - 1);
-
-            var newDesignPointFirst = pair.First.Clone();
-            newDesignPointFirst.PopulationNumber = PopulationNumber;
-            var crossoverFirst = new List<byte>().Concat(binaryFirstPair.GetRange(0, index));
-            crossoverFirst = crossoverFirst.Concat(binarySecondPair.GetRange(index, pair.Second.X1X2.Count() - index));
-            newDesignPointFirst.Update(crossoverFirst);
+            if (index < 2 || index > pair.First.X1X2.Count() - 1)
+            {
+                index = random.Next(2, pair.First.X1X2.Count() - 1);
+            }
+            
+            var newDesignPointFirst = CrossoverDesignPoints(pair.First, pair.Second);
             result.Add(newDesignPointFirst);
 
-            var newDesignPointSecond = pair.Second.Clone();
-            newDesignPointSecond.PopulationNumber = PopulationNumber;
-            var crossoverSecond = new List<byte>().Concat(binarySecondPair.GetRange(0, index));
-            crossoverSecond = crossoverSecond.Concat(binaryFirstPair.GetRange(index, pair.First.X1X2.Count() - index));
-            newDesignPointSecond.Update(crossoverSecond);
+            var newDesignPointSecond = CrossoverDesignPoints(pair.Second, pair.First);
             result.Add(newDesignPointSecond);
 
             return result;
+        }
+        #endregion
+
+        #region Private method
+        private IDesignPoint CrossoverDesignPoints(IDesignPoint first, IDesignPoint second)
+        {
+            var newDesignPointFirst = first.Clone();
+            newDesignPointFirst.PopulationNumber = PopulationNumber;
+            newDesignPointFirst.ID = PopulationId;
+            newDesignPointFirst.IsMutate = false;
+
+            PopulationId++;
+
+            var crossoverFirst = new List<byte>().Concat(first.X1X2.ToList().GetRange(0, index));
+            crossoverFirst = crossoverFirst.Concat(second.X1X2.ToList().GetRange(index, second.X1X2.Count() - index));
+            newDesignPointFirst.Update(crossoverFirst);
+            return newDesignPointFirst;
         }
         #endregion
     }
