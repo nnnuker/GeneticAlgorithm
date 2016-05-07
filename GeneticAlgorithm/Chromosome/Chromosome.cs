@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace GeneticAlgorithm.Chromosome
 {
     public class Chromosome : IChromosome
     {
+        #region Fields
+
         private IBinary binary;
+
+        #endregion
 
         #region Properties
         public int Accuracy { get; set; }
@@ -64,6 +69,18 @@ namespace GeneticAlgorithm.Chromosome
                 this.binary = new Binary(Value, Accuracy, Left, Right);
 
             Value = this.binary.Update(binary);
+        }
+
+        public bool Equals(IChromosome other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+
+            return StructuralComparisons.StructuralEqualityComparer.Equals(this.Binary, other.Binary)
+                && this.Accuracy == other.Accuracy
+                && this.Value.Equals(other.Value)
+                && this.Left.Equals(other.Left)
+                && this.Right.Equals(other.Right)
+                && this.Name == other.Name;
         }
 
         #endregion

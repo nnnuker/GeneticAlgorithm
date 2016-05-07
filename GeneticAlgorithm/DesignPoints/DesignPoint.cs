@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GeneticAlgorithm.Chromosome;
@@ -6,7 +7,7 @@ using GeneticAlgorithm.FuncCalculator;
 
 namespace GeneticAlgorithm.DesignPoints
 {
-    public class DesignPoint : IDesignPoint
+    public class DesignPoint : IDesignPoint, IEquatable<IDesignPoint>
     {
         #region Properties
         public double FunctionValue { get; set; }
@@ -92,6 +93,18 @@ namespace GeneticAlgorithm.DesignPoints
             };
         }
 
+        public bool Equals(IDesignPoint other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+
+            return this.FunctionValue.Equals(other.FunctionValue)
+                   && this.ID == other.ID
+                   && this.PopulationNumber == other.PopulationNumber
+                   && this.IsMutate == other.IsMutate
+                   && this.FuncCalculator.Equals(other.FuncCalculator)
+                   && StructuralComparisons.StructuralEqualityComparer.Equals(this.X, other.X);
+        }
+
         #endregion
 
         #region Private methods
@@ -105,5 +118,6 @@ namespace GeneticAlgorithm.DesignPoints
         }
 
         #endregion
+        
     }
 }

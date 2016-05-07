@@ -11,5 +11,10 @@ namespace GeneticAlgorithm.FuncCalculator
         {
             throw new NotImplementedException();
         }
+
+        public bool Equals(IFuncCalculator other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
