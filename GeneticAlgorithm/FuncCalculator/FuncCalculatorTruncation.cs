@@ -21,6 +21,11 @@ namespace GeneticAlgorithm.FuncCalculator
         private readonly double searchMethodAccuracy;
         private readonly double funcCalculatorTruncationAccuracy;
 
+
+        private Dictionary<int, string> populationDictionary = new Dictionary<int, string>()
+        {
+            {1, "GeneticAlgorithm.Population.RandomPopulation"}
+        };
         private IPopulation population;
         private ISelectPoints selectStartPoints;
         private ISelectPoints selectOtherPoints;
@@ -123,18 +128,34 @@ namespace GeneticAlgorithm.FuncCalculator
             IChromosome chromoX = new Axis(0, minX, maxX, 0, "X");
             IChromosome chromoY = new Axis(0, minY, maxY, 0, "Y");
 
-            switch ((int)x[2].Value)
+            foreach (var item in populationDictionary)
             {
-                case 1:
-                    population = new RandomPopulation(new CreatePoint(new FuncCalculatorBasic(FuncExpression)),
-                        (int) x[0].Value, 1, chromoX, chromoY);
-                    break;
-                case 2:
-                    population = new NetPopulation(); // - 
-                    break;
-                default:
+                if (item.Key == (int) x[2].Value)
+                {
+                    var t = Type.GetType(item.Value);
+
+                    object[] args = { };
+                    population = (IPopulation)Activator.CreateInstance(Type.GetType(item.Value), new CreatePoint(new FuncCalculatorBasic(FuncExpression)),
+                        (int)x[0].Value, 1, chromoX, chromoY); // new NetPopulation() ---
+                }
+                else
+                {
                     throw new ArgumentException();
+                }
             }
+
+            //switch ((int)x[2].Value)
+            //{
+            //    case 1:
+            //        population = new RandomPopulation(new CreatePoint(new FuncCalculatorBasic(FuncExpression)),
+            //            (int) x[0].Value, 1, chromoX, chromoY);
+            //        break;
+            //    case 2:
+            //        population = new NetPopulation(); // - 
+            //        break;
+            //    default:
+            //        throw new ArgumentException();
+            //}
 
             switch ((int)x[3].Value)
             {
