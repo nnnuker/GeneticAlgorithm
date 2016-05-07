@@ -17,7 +17,7 @@ namespace GeneticAlgorithm.Population
 
         public RandomPopulation()
         {
-            random = new Random(DateTime.Today.Millisecond);
+            random = new Random((int)DateTime.Now.Ticks);
         }
 
         public RandomPopulation(IFactoryPoints factoryPoint, int N, int populationNumber = 1, params IChromosome[] chromosomes):this()

@@ -14,7 +14,7 @@ namespace GeneticAlgorithm.PairFormation
         #region Constructor
         public RandomPairFormation()
         {
-            random = new Random(DateTime.Now.Millisecond);
+            random = new Random((int)DateTime.Now.Ticks);
         }
         #endregion  
 
