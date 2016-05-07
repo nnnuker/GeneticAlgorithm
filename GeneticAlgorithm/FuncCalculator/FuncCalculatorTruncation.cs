@@ -24,8 +24,24 @@ namespace GeneticAlgorithm.FuncCalculator
 
         private Dictionary<int, string> populationDictionary = new Dictionary<int, string>()
         {
-            {1, "GeneticAlgorithm.Population.RandomPopulation"}
+            {1, "GeneticAlgorithm.Population.RandomPopulation"},
+            {2, "GeneticAlgorithm.Population.NetPopulation"}
         };
+
+        private Dictionary<int, string> selectDictionary = new Dictionary<int, string>()
+        {
+            {1, "GeneticAlgorithm.SelectPoints.ClassicRouletteSelectPoints"},
+            {2, "GeneticAlgorithm.SelectPoints.RouletteSelectPoints"},
+            {3, "GeneticAlgorithm.SelectPoints.RangSelectPoints"},
+            {4, "GeneticAlgorithm.SelectPoints.TourSelectPoints"}
+        };
+
+        private Dictionary<int, string> searchMethodDictionary = new Dictionary<int, string>()
+        {
+            {1, "GeneticAlgorithm.FuncCalculator.SearchMethods.BestProbe"},
+            {2, "GeneticAlgorithm.FuncCalculator.SearchMethods.HukJivs"},
+        };
+
         private IPopulation population;
         private ISelectPoints selectStartPoints;
         private ISelectPoints selectOtherPoints;
@@ -132,11 +148,26 @@ namespace GeneticAlgorithm.FuncCalculator
             {
                 if (item.Key == (int) x[2].Value)
                 {
-                    var t = Type.GetType(item.Value);
+                    population =(IPopulation)Activator.CreateInstance(Type.GetType(item.Value),
+                        new CreatePoint(new FuncCalculatorBasic(FuncExpression)), (int) x[0].Value, 1, chromoX, chromoY); // new NetPopulation() ---
+                    break;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
 
-                    object[] args = { };
-                    population = (IPopulation)Activator.CreateInstance(Type.GetType(item.Value), new CreatePoint(new FuncCalculatorBasic(FuncExpression)),
-                        (int)x[0].Value, 1, chromoX, chromoY); // new NetPopulation() ---
+            }
+
+            foreach (var item in selectDictionary)
+            {
+                if (item.Key == (int)x[3].Value)
+                {
+                    selectStartPoints = (ISelectPoints)Activator.CreateInstance(Type.GetType(item.Value)); // new RangSelectPoints() new TourSelectPoints() ---
+                }
+                if (item.Key == (int)x[6].Value)
+                {
+                    selectOtherPoints = (ISelectPoints)Activator.CreateInstance(Type.GetType(item.Value)); // new RangSelectPoints() new TourSelectPoints() ---
                 }
                 else
                 {
@@ -144,47 +175,19 @@ namespace GeneticAlgorithm.FuncCalculator
                 }
             }
 
-            //switch ((int)x[2].Value)
-            //{
-            //    case 1:
-            //        population = new RandomPopulation(new CreatePoint(new FuncCalculatorBasic(FuncExpression)),
-            //            (int) x[0].Value, 1, chromoX, chromoY);
-            //        break;
-            //    case 2:
-            //        population = new NetPopulation(); // - 
-            //        break;
-            //    default:
-            //        throw new ArgumentException();
-            //}
+            foreach (var item in searchMethodDictionary)
+            {
+                if (item.Key == (int) x[4].Value)
+                {
+                    searchMethod = (ISearchMethod) Activator.CreateInstance(Type.GetType(item.Value));//new Huk() ---
+                    break;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
 
-            switch ((int)x[3].Value)
-            {
-                case 1:
-                    selectStartPoints = new ClassicRouletteSelectPoints();
-                    break;
-                case 2:
-                    selectStartPoints = new RouletteSelectPoints();
-                    break;
-                case 3:
-                    selectStartPoints = new RangSelectPoints(); // - 
-                    break;
-                case 4:
-                    selectStartPoints = new TourSelectPoints(); // - 
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
-            switch ((int)x[4].Value)
-            {
-                case 1:
-                    searchMethod = new BestProbe(s, sDir, searchMethodAccuracy);
-                    break;
-                case 2:
-                    searchMethod = new HukJivs(); // - 
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
             switch ((int)x[5].Value)
             {
                 case 1:
@@ -196,24 +199,6 @@ namespace GeneticAlgorithm.FuncCalculator
                 default:
                     throw new ArgumentException();
             }
-            switch ((int)x[6].Value)
-            {
-                case 1:
-                    selectOtherPoints = new ClassicRouletteSelectPoints();
-                    break;
-                case 2:
-                    selectOtherPoints = new RouletteSelectPoints();
-                    break;
-                case 3:
-                    selectOtherPoints = new RangSelectPoints();
-                    break;
-                case 4:
-                    selectOtherPoints = new TourSelectPoints();
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
-
         }
     }
 }
