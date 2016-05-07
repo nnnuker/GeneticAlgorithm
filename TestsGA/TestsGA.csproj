@@ -57,6 +57,7 @@
     <Compile Include="MutationTest.cs" />
     <Compile Include="PairFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchMethodTest.cs" />
     <Compile Include="TourSelectPointsTests.cs" />
     <Compile Include="SelectPointTest.cs" />
     <Compile Include="GAlgorithmTest.cs" />
