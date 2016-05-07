@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeGAForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeGAForm.Designer.cs">
+      <DependentUpon>ChangeGAForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DesignPointsData.cs" />
     <Compile Include="DesignPointsGraph.cs" />
     <Compile Include="DesignPointViewModel.cs" />
@@ -58,6 +64,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ChangeGAForm.resx">
+      <DependentUpon>ChangeGAForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

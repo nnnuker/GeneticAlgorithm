@@ -200,5 +200,10 @@ namespace GeneticAlgorithm.FuncCalculator
                     throw new ArgumentException();
             }
         }
+
+        public bool Equals(IFuncCalculator other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
