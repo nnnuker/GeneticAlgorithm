@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeneticAlgorithm.Crossover;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.Mutation;
@@ -16,6 +17,8 @@ namespace GeneticAlgorithm.Descendants
         private static IPairFormation pairFormation;
         private readonly NewPopulation newPopulation;
         private static List<IDesignPoint> listOfAllDesignPoints;
+        private static IEnumerable<IDesignPoint> listOfSecond;
+        private static IEnumerable<IDesignPoint> listOfFirst;
 
         #endregion
 
@@ -28,6 +31,8 @@ namespace GeneticAlgorithm.Descendants
         #region Property
 
         public IEnumerable<IDesignPoint> GetAllDesignPoints => listOfAllDesignPoints;
+        public IEnumerable<IDesignPoint> GetAfterFirst => listOfFirst;
+        public IEnumerable<IDesignPoint> GetAfterSecond => listOfSecond;
 
         #endregion
 
@@ -50,6 +55,8 @@ namespace GeneticAlgorithm.Descendants
             MutationCrossover.pairFormation = pairFormation;
             this.newPopulation = newPopulation;
             listOfAllDesignPoints = new List<IDesignPoint>();
+            listOfFirst = new List<IDesignPoint>();
+            listOfSecond = new List<IDesignPoint>();
         }
 
         #endregion
@@ -71,7 +78,9 @@ namespace GeneticAlgorithm.Descendants
 
             mutation.Mutate(designPoints);
 
-            list.AddRange(mutation.AllDesignPoints);
+            listOfFirst = mutation.AllDesignPoints;
+
+            list.AddRange(mutation.AllDesignPoints.Where(x => x.IsAlive));
 
             var pairs = pairFormation.FormatPairs(list);
 
@@ -80,6 +89,7 @@ namespace GeneticAlgorithm.Descendants
 
             var crossovered = crossover.Crossover(pairs);
 
+            listOfSecond = crossovered;
             list.AddRange(crossovered);
 
             listOfAllDesignPoints.AddRange(list);
@@ -93,8 +103,8 @@ namespace GeneticAlgorithm.Descendants
             mutation.PopulationId = 1;
 
             mutation.Mutate(designPoints);
-
-            listOfAllDesignPoints.AddRange(mutation.AllDesignPoints);
+            listOfFirst = mutation.AllDesignPoints;
+            listOfAllDesignPoints.AddRange(mutation.AllDesignPoints.Where(x => x.IsAlive));
 
             var pairs = pairFormation.FormatPairs(mutation.AllDesignPoints);
 
@@ -102,7 +112,7 @@ namespace GeneticAlgorithm.Descendants
             crossover.PopulationId = mutation.PopulationId;
 
             var crossovered = crossover.Crossover(pairs);
-
+            listOfSecond = crossovered;
             listOfAllDesignPoints.AddRange(crossovered);
 
             return crossovered;

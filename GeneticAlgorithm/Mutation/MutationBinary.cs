@@ -22,7 +22,7 @@ namespace GeneticAlgorithm.Mutation
         public MutationBinary(double mutationCoefficient)
         {
             this.mutationCoefficient = mutationCoefficient;
-            rnd = new Random((int)DateTime.Now.Ticks);
+            rnd = new Random((int)(DateTime.Now.Ticks));
             AllDesignPoints = new List<IDesignPoint>();
             MutateDesignPoints = new List<IDesignPoint>();
         }

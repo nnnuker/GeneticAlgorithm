@@ -17,7 +17,7 @@ namespace GeneticAlgorithm.Population
 
         public RandomPopulation()
         {
-            random = new Random((int)DateTime.Now.Ticks);
+            random = new Random((int)(DateTime.Now.Ticks));
         }
 
         public RandomPopulation(IFactoryPoints factoryPoint, int N, int populationNumber = 1, params IChromosome[] chromosomes):this()
@@ -42,7 +42,7 @@ namespace GeneticAlgorithm.Population
                     do
                     {
                         value = random.Next((int)chromosomes[j].Left, (int)chromosomes[j].Right + 1) + random.NextDouble();
-                        value = Math.Round(value, chromosomes[j].Accuracy);
+                        value = Math.Round(value, chromosomes[j].Accuracy <= 15 ? chromosomes[j].Accuracy :15);
                     }
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
                     chromo[j].Value = value;

@@ -19,7 +19,7 @@ namespace GeneticAlgorithm.Crossover
         #region Constructor
         public OnePointCrossover()
         {
-            random = new Random((int)DateTime.Now.Ticks);
+            random = new Random((int)(DateTime.Now.Ticks));
             PopulationNumber = 1;
             PopulationId = 1;
         }

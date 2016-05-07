@@ -30,9 +30,9 @@ namespace PresentationForms
             }
         }
 
-        public bool AddPopulation(IEnumerable<DesignPointViewModel> designPoints)
+        public bool AddPopulation(IEnumerable<DesignPointViewModel> designPoints, Color color)
         {
-            if (designPoints.Count() == 0)
+            if (!designPoints.Any())
             {
                 return false;
             }
@@ -53,7 +53,7 @@ namespace PresentationForms
             grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.Gold;
 
             grid.Rows.Insert(grid.Rows.Count - 1);
-            grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = Color.LightGreen;
+            grid.Rows[grid.Rows.Count - 2].DefaultCellStyle.BackColor = color;
 
             return true;
         }

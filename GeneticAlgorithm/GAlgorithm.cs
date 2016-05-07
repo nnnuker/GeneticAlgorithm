@@ -27,6 +27,9 @@ namespace GeneticAlgorithm
         #region Properties
 
         public IEnumerable<IDesignPoint> ListOfAllDesignPoints => listOfAllDesignPoints;
+        public IEnumerable<IDesignPoint> ListOfSelectedPoints { get; private set; }
+        public IEnumerable<IDesignPoint> ListOfFirst { get; private set; }
+        public IEnumerable<IDesignPoint> ListOfSecond { get; private set; }
 
         public List<IDesignPoint> CurrentDesignPoints
         {
@@ -58,6 +61,9 @@ namespace GeneticAlgorithm
             this.selectPoints = selectPoints;
             this.listOfAllDesignPoints = listOfCurrentDesignPoints 
                 = currentDesignPoints = population.GetPopulation().ToList();
+            this.ListOfSelectedPoints = new List<IDesignPoint>();
+            this.ListOfFirst = new List<IDesignPoint>();
+            this.ListOfSecond = new List<IDesignPoint>();
         }
 
         #endregion
@@ -72,7 +78,11 @@ namespace GeneticAlgorithm
 
             listOfCurrentDesignPoints = selectPoints.SelectPoints(percent, listOfCurrentDesignPoints).ToList();
 
+            ListOfSelectedPoints = listOfCurrentDesignPoints;
+
             listOfCurrentDesignPoints = descendants.GetDescendants(listOfCurrentDesignPoints).ToList();
+            ListOfFirst = descendants.GetAfterFirst;
+            ListOfSecond = descendants.GetAfterSecond;
 
             currentDesignPoints = descendants.GetAllDesignPoints.ToList();
 

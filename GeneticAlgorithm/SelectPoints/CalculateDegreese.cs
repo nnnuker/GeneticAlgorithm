@@ -21,17 +21,12 @@ namespace GeneticAlgorithm.SelectPoints
             listDesignPoints.Sort(new ComparerIDesignPoints());
             listDesignPoints.Reverse();
 
-            double sumFunctionValue = 0;
-
-            foreach (var item in designPoints)
-            {
-                sumFunctionValue += Math.Abs(item.FunctionValue);
-            }
+            var sumFunctionValue = designPoints.Sum(item => Math.Abs(item.FunctionValue));
 
             var listDegrees = new List<double>();
             foreach (var item in listDesignPoints)
             {
-                listDegrees.Add(item.FunctionValue * circle / sumFunctionValue);
+                listDegrees.Add(Math.Abs(item.FunctionValue) * circle / sumFunctionValue);
             }
             listDegrees.Reverse();
 

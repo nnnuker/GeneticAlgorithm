@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -63,10 +64,15 @@ namespace PresentationForms
 
         private void AppData()
         {
+            var res1 = algorithm.ListOfSelectedPoints.Select(x => new DesignPointViewModel(x));
+            dataAdapter.AddPopulation(res1, Color.Blue);
+            var res2 = algorithm.ListOfFirst.Select(x => new DesignPointViewModel(x));
+            dataAdapter.AddPopulation(res2, Color.BlueViolet);
+            var res3 = algorithm.ListOfSecond.Select(x => new DesignPointViewModel(x));
+            dataAdapter.AddPopulation(res3, Color.Brown);
             var res = algorithm.CurrentDesignPoints.Select(x => new DesignPointViewModel(x));
-            if (!dataAdapter.AddPopulation(res))
+            if (!dataAdapter.AddPopulation(res, Color.LightGreen))
             {
-                GetBest();
                 return;
             }
             graphAdapter.AddRange(res);
