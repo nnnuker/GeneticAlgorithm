@@ -1,4 +1,5 @@
-﻿using GeneticAlgorithm.DesignPoints;
+﻿using System;
+using GeneticAlgorithm.DesignPoints;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,7 @@ namespace GeneticAlgorithm.SelectPoints
 
             foreach (var item in designPoints)
             {
-                sumFunctionValue += item.FunctionValue;
+                sumFunctionValue += Math.Abs(item.FunctionValue);
             }
 
             var listDegrees = new List<double>();

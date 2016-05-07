@@ -11,7 +11,7 @@ namespace GeneticAlgorithm.SelectPoints
 
         public RouletteSelectPoints()
         {
-            rand = new Random(DateTime.Today.Millisecond);
+            rand = new Random((int)DateTime.Now.Ticks);
         }
 
         public IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints)
