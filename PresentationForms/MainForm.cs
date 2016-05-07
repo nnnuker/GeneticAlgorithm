@@ -34,11 +34,13 @@ namespace PresentationForms
 
         #endregion
 
+        #region Steps
+
         private void bToEnd_Click(object sender, EventArgs e)
         {
             for (int i = algorithm.PopulationNumber; i < int.Parse(tBoxExeEnd.Text); i++)
             {
-                if (algorithm.ListOfAllDesignPoints.Count(y => y.IsAlive) == 0)
+                if (algorithm.CurrentDesignPoints.Count(y => y.IsAlive) == 0)
                 {
                     GetBest();
                     return;
@@ -55,6 +57,10 @@ namespace PresentationForms
             AppData();
         }
 
+        #endregion
+
+        #region Append data
+
         private void AppData()
         {
             var res = algorithm.CurrentDesignPoints.Select(x => new DesignPointViewModel(x));
@@ -65,6 +71,19 @@ namespace PresentationForms
             }
             graphAdapter.AddRange(res);
         }
+
+        private void GetBest()
+        {
+            var best = algorithm.ListOfAllDesignPoints
+                .Where(y => y.IsAlive)
+                .OrderBy(x => x.FunctionValue)
+                .Select(x => new DesignPointViewModel(x))
+                .First();
+            dataAdapter.AddBest(best);
+            graphAdapter.AddBest(best);
+        }
+
+        #endregion
 
         private void Initialize(int accuracy, int N, int m, int percent, int end, double minX, double maxX,
             double minY, double maxY, string formula)
@@ -78,7 +97,7 @@ namespace PresentationForms
 
             IPopulation population = new RandomPopulation(factoryPoint, N, 1, chromoX, chromoY);
 
-            ISelectPoints selectPoints = new ClassicRouletteSelectPoints();
+            ISelectPoints selectPoints = new RouletteSelectPoints();
 
             ICrossover crossover = new OnePointCrossover();
             IMutation mutation = new MutationBinary(m);
@@ -118,6 +137,8 @@ namespace PresentationForms
             }
         }
 
+        #region Parsers
+
         private double DoubleParser(TextBox textBox)
         {
             double result;
@@ -144,15 +165,15 @@ namespace PresentationForms
             return result;
         }
 
-        private void GetBest()
+        #endregion
+
+        private void bChangeGA_Click(object sender, EventArgs e)
         {
-            var best = algorithm.ListOfAllDesignPoints
-                    .Where(y => y.IsAlive)
-                    .OrderBy(x => x.FunctionValue)
-                    .Select(x => new DesignPointViewModel(x))
-                    .First();
-            dataAdapter.AddBest(best);
-            graphAdapter.AddBest(best);
+            Form form = new ChangeGAForm();
+
+            form.ShowDialog();
+
+
         }
     }
 }
