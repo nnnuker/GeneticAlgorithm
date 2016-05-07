@@ -35,6 +35,8 @@ namespace PresentationForms
 
         #endregion
 
+        #region Steps
+
         private void bToEnd_Click(object sender, EventArgs e)
         {
             for (int i = algorithm.PopulationNumber; i < int.Parse(tBoxExeEnd.Text); i++)
@@ -56,6 +58,10 @@ namespace PresentationForms
             AppData();
         }
 
+        #endregion
+
+        #region Append data
+
         private void AppData()
         {
             var res1 = algorithm.ListOfSelectedPoints.Select(x => new DesignPointViewModel(x));
@@ -71,6 +77,19 @@ namespace PresentationForms
             }
             graphAdapter.AddRange(res);
         }
+
+        private void GetBest()
+        {
+            var best = algorithm.ListOfAllDesignPoints
+                .Where(y => y.IsAlive)
+                .OrderBy(x => x.FunctionValue)
+                .Select(x => new DesignPointViewModel(x))
+                .First();
+            dataAdapter.AddBest(best);
+            graphAdapter.AddBest(best);
+        }
+
+        #endregion
 
         private void Initialize(int accuracy, int N, int m, int percent, int end, double minX, double maxX,
             double minY, double maxY, string formula)
@@ -124,6 +143,8 @@ namespace PresentationForms
             }
         }
 
+        #region Parsers
+
         private double DoubleParser(TextBox textBox)
         {
             double result;
@@ -150,15 +171,15 @@ namespace PresentationForms
             return result;
         }
 
-        private void GetBest()
+        #endregion
+
+        private void bChangeGA_Click(object sender, EventArgs e)
         {
-            var best = algorithm.ListOfAllDesignPoints
-                    .Where(y => y.IsAlive)
-                    .OrderBy(x => x.FunctionValue)
-                    .Select(x => new DesignPointViewModel(x))
-                    .First();
-            dataAdapter.AddBest(best);
-            graphAdapter.AddBest(best);
+            Form form = new ChangeGAForm();
+
+            form.ShowDialog();
+
+
         }
     }
 }

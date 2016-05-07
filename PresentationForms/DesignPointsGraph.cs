@@ -10,9 +10,9 @@ namespace PresentationForms
     {
         private Chart graph;
         private Series series;
-        private Color deadColor = Color.Gray;
-        private Color invalidColor = Color.Red;
-        private Color healthyColor = Color.Green;
+        private readonly Color deadColor = Color.Gray;
+        private readonly Color invalidColor = Color.Red;
+        private readonly Color healthyColor = Color.Green;
         private MarkerStyle deadMarker = MarkerStyle.Circle;
         private MarkerStyle healthyMarker = MarkerStyle.Circle;
 

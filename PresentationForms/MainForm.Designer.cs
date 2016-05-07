@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tBoxX1Left = new System.Windows.Forms.TextBox();
             this.tBoxX1Right = new System.Windows.Forms.TextBox();
             this.tBoxX2Left = new System.Windows.Forms.TextBox();
@@ -53,6 +52,7 @@
             this.bToEnd = new System.Windows.Forms.Button();
             this.bInitialize = new System.Windows.Forms.Button();
             this.tBoxFormula = new System.Windows.Forms.TextBox();
+            this.bChangeGA = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -115,18 +115,15 @@
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea2);
             this.chart.Location = new System.Drawing.Point(13, 13);
             this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 2;
-            this.chart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.Name = "Series1";
+            series2.YValuesPerPoint = 2;
+            this.chart.Series.Add(series2);
             this.chart.Size = new System.Drawing.Size(306, 435);
             this.chart.TabIndex = 8;
             this.chart.Text = "chart1";
@@ -196,7 +193,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(461, 74);
+            this.label6.Location = new System.Drawing.Point(464, 67);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 16;
@@ -213,7 +210,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(464, 96);
+            this.label7.Location = new System.Drawing.Point(464, 93);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 13);
             this.label7.TabIndex = 18;
@@ -257,11 +254,22 @@
             this.tBoxFormula.TabIndex = 22;
             this.tBoxFormula.Text = "X+Y";
             // 
+            // bChangeGA
+            // 
+            this.bChangeGA.Location = new System.Drawing.Point(508, 145);
+            this.bChangeGA.Name = "bChangeGA";
+            this.bChangeGA.Size = new System.Drawing.Size(75, 23);
+            this.bChangeGA.TabIndex = 23;
+            this.bChangeGA.Text = "ChangeGA";
+            this.bChangeGA.UseVisualStyleBackColor = true;
+            this.bChangeGA.Click += new System.EventHandler(this.bChangeGA_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 460);
+            this.Controls.Add(this.bChangeGA);
             this.Controls.Add(this.tBoxFormula);
             this.Controls.Add(this.bInitialize);
             this.Controls.Add(this.bToEnd);
@@ -317,6 +325,7 @@
         private System.Windows.Forms.Button bToEnd;
         private System.Windows.Forms.Button bInitialize;
         private System.Windows.Forms.TextBox tBoxFormula;
+        private System.Windows.Forms.Button bChangeGA;
     }
 }
 

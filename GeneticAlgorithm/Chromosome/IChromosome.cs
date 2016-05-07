@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GeneticAlgorithm.Chromosome
 {
-    public interface IChromosome
+    public interface IChromosome:IEquatable<IChromosome>
     {
         string Name { get; set; }
         int Accuracy { get; set; }

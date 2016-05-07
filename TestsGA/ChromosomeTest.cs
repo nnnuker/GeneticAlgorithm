@@ -90,5 +90,16 @@ namespace TestsGA
             List<byte> expected = new List<byte> { 10 };
             CollectionAssert.AreEqual(expected, chromosome.Binary.ToList());
         }
+
+        [TestMethod]
+        public void Equals_BinaryChromosome()
+        {
+            IChromosome chromosome = new Chromosome(1, -5, 5, 0, "x");
+            IChromosome chromosome1 = new Chromosome(1, -5, 5, 0, "x");
+
+            var result = chromosome.Equals(chromosome1);
+
+            Assert.AreEqual(true, result);
+        }
     }
 }

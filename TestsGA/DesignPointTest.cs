@@ -20,8 +20,20 @@ namespace TestsGA
         public void FunctionValue_SpecificFunc()
         {
             IFuncCalculator funcCalulator = new FuncCalculatorBasic("x^2+y+z");
-            DesignPoint DP = new DesignPoint(1, 0, funcCalulator, new Chromosome(1, -3, 2, -2, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
+            IDesignPoint DP = new DesignPoint(1, 0, funcCalulator, new Chromosome(1, -3, 2, -2, "x"), new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
             Assert.AreEqual(DP.FunctionValue, 9);
+        }
+
+        [TestMethod]
+        public void Equals_Success()
+        {
+            IFuncCalculator funcCalulator = new FuncCalculatorBasic("x^2+y+z");
+            IDesignPoint DP = new DesignPoint(1, 0, funcCalulator, new Chromosome(1, -3, 2, -2, "x"), 
+                new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
+            IDesignPoint DP1 = new DesignPoint(1, 0, funcCalulator, new Chromosome(1, -3, 2, -2, "x"),
+                new Chromosome(1, 1, 2, 2, "y"), new Chromosome(1, 1, 2, 3, "z"));
+
+            Assert.AreEqual(true, DP.Equals(DP1));
         }
     }
 }
