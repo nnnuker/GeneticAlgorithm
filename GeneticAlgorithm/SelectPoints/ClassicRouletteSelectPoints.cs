@@ -11,7 +11,7 @@ namespace GeneticAlgorithm.SelectPoints
 
         public ClassicRouletteSelectPoints()
         {
-            rand = new Random(DateTime.Today.Millisecond);
+            rand = new Random((int)(DateTime.Now.Ticks));
         }
 
         public IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints)
@@ -19,12 +19,12 @@ namespace GeneticAlgorithm.SelectPoints
             if (n > designPoints.Count())
                 throw new ArgumentException();
 
-            int circle = 360;
+            var circle = 360;
             var listDegreeseWithIDesignPoints = CalculateDegreese.Calculate(designPoints, circle);
 
             var result = new List<IDesignPoint>();
 
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 var newPoint = rand.Next(0, circle + 1);
                 double currentValueDegrees = 0;

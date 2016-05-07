@@ -21,8 +21,8 @@ namespace GeneticAlgorithm.Mutation
         public MutationNumeric(double mutationCoefficient)
         {
             this.mutationCoefficient = mutationCoefficient;
-            rndCoefficient = new Random(DateTime.Today.Millisecond);
-            rndNumeric = new Random(DateTime.Today.Millisecond);
+            rndCoefficient = new Random((int)(DateTime.Now.Ticks));
+            rndNumeric = new Random((int)(DateTime.Now.Ticks));
             AllDesignPoints = new List<IDesignPoint>();
             MutateDesignPoints = new List<IDesignPoint>();
         }

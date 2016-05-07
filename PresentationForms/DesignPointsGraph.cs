@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -26,10 +27,10 @@ namespace PresentationForms
             Area = this.graph.ChartAreas.Add("graph");
             Area.AxisX.Minimum = minX;
             Area.AxisX.Maximum = maxX;
-            Area.AxisX.Interval = 1;
+            Area.AxisX.Interval = Math.Round((Math.Abs(minX) + Math.Abs(maxX))/10.0);
             Area.AxisY.Minimum = minY;
             Area.AxisY.Maximum = maxY;
-            Area.AxisY.Interval = 1;
+            Area.AxisY.Interval = Math.Round((Math.Abs(minX) + Math.Abs(maxX)) / 10.0);
             series = this.graph.Series.Add("designPoint");
             series.ChartType = SeriesChartType.Point;
             series.MarkerSize = 10;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,7 +39,7 @@ namespace PresentationForms
         {
             for (int i = algorithm.PopulationNumber; i < int.Parse(tBoxExeEnd.Text); i++)
             {
-                if (algorithm.ListOfAllDesignPoints.Count(y => y.IsAlive) == 0)
+                if (algorithm.CurrentDesignPoints.Count(y => y.IsAlive) == 0)
                 {
                     GetBest();
                     return;
@@ -57,10 +58,15 @@ namespace PresentationForms
 
         private void AppData()
         {
+            var res1 = algorithm.ListOfSelectedPoints.Select(x => new DesignPointViewModel(x));
+            dataAdapter.AddPopulation(res1, Color.Blue);
+            var res2 = algorithm.ListOfFirst.Select(x => new DesignPointViewModel(x));
+            dataAdapter.AddPopulation(res2, Color.BlueViolet);
+            var res3 = algorithm.ListOfSecond.Select(x => new DesignPointViewModel(x));
+            dataAdapter.AddPopulation(res3, Color.Brown);
             var res = algorithm.CurrentDesignPoints.Select(x => new DesignPointViewModel(x));
-            if (!dataAdapter.AddPopulation(res))
+            if (!dataAdapter.AddPopulation(res, Color.LightGreen))
             {
-                GetBest();
                 return;
             }
             graphAdapter.AddRange(res);
@@ -78,7 +84,7 @@ namespace PresentationForms
 
             IPopulation population = new RandomPopulation(factoryPoint, N, 1, chromoX, chromoY);
 
-            ISelectPoints selectPoints = new ClassicRouletteSelectPoints();
+            ISelectPoints selectPoints = new RouletteSelectPoints();
 
             ICrossover crossover = new OnePointCrossover();
             IMutation mutation = new MutationBinary(m);

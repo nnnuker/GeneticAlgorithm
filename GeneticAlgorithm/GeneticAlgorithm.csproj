@@ -65,6 +65,8 @@
     <Compile Include="FuncCalculator\IFuncCalculator.cs" />
     <Compile Include="Chromosome\Axis.cs" />
     <Compile Include="DesignPoints\Point.cs" />
+    <Compile Include="FuncCalculator\SearchMethods\BestProbe.cs" />
+    <Compile Include="FuncCalculator\SearchMethods\HukJivs.cs" />
     <Compile Include="GAlgorithm.cs" />
     <Compile Include="Mutation\IMutation.cs" />
     <Compile Include="Mutation\MutationBinary.cs" />
@@ -79,7 +81,7 @@
     <Compile Include="Population\NetPopulation.cs" />
     <Compile Include="Population\RandomPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FuncCalculator\TruncationAlgorithm\SearchMethods\IMethod.cs" />
+    <Compile Include="FuncCalculator\SearchMethods\ISearchMethod.cs" />
     <Compile Include="SelectPoints\BestSelectPoints.cs" />
     <Compile Include="SelectPoints\CalculateDegreese.cs" />
     <Compile Include="SelectPoints\ClassicRouletteSelectPoints.cs" />

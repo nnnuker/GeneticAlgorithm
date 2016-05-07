@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeneticAlgorithm.Crossover;
 using GeneticAlgorithm.DesignPoints;
 using GeneticAlgorithm.Mutation;
@@ -16,6 +17,8 @@ namespace GeneticAlgorithm.Descendants
         private static IPairFormation pairFormation;
         private readonly NewPopulation newPopulation;
         private static List<IDesignPoint> listOfAllDesignPoints;
+        private static IEnumerable<IDesignPoint> listOfSecond;
+        private static IEnumerable<IDesignPoint> listOfFirst;
 
         #endregion
 
@@ -28,6 +31,8 @@ namespace GeneticAlgorithm.Descendants
         #region Property
 
         public IEnumerable<IDesignPoint> GetAllDesignPoints => listOfAllDesignPoints;
+        public IEnumerable<IDesignPoint> GetAfterFirst => listOfFirst;
+        public IEnumerable<IDesignPoint> GetAfterSecond => listOfSecond;
 
         #endregion
 
@@ -50,6 +55,8 @@ namespace GeneticAlgorithm.Descendants
             CrossoverMutation.pairFormation = pairFormation;
             this.newPopulation = newPopulation;
             listOfAllDesignPoints = new List<IDesignPoint>();
+            listOfFirst= new List<IDesignPoint>();
+            listOfSecond = new List<IDesignPoint>();
         }
 
         #endregion
@@ -73,12 +80,16 @@ namespace GeneticAlgorithm.Descendants
 
             var crossovered = crossover.Crossover(pairs);
 
-            list.AddRange(crossovered);
+            listOfFirst = crossovered;
+
+            list.AddRange(crossovered.Where(x=>x.IsAlive));
 
             mutation.PopulationNumber = crossover.PopulationNumber;
             mutation.PopulationId = crossover.PopulationId;
 
             mutation.Mutate(crossovered);
+
+            listOfSecond = mutation.MutateDesignPoints;
 
             list.AddRange(mutation.MutateDesignPoints);
 
@@ -95,12 +106,12 @@ namespace GeneticAlgorithm.Descendants
             crossover.PopulationId = 1;
 
             var crossovered = crossover.Crossover(pairs);
-
+            listOfFirst = crossovered;
             mutation.PopulationNumber = crossover.PopulationNumber;
             mutation.PopulationId = crossover.PopulationId;
 
-            mutation.Mutate(crossovered);
-
+            mutation.Mutate(crossovered.Where(x => x.IsAlive));
+            listOfSecond = mutation.AllDesignPoints;
             listOfAllDesignPoints = mutation.AllDesignPoints;
 
             return listOfAllDesignPoints;

@@ -11,7 +11,7 @@ namespace GeneticAlgorithm.SelectPoints
 
         public RouletteSelectPoints()
         {
-            rand = new Random(DateTime.Today.Millisecond);
+            rand = new Random((int)(DateTime.Now.Ticks));
         }
 
         public IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints)
@@ -24,12 +24,12 @@ namespace GeneticAlgorithm.SelectPoints
 
             var result = new List<IDesignPoint>();
 
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 var newPoint = rand.Next(0, circle + 1);
                 double currentValueDegrees = 0;
 
-                for (int j = 0; j < listDegreeseWithIDesignPoints.Count; j++)
+                for (var j = 0; j < listDegreeseWithIDesignPoints.Count; j++)
                 {
                     currentValueDegrees += listDegreeseWithIDesignPoints[j].Degrees;
                     if (newPoint <= currentValueDegrees)
