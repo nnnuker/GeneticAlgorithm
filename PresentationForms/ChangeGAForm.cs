@@ -22,7 +22,5 @@ namespace PresentationForms
             {"", typeof(OnePointCrossover)},
             {"", typeof(TwoPointsCrossover)}
         };
-
-
     }
 }

@@ -67,7 +67,7 @@ namespace GeneticAlgorithm.DesignPoints
 
         public bool Equals(IDesignPoint other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null) return false;
 
             return this.FunctionValue.Equals(other.FunctionValue)
                    && this.ID == other.ID

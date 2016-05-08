@@ -74,7 +74,7 @@ namespace GeneticAlgorithm.Chromosome
 
         public bool Equals(IChromosome other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null) return false;
 
             return this.Accuracy == other.Accuracy
                 && this.Value.Equals(other.Value)
