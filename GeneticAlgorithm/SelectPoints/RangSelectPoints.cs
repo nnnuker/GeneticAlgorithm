@@ -23,7 +23,7 @@ namespace GeneticAlgorithm.SelectPoints
         public RangSelectPoints(params int[] arrayCoefficients)
         {
             if (arrayCoefficients == null)
-                arrayCoefficients = new int[] {};
+                arrayCoefficients = new [] {2, 2};
 
             this.arrayCoefficients = new List<int>(arrayCoefficients);
         }

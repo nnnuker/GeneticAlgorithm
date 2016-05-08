@@ -47,6 +47,5 @@ namespace GeneticAlgorithm.FuncCalculator
         }
 
         #endregion
-
     }
 }
