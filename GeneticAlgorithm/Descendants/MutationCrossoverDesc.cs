@@ -8,7 +8,7 @@ using GeneticAlgorithm.PairFormation;
 
 namespace GeneticAlgorithm.Descendants
 {
-    public class MutationCrossover : IDescendants
+    public class MutationCrossoverDesc : IDescendants
     {
         #region Fields
 
@@ -31,11 +31,11 @@ namespace GeneticAlgorithm.Descendants
 
         #region Constructors
 
-        public MutationCrossover() : this(null, null, null)
+        public MutationCrossoverDesc() : this(null, null, null)
         {
         }
 
-        public MutationCrossover(ICrossover crossover, IMutation mutation, IPairFormation pairFormation)
+        public MutationCrossoverDesc(ICrossover crossover, IMutation mutation, IPairFormation pairFormation)
         {
             if (crossover == null) throw new ArgumentNullException(nameof(crossover));
             if (mutation == null) throw new ArgumentNullException(nameof(mutation));
@@ -56,38 +56,33 @@ namespace GeneticAlgorithm.Descendants
         public IEnumerable<IDesignPoint> GetDescendants(IEnumerable<IDesignPoint> designPoints)
         {
             listOfAllDesignPoints = new List<IDesignPoint>();
-            return ParentMutationCrossover(designPoints);
+            return ParentDescendants(designPoints);
         }
         #endregion
 
         #region Private methods
-        private IEnumerable<IDesignPoint> ParentMutationCrossover(IEnumerable<IDesignPoint> designPoints)
-        {
-            var list = new List<IDesignPoint>();
 
+        private IEnumerable<IDesignPoint> ParentDescendants(IEnumerable<IDesignPoint> designPoints)
+        {
             mutation.PopulationNumber++;
             mutation.PopulationId = 1;
 
             mutation.Mutate(designPoints);
-
             listOfFirst = mutation.AllDesignPoints;
+            listOfAllDesignPoints.AddRange(mutation.AllDesignPoints.Where(x => x.IsAlive));
 
-            list.AddRange(mutation.AllDesignPoints.Where(x => x.IsAlive));
-
-            var pairs = pairFormation.FormatPairs(list);
+            var pairs = pairFormation.FormatPairs(mutation.AllDesignPoints);
 
             crossover.PopulationNumber = mutation.PopulationNumber;
             crossover.PopulationId = mutation.PopulationId;
 
             var crossovered = crossover.Crossover(pairs);
-
             listOfSecond = crossovered;
-            list.AddRange(crossovered);
+            listOfAllDesignPoints.AddRange(crossovered);
 
-            listOfAllDesignPoints.AddRange(list);
-
-            return list;
+            return crossovered;
         }
+
         #endregion
     }
 }

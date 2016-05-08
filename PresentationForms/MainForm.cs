@@ -91,28 +91,13 @@ namespace PresentationForms
 
         #endregion
 
+        #region Methods
+
         private void Initialize(int accuracy, int N, int m, int percent, int end, double minX, double maxX,
             double minY, double maxY, string formula)
         {
-            IFuncCalculator funcCalculator = new FuncCalculatorBasic(formula);
-
-            IFactoryPoints factoryPoint = new CreateDesignPoint(funcCalculator);
-
-            IChromosome chromoX = new Chromosome(accuracy, minX, maxX, 0, "X");
-            IChromosome chromoY = new Chromosome(accuracy, minY, maxY, 0, "Y");
-
-            IPopulation population = new RandomPopulation(factoryPoint, N, 1, chromoX, chromoY);
-
-            ISelectPoints selectPoints = new RouletteSelectPoints();
-
-            ICrossover crossover = new OnePointCrossover();
-            IMutation mutation = new MutationBinary(m);
-            IPairFormation pairFormation = new RandomPairFormation();
-
-            IDescendants descendants = new CrossoverMutation(crossover, mutation, pairFormation,
-                CrossoverMutation.ParentDescendants);
-
-            algorithm = new GAlgorithm(end, percent, population, selectPoints, descendants);
+            algorithm = GaService.GetGa(accuracy, N, m, percent, end, minX, maxX,
+            minY, maxY, formula);
         }
 
         private void bInitialize_Click(object sender, EventArgs e)
@@ -178,8 +163,9 @@ namespace PresentationForms
             Form form = new ChangeGAForm();
 
             form.ShowDialog();
-
-
         }
+
+        #endregion
+
     }
 }

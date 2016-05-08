@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
-using GeneticAlgorithm.Crossover;
+using GeneticAlgorithm;
 
 namespace PresentationForms
 {
@@ -10,17 +10,20 @@ namespace PresentationForms
         public ChangeGAForm()
         {
             InitializeComponent();
+
+            cbPopulation.DataSource = GaService.DictionaryPopulation.Keys.ToList();
+            cbCrossover.DataSource = GaService.DictionaryCrossover.Keys.ToList();
+            cbDescendants.DataSource = GaService.DictionaryDescendants.Keys.ToList();
+            cbPairFormation.DataSource = GaService.DictionaryPairFormation.Keys.ToList();
+            cbSelectPoints.DataSource = GaService.DictionarySelectPoints.Keys.ToList();
         }
 
         private void bOk_Click(object sender, EventArgs e)
         {
-            
-        }
+            GaService.SetArguments(cbCrossover.Text, cbPopulation.Text, cbSelectPoints.Text,
+                cbPairFormation.Text, cbDescendants.Text);
 
-        Dictionary<string, Type> dictionaryCrossover = new Dictionary<string, Type>
-        {
-            {"", typeof(OnePointCrossover)},
-            {"", typeof(TwoPointsCrossover)}
-        };
+            this.Close();
+        }
     }
 }

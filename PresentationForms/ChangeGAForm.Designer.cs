@@ -38,8 +38,6 @@
             this.cbDescendants = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbSelectPoints = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbNewPopulation = new System.Windows.Forms.ComboBox();
             this.bOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -66,7 +64,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 57);
+            this.label2.Location = new System.Drawing.Point(13, 104);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 13);
             this.label2.TabIndex = 2;
@@ -79,7 +77,7 @@
             "Random",
             "Several best",
             "Best worse"});
-            this.cbPairFormation.Location = new System.Drawing.Point(12, 73);
+            this.cbPairFormation.Location = new System.Drawing.Point(12, 120);
             this.cbPairFormation.Name = "cbPairFormation";
             this.cbPairFormation.Size = new System.Drawing.Size(121, 21);
             this.cbPairFormation.TabIndex = 3;
@@ -87,7 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(146, 57);
+            this.label3.Location = new System.Drawing.Point(9, 144);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 13);
             this.label3.TabIndex = 4;
@@ -99,7 +97,7 @@
             this.cbCrossover.Items.AddRange(new object[] {
             "Single point",
             "Two point"});
-            this.cbCrossover.Location = new System.Drawing.Point(149, 73);
+            this.cbCrossover.Location = new System.Drawing.Point(12, 160);
             this.cbCrossover.Name = "cbCrossover";
             this.cbCrossover.Size = new System.Drawing.Size(121, 21);
             this.cbCrossover.TabIndex = 5;
@@ -107,7 +105,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(146, 97);
+            this.label4.Location = new System.Drawing.Point(9, 184);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 6;
@@ -117,9 +115,9 @@
             // 
             this.cbDescendants.FormattingEnabled = true;
             this.cbDescendants.Items.AddRange(new object[] {
-            "Crossover -> mutation",
-            "Mutation -> crossover"});
-            this.cbDescendants.Location = new System.Drawing.Point(149, 113);
+            "Crossover mutation",
+            "Mutation crossover"});
+            this.cbDescendants.Location = new System.Drawing.Point(12, 200);
             this.cbDescendants.Name = "cbDescendants";
             this.cbDescendants.Size = new System.Drawing.Size(121, 21);
             this.cbDescendants.TabIndex = 7;
@@ -127,7 +125,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(146, 13);
+            this.label5.Location = new System.Drawing.Point(9, 58);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 8;
@@ -142,34 +140,14 @@
             "Rang",
             "Tour",
             "Best"});
-            this.cbSelectPoints.Location = new System.Drawing.Point(149, 29);
+            this.cbSelectPoints.Location = new System.Drawing.Point(12, 74);
             this.cbSelectPoints.Name = "cbSelectPoints";
             this.cbSelectPoints.Size = new System.Drawing.Size(121, 21);
             this.cbSelectPoints.TabIndex = 9;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 97);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "New population";
-            // 
-            // cbNewPopulation
-            // 
-            this.cbNewPopulation.FormattingEnabled = true;
-            this.cbNewPopulation.Items.AddRange(new object[] {
-            "Descendants",
-            "Crossover with mutation"});
-            this.cbNewPopulation.Location = new System.Drawing.Point(12, 113);
-            this.cbNewPopulation.Name = "cbNewPopulation";
-            this.cbNewPopulation.Size = new System.Drawing.Size(121, 21);
-            this.cbNewPopulation.TabIndex = 11;
-            // 
             // bOk
             // 
-            this.bOk.Location = new System.Drawing.Point(12, 141);
+            this.bOk.Location = new System.Drawing.Point(12, 227);
             this.bOk.Name = "bOk";
             this.bOk.Size = new System.Drawing.Size(75, 23);
             this.bOk.TabIndex = 12;
@@ -181,10 +159,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 360);
+            this.ClientSize = new System.Drawing.Size(686, 265);
             this.Controls.Add(this.bOk);
-            this.Controls.Add(this.cbNewPopulation);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.cbSelectPoints);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbDescendants);
@@ -214,8 +190,6 @@
         private System.Windows.Forms.ComboBox cbDescendants;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbSelectPoints;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbNewPopulation;
         private System.Windows.Forms.Button bOk;
     }
 }
