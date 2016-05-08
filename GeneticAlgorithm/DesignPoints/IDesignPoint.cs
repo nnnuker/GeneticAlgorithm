@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.FuncCalculator;
 
 namespace GeneticAlgorithm.DesignPoints
 {
-    public interface IDesignPoint
+    public interface IDesignPoint:IEquatable<IDesignPoint>
     {
         int ID { get; set; }
         int PopulationNumber { get; set; }

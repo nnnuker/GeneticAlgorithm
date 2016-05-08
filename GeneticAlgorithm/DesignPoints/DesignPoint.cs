@@ -7,7 +7,7 @@ using GeneticAlgorithm.FuncCalculator;
 
 namespace GeneticAlgorithm.DesignPoints
 {
-    public class DesignPoint : IDesignPoint, IEquatable<IDesignPoint>
+    public class DesignPoint : IDesignPoint
     {
         #region Properties
         public double FunctionValue { get; set; }
@@ -102,7 +102,7 @@ namespace GeneticAlgorithm.DesignPoints
                    && this.PopulationNumber == other.PopulationNumber
                    && this.IsMutate == other.IsMutate
                    && this.FuncCalculator.Equals(other.FuncCalculator)
-                   && StructuralComparisons.StructuralEqualityComparer.Equals(this.X, other.X);
+                   && this.X.SequenceEqual(other.X);
         }
 
         #endregion
