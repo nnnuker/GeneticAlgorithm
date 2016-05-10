@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Crossovers">
+          <Key>
+            <PropertyRef Name="CrossoverId" />
+          </Key>
+          <Property Name="CrossoverId" Type="int" Nullable="false" />
+          <Property Name="CrossoverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Descendants">
+          <Key>
+            <PropertyRef Name="DescendantsId" />
+          </Key>
+          <Property Name="DescendantsId" Type="int" Nullable="false" />
+          <Property Name="DescendantsName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PairFormations">
+          <Key>
+            <PropertyRef Name="PairFormationId" />
+          </Key>
+          <Property Name="PairFormationId" Type="int" Nullable="false" />
+          <Property Name="PairFormationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Populations">
+          <Key>
+            <PropertyRef Name="PopulationId" />
+          </Key>
+          <Property Name="PopulationId" Type="int" Nullable="false" />
+          <Property Name="PopulationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CrossoverId" Type="int" Nullable="false" />
+          <Property Name="DescendantsId" Type="int" Nullable="false" />
+          <Property Name="PopulationId" Type="int" Nullable="false" />
+          <Property Name="PairFormationId" Type="int" Nullable="false" />
+          <Property Name="SelectPointsId" Type="int" Nullable="false" />
+          <Property Name="FunctionValue" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SelectPoints">
+          <Key>
+            <PropertyRef Name="SelectPointsId" />
+          </Key>
+          <Property Name="SelectPointsId" Type="int" Nullable="false" />
+          <Property Name="SelectPointsName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Results_ToCrossovers">
+          <End Role="Crossovers" Type="Self.Crossovers" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crossovers">
+              <PropertyRef Name="CrossoverId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="CrossoverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToDescendants">
+          <End Role="Descendants" Type="Self.Descendants" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descendants">
+              <PropertyRef Name="DescendantsId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="DescendantsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToPairFormation">
+          <End Role="PairFormations" Type="Self.PairFormations" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PairFormations">
+              <PropertyRef Name="PairFormationId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="PairFormationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToPopulation">
+          <End Role="Populations" Type="Self.Populations" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Populations">
+              <PropertyRef Name="PopulationId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="PopulationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToSelectPoints">
+          <End Role="SelectPoints" Type="Self.SelectPoints" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SelectPoints">
+              <PropertyRef Name="SelectPointsId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="SelectPointsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Crossovers" EntityType="Self.Crossovers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Descendants" EntityType="Self.Descendants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PairFormations" EntityType="Self.PairFormations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Populations" EntityType="Self.Populations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SelectPoints" EntityType="Self.SelectPoints" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Results_ToCrossovers" Association="Self.FK_Results_ToCrossovers">
+            <End Role="Crossovers" EntitySet="Crossovers" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToDescendants" Association="Self.FK_Results_ToDescendants">
+            <End Role="Descendants" EntitySet="Descendants" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToPairFormation" Association="Self.FK_Results_ToPairFormation">
+            <End Role="PairFormations" EntitySet="PairFormations" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToPopulation" Association="Self.FK_Results_ToPopulation">
+            <End Role="Populations" EntitySet="Populations" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToSelectPoints" Association="Self.FK_Results_ToSelectPoints">
+            <End Role="SelectPoints" EntitySet="SelectPoints" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Crossover">
+          <Key>
+            <PropertyRef Name="CrossoverId" />
+          </Key>
+          <Property Name="CrossoverId" Type="Int32" Nullable="false" />
+          <Property Name="CrossoverName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_Results_ToCrossovers" FromRole="Crossovers" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="Descendant">
+          <Key>
+            <PropertyRef Name="DescendantsId" />
+          </Key>
+          <Property Name="DescendantsId" Type="Int32" Nullable="false" />
+          <Property Name="DescendantsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_Results_ToDescendants" FromRole="Descendants" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="PairFormation">
+          <Key>
+            <PropertyRef Name="PairFormationId" />
+          </Key>
+          <Property Name="PairFormationId" Type="Int32" Nullable="false" />
+          <Property Name="PairFormationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_Results_ToPairFormation" FromRole="PairFormations" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="Population">
+          <Key>
+            <PropertyRef Name="PopulationId" />
+          </Key>
+          <Property Name="PopulationId" Type="Int32" Nullable="false" />
+          <Property Name="PopulationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_Results_ToPopulation" FromRole="Populations" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CrossoverId" Type="Int32" Nullable="false" />
+          <Property Name="DescendantsId" Type="Int32" Nullable="false" />
+          <Property Name="PopulationId" Type="Int32" Nullable="false" />
+          <Property Name="PairFormationId" Type="Int32" Nullable="false" />
+          <Property Name="SelectPointsId" Type="Int32" Nullable="false" />
+          <Property Name="FunctionValue" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Crossover" Relationship="Self.FK_Results_ToCrossovers" FromRole="Results" ToRole="Crossovers" />
+          <NavigationProperty Name="Descendant" Relationship="Self.FK_Results_ToDescendants" FromRole="Results" ToRole="Descendants" />
+          <NavigationProperty Name="PairFormation" Relationship="Self.FK_Results_ToPairFormation" FromRole="Results" ToRole="PairFormations" />
+          <NavigationProperty Name="Population" Relationship="Self.FK_Results_ToPopulation" FromRole="Results" ToRole="Populations" />
+          <NavigationProperty Name="SelectPoint" Relationship="Self.FK_Results_ToSelectPoints" FromRole="Results" ToRole="SelectPoints" />
+        </EntityType>
+        <EntityType Name="SelectPoint">
+          <Key>
+            <PropertyRef Name="SelectPointsId" />
+          </Key>
+          <Property Name="SelectPointsId" Type="Int32" Nullable="false" />
+          <Property Name="SelectPointsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_Results_ToSelectPoints" FromRole="SelectPoints" ToRole="Results" />
+        </EntityType>
+        <Association Name="FK_Results_ToCrossovers">
+          <End Role="Crossovers" Type="Self.Crossover" Multiplicity="1" />
+          <End Role="Results" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crossovers">
+              <PropertyRef Name="CrossoverId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="CrossoverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToDescendants">
+          <End Role="Descendants" Type="Self.Descendant" Multiplicity="1" />
+          <End Role="Results" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descendants">
+              <PropertyRef Name="DescendantsId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="DescendantsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToPairFormation">
+          <End Role="PairFormations" Type="Self.PairFormation" Multiplicity="1" />
+          <End Role="Results" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PairFormations">
+              <PropertyRef Name="PairFormationId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="PairFormationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToPopulation">
+          <End Role="Populations" Type="Self.Population" Multiplicity="1" />
+          <End Role="Results" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Populations">
+              <PropertyRef Name="PopulationId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="PopulationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_ToSelectPoints">
+          <End Role="SelectPoints" Type="Self.SelectPoint" Multiplicity="1" />
+          <End Role="Results" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SelectPoints">
+              <PropertyRef Name="SelectPointsId" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="SelectPointsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Crossovers" EntityType="Self.Crossover" />
+          <EntitySet Name="Descendants" EntityType="Self.Descendant" />
+          <EntitySet Name="PairFormations" EntityType="Self.PairFormation" />
+          <EntitySet Name="Populations" EntityType="Self.Population" />
+          <EntitySet Name="Results" EntityType="Self.Result" />
+          <EntitySet Name="SelectPoints" EntityType="Self.SelectPoint" />
+          <AssociationSet Name="FK_Results_ToCrossovers" Association="Self.FK_Results_ToCrossovers">
+            <End Role="Crossovers" EntitySet="Crossovers" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToDescendants" Association="Self.FK_Results_ToDescendants">
+            <End Role="Descendants" EntitySet="Descendants" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToPairFormation" Association="Self.FK_Results_ToPairFormation">
+            <End Role="PairFormations" EntitySet="PairFormations" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToPopulation" Association="Self.FK_Results_ToPopulation">
+            <End Role="Populations" EntitySet="Populations" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_ToSelectPoints" Association="Self.FK_Results_ToSelectPoints">
+            <End Role="SelectPoints" EntitySet="SelectPoints" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Crossovers">
+            <EntityTypeMapping TypeName="DatabaseModel.Crossover">
+              <MappingFragment StoreEntitySet="Crossovers">
+                <ScalarProperty Name="CrossoverId" ColumnName="CrossoverId" />
+                <ScalarProperty Name="CrossoverName" ColumnName="CrossoverName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Descendants">
+            <EntityTypeMapping TypeName="DatabaseModel.Descendant">
+              <MappingFragment StoreEntitySet="Descendants">
+                <ScalarProperty Name="DescendantsId" ColumnName="DescendantsId" />
+                <ScalarProperty Name="DescendantsName" ColumnName="DescendantsName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PairFormations">
+            <EntityTypeMapping TypeName="DatabaseModel.PairFormation">
+              <MappingFragment StoreEntitySet="PairFormations">
+                <ScalarProperty Name="PairFormationId" ColumnName="PairFormationId" />
+                <ScalarProperty Name="PairFormationName" ColumnName="PairFormationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Populations">
+            <EntityTypeMapping TypeName="DatabaseModel.Population">
+              <MappingFragment StoreEntitySet="Populations">
+                <ScalarProperty Name="PopulationId" ColumnName="PopulationId" />
+                <ScalarProperty Name="PopulationName" ColumnName="PopulationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="DatabaseModel.Result">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CrossoverId" ColumnName="CrossoverId" />
+                <ScalarProperty Name="DescendantsId" ColumnName="DescendantsId" />
+                <ScalarProperty Name="PopulationId" ColumnName="PopulationId" />
+                <ScalarProperty Name="PairFormationId" ColumnName="PairFormationId" />
+                <ScalarProperty Name="SelectPointsId" ColumnName="SelectPointsId" />
+                <ScalarProperty Name="FunctionValue" ColumnName="FunctionValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SelectPoints">
+            <EntityTypeMapping TypeName="DatabaseModel.SelectPoint">
+              <MappingFragment StoreEntitySet="SelectPoints">
+                <ScalarProperty Name="SelectPointsId" ColumnName="SelectPointsId" />
+                <ScalarProperty Name="SelectPointsName" ColumnName="SelectPointsName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

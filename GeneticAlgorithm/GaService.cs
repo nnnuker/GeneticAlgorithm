@@ -58,8 +58,8 @@ namespace GeneticAlgorithm
 
             DictionarySelectPoints = new Dictionary<string, Type>
             {
-                {"Classic roulette", typeof(ClassicRouletteSelectPoints)},
                 {"Roulette", typeof(RouletteSelectPoints)},
+                {"Classic roulette", typeof(ClassicRouletteSelectPoints)},
                 {"Rang", typeof(RangSelectPoints)},
                 {"Tour", typeof(TourSelectPoints)},
                 {"Best", typeof(BestSelectPoints)}

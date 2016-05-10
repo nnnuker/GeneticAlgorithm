@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticAlgorithm", "GeneticAlgorithm\GeneticAlgorithm.csproj", "{F77C5777-5E2E-44B3-A36F-073771E1DF3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationForms", "PresentationForms\PresentationForms.csproj", "{E3E876CE-0537-4222-BE3A-95C4AE87D514}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsGA", "TestsGA\TestsGA.csproj", "{5854E237-AE5D-4589-BCF6-453C35373AD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM", "ORM\ORM.csproj", "{A289F5B8-A513-4743-9677-F46EF42D3DDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5854E237-AE5D-4589-BCF6-453C35373AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5854E237-AE5D-4589-BCF6-453C35373AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5854E237-AE5D-4589-BCF6-453C35373AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A289F5B8-A513-4743-9677-F46EF42D3DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A289F5B8-A513-4743-9677-F46EF42D3DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A289F5B8-A513-4743-9677-F46EF42D3DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A289F5B8-A513-4743-9677-F46EF42D3DDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

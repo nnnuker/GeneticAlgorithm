@@ -94,7 +94,12 @@
     <Compile Include="SelectPoints\RouletteSelectPoints.cs" />
     <Compile Include="SelectPoints\TourSelectPoints.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ORM\ORM.csproj">
+      <Project>{a289f5b8-a513-4743-9677-f46ef42d3ddd}</Project>
+      <Name>ORM</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

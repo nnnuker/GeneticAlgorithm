@@ -39,14 +39,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbSelectPoints = new System.Windows.Forms.ComboBox();
             this.bOk = new System.Windows.Forms.Button();
+            this.dGVResults = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVResults)).BeginInit();
             this.SuspendLayout();
             // 
             // cbPopulation
             // 
             this.cbPopulation.FormattingEnabled = true;
-            this.cbPopulation.Items.AddRange(new object[] {
-            "Random",
-            "Net"});
             this.cbPopulation.Location = new System.Drawing.Point(12, 29);
             this.cbPopulation.Name = "cbPopulation";
             this.cbPopulation.Size = new System.Drawing.Size(121, 21);
@@ -73,10 +72,6 @@
             // cbPairFormation
             // 
             this.cbPairFormation.FormattingEnabled = true;
-            this.cbPairFormation.Items.AddRange(new object[] {
-            "Random",
-            "Several best",
-            "Best worse"});
             this.cbPairFormation.Location = new System.Drawing.Point(12, 120);
             this.cbPairFormation.Name = "cbPairFormation";
             this.cbPairFormation.Size = new System.Drawing.Size(121, 21);
@@ -94,9 +89,6 @@
             // cbCrossover
             // 
             this.cbCrossover.FormattingEnabled = true;
-            this.cbCrossover.Items.AddRange(new object[] {
-            "Single point",
-            "Two point"});
             this.cbCrossover.Location = new System.Drawing.Point(12, 160);
             this.cbCrossover.Name = "cbCrossover";
             this.cbCrossover.Size = new System.Drawing.Size(121, 21);
@@ -114,9 +106,6 @@
             // cbDescendants
             // 
             this.cbDescendants.FormattingEnabled = true;
-            this.cbDescendants.Items.AddRange(new object[] {
-            "Crossover mutation",
-            "Mutation crossover"});
             this.cbDescendants.Location = new System.Drawing.Point(12, 200);
             this.cbDescendants.Name = "cbDescendants";
             this.cbDescendants.Size = new System.Drawing.Size(121, 21);
@@ -134,12 +123,6 @@
             // cbSelectPoints
             // 
             this.cbSelectPoints.FormattingEnabled = true;
-            this.cbSelectPoints.Items.AddRange(new object[] {
-            "Classic roulette",
-            "Roulette",
-            "Rang",
-            "Tour",
-            "Best"});
             this.cbSelectPoints.Location = new System.Drawing.Point(12, 74);
             this.cbSelectPoints.Name = "cbSelectPoints";
             this.cbSelectPoints.Size = new System.Drawing.Size(121, 21);
@@ -155,11 +138,23 @@
             this.bOk.UseVisualStyleBackColor = true;
             this.bOk.Click += new System.EventHandler(this.bOk_Click);
             // 
+            // dGVResults
+            // 
+            this.dGVResults.AllowUserToAddRows = false;
+            this.dGVResults.AllowUserToDeleteRows = false;
+            this.dGVResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVResults.Location = new System.Drawing.Point(140, 13);
+            this.dGVResults.Name = "dGVResults";
+            this.dGVResults.ReadOnly = true;
+            this.dGVResults.Size = new System.Drawing.Size(534, 240);
+            this.dGVResults.TabIndex = 13;
+            // 
             // ChangeGAForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 265);
+            this.Controls.Add(this.dGVResults);
             this.Controls.Add(this.bOk);
             this.Controls.Add(this.cbSelectPoints);
             this.Controls.Add(this.label5);
@@ -173,6 +168,7 @@
             this.Controls.Add(this.cbPopulation);
             this.Name = "ChangeGAForm";
             this.Text = "ChangeGAForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dGVResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +187,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbSelectPoints;
         private System.Windows.Forms.Button bOk;
+        private System.Windows.Forms.DataGridView dGVResults;
     }
 }

@@ -1,18 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using GeneticAlgorithm;
-using GeneticAlgorithm.Chromosome;
-using GeneticAlgorithm.Crossover;
-using GeneticAlgorithm.Descendants;
-using GeneticAlgorithm.FactoryPoint;
-using GeneticAlgorithm.FuncCalculator;
-using GeneticAlgorithm.Mutation;
-using GeneticAlgorithm.PairFormation;
-using GeneticAlgorithm.Population;
-using GeneticAlgorithm.SelectPoints;
+using ORM;
 
 namespace PresentationForms
 {
@@ -39,7 +32,7 @@ namespace PresentationForms
 
         private void bToEnd_Click(object sender, EventArgs e)
         {
-            for (int i = algorithm.PopulationNumber; i < int.Parse(tBoxExeEnd.Text); i++)
+            for (int i = algorithm.PopulationNumber; i < Int32.Parse(tBoxExeEnd.Text); i++)
             {
                 if (algorithm.CurrentDesignPoints.Count(y => y.IsAlive) == 0)
                 {
@@ -87,6 +80,7 @@ namespace PresentationForms
                 .First();
             dataAdapter.AddBest(best);
             graphAdapter.AddBest(best);
+            ResultService.SaveResult(best.Value);
         }
 
         #endregion
@@ -133,7 +127,7 @@ namespace PresentationForms
         private double DoubleParser(TextBox textBox)
         {
             double result;
-            var flag = double.TryParse(textBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out result);
+            var flag = Double.TryParse(textBox.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out result);
 
             if (!flag)
             {
@@ -146,7 +140,7 @@ namespace PresentationForms
         private int IntParser(TextBox textBox)
         {
             int result;
-            var flag = int.TryParse(textBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
+            var flag = Int32.TryParse(textBox.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
 
             if (!flag)
             {
