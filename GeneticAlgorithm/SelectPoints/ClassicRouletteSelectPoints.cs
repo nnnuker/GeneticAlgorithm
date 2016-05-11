@@ -7,12 +7,22 @@ namespace GeneticAlgorithm.SelectPoints
 {
     public class ClassicRouletteSelectPoints : ISelectPoints
     {
+        #region Fields
+
         private readonly Random rand;
+
+        #endregion
+
+        #region Constructors
 
         public ClassicRouletteSelectPoints()
         {
-            rand = new Random((int)(DateTime.Now.Ticks));
+            rand = new Random((int) (DateTime.Now.Ticks));
         }
+
+        #endregion
+
+        #region Public methods
 
         public IEnumerable<IDesignPoint> SelectPoints(int n, IEnumerable<IDesignPoint> designPoints)
         {
@@ -41,5 +51,8 @@ namespace GeneticAlgorithm.SelectPoints
             }
             return result;
         }
+
+        #endregion
+
     }
 }

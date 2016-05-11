@@ -54,8 +54,10 @@
     <Compile Include="Crossover\OnePointCrossover.cs" />
     <Compile Include="Crossover\TwoPointsCrossover.cs" />
     <Compile Include="Descendants\CrossoverMutation.cs" />
+    <Compile Include="Descendants\CrossoverMutationDesc.cs" />
     <Compile Include="Descendants\IDescendants.cs" />
     <Compile Include="Descendants\MutationCrossover.cs" />
+    <Compile Include="Descendants\MutationCrossoverDesc.cs" />
     <Compile Include="DesignPoints\DesignPoint.cs" />
     <Compile Include="DesignPoints\IDesignPoint.cs" />
     <Compile Include="FactoryPoint\CreateDesignPoint.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="FuncCalculator\SearchMethods\BestProbe.cs" />
     <Compile Include="FuncCalculator\SearchMethods\HukJivs.cs" />
     <Compile Include="GAlgorithm.cs" />
+    <Compile Include="GaService.cs" />
     <Compile Include="Mutation\IMutation.cs" />
     <Compile Include="Mutation\MutationBinary.cs" />
     <Compile Include="Mutation\MutationNumeric.cs" />

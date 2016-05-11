@@ -44,12 +44,11 @@ namespace GeneticAlgorithm.FuncCalculator
 
         public bool Equals(IFuncCalculator other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null) return false;
 
             return this.FuncExpression == other.FuncExpression;
         }
 
         #endregion
-
     }
 }

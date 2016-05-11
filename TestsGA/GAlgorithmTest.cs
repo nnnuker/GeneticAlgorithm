@@ -19,8 +19,6 @@ namespace TestsGA
         [TestMethod]
         public void MoveNext()
         {
-            //Assert.Inconclusive();
-
             IFuncCalculator funcCalculator = new FuncCalculatorBasic("x+y");
 
             IFactoryPoints factoryPoint = new CreateDesignPoint(funcCalculator);
@@ -36,8 +34,7 @@ namespace TestsGA
             IMutation mutation = new MutationBinary(10);
             IPairFormation pairFormation = new RandomPairFormation();
 
-            IDescendants descendants = new CrossoverMutation(crossover, mutation, pairFormation,
-                CrossoverMutation.ParentDescendants);
+            IDescendants descendants = new CrossoverMutationDesc(crossover, mutation, pairFormation);
 
             GAlgorithm ga = new GAlgorithm(10, 50, population, selectPoints, descendants);
 
@@ -51,8 +48,6 @@ namespace TestsGA
         [TestMethod]
         public void MoveToEnd()
         {
-            //Assert.Inconclusive();
-
             IFuncCalculator funcCalculator = new FuncCalculatorBasic("x+y");
 
             IFactoryPoints factoryPoint = new CreateDesignPoint(funcCalculator);
@@ -68,16 +63,12 @@ namespace TestsGA
             IMutation mutation = new MutationBinary(10);
             IPairFormation pairFormation = new RandomPairFormation();
 
-            IDescendants descendants = new CrossoverMutation(crossover, mutation, pairFormation,
-                CrossoverMutation.ParentDescendants);
+            IDescendants descendants = new CrossoverMutationDesc(crossover, mutation, pairFormation);
 
             GAlgorithm ga = new GAlgorithm(10, 80, population, selectPoints, descendants);
 
             ga.MoveToEnd();
 
-            var result = ga.ListOfAllDesignPoints.Where(x=>(x.X[1].Value.ToString().Length > 3 || x.X[0].Value.ToString().Length > 3) && x.IsAlive);
-
-            //Assert.AreEqual(20, result.Count());
         }
     }
 }

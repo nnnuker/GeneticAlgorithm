@@ -74,7 +74,7 @@ namespace GeneticAlgorithm
         {
             listOfCurrentDesignPoints = listOfCurrentDesignPoints.Where(x => x.IsAlive).ToList();
 
-            var percent = (int)Math.Round(((double)listOfCurrentDesignPoints.Count * (double)n) / 100.0);
+            var percent = (int)Math.Floor(((double)listOfCurrentDesignPoints.Count * (double)n) / 100.0);
 
             listOfCurrentDesignPoints = selectPoints.SelectPoints(percent, listOfCurrentDesignPoints).ToList();
 

@@ -56,6 +56,8 @@
     <Compile Include="DesignPoint.Tests\DesignPointTest.cs" />
     <Compile Include="Mutation.Tests\MutationTest.cs" />
     <Compile Include="PairFormation.Tests\PairFormationTest.cs" />
+    <Compile Include="PairFormation.Tests\BestWorsePairFormationTest.cs" />
+    <Compile Include="PairFormation.Tests\SeveralBestPairFormationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchMethod.Tests\SearchMethodTest.cs" />
     <Compile Include="SelectPoints.Tests\TourSelectPointsTests.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GeneticAlgorithm.Chromosome
 {
@@ -73,14 +74,14 @@ namespace GeneticAlgorithm.Chromosome
 
         public bool Equals(IChromosome other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null) return false;
 
-            return StructuralComparisons.StructuralEqualityComparer.Equals(this.Binary, other.Binary)
-                && this.Accuracy == other.Accuracy
+            return this.Accuracy == other.Accuracy
                 && this.Value.Equals(other.Value)
                 && this.Left.Equals(other.Left)
                 && this.Right.Equals(other.Right)
-                && this.Name == other.Name;
+                && this.Name == other.Name
+                && this.Binary.SequenceEqual(other.Binary);
         }
 
         #endregion

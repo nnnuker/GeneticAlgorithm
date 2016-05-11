@@ -69,5 +69,17 @@ namespace GeneticAlgorithm.DesignPoints
         {
             
         }
+
+        public bool Equals(IDesignPoint other)
+        {
+            if (other == null) return false;
+
+            return this.FunctionValue.Equals(other.FunctionValue)
+                   && this.ID == other.ID
+                   && this.PopulationNumber == other.PopulationNumber
+                   && this.IsMutate == other.IsMutate
+                   && this.FuncCalculator.Equals(other.FuncCalculator)
+                   && this.X.SequenceEqual(other.X);
+        }
     }
 }
