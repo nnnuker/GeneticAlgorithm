@@ -43,6 +43,14 @@ namespace GeneticAlgorithm.Population
                     {
                         value = random.Next((int)chromosomes[j].Left, (int)chromosomes[j].Right + 1) + random.NextDouble();
                         value = Math.Round(value, chromosomes[j].Accuracy <= 15 ? chromosomes[j].Accuracy :15);
+                        if (chromo[j].Name == "n") //костыль
+                        {
+                            while (chromo[j - 1].Value < value)
+                            { 
+                                value = random.Next((int)chromosomes[j].Left, (int)chromosomes[j].Right + 1) + random.NextDouble();
+                                value = Math.Round(value, chromosomes[j].Accuracy <= 15 ? chromosomes[j].Accuracy : 15);
+                            };
+                        }
                     }
                     while (value < chromosomes[j].Left || value > chromosomes[j].Right);
                     chromo[j].Value = value;

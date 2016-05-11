@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using GeneticAlgorithm.Chromosome;
 using GeneticAlgorithm.FuncCalculator;
@@ -8,6 +9,8 @@ namespace GeneticAlgorithm.DesignPoints
 { 
     public class Point : IDesignPoint
     {
+        public IEnumerable<IDesignPoint> AllPoints { get; set; }
+
         public bool IsAlive
         {
             get
@@ -25,6 +28,8 @@ namespace GeneticAlgorithm.DesignPoints
         public int ID { get; set; }
         public int PopulationNumber { get; set; }
         public List<IChromosome> X { get; set; }
+
+
 
         public Point()
         {

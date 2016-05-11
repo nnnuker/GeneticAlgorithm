@@ -7,10 +7,12 @@ using GeneticAlgorithm.FuncCalculator;
 
 namespace GeneticAlgorithm.DesignPoints
 {
+    [Serializable]
     public class DesignPoint : IDesignPoint, IEquatable<IDesignPoint>
     {
         #region Properties
         public double FunctionValue { get; set; }
+        public IEnumerable<IDesignPoint> AllPoints { get; set; }
         public IEnumerable<byte> X1X2 { get; set; }
         public int ID { get; set; }
         public int PopulationNumber { get; set; }
@@ -51,6 +53,7 @@ namespace GeneticAlgorithm.DesignPoints
             this.X = new List<IChromosome>(x);
             this.FuncCalculator = funcCalculator;
             this.FunctionValue = funcCalculator.CalculateFunc(x);
+            this.AllPoints = GetAllPoints(funcCalculator.AllPoints);
             this.X1X2 = GetBinary(x);
             this.IsMutate = false;
         }
@@ -85,6 +88,7 @@ namespace GeneticAlgorithm.DesignPoints
             {
                 FunctionValue = this.FunctionValue,
                 FuncCalculator = this.FuncCalculator,
+                AllPoints = this.AllPoints,
                 X = this.X,
                 PopulationNumber = this.PopulationNumber,
                 X1X2 = this.X1X2,
@@ -102,12 +106,26 @@ namespace GeneticAlgorithm.DesignPoints
                    && this.PopulationNumber == other.PopulationNumber
                    && this.IsMutate == other.IsMutate
                    && this.FuncCalculator.Equals(other.FuncCalculator)
+                   && StructuralComparisons.StructuralEqualityComparer.Equals(this.AllPoints, other.AllPoints)
                    && StructuralComparisons.StructuralEqualityComparer.Equals(this.X, other.X);
         }
 
         #endregion
 
         #region Private methods
+
+        private IEnumerable<IDesignPoint> GetAllPoints(IEnumerable<IDesignPoint> allPoints)
+        {
+            var list = new List<IDesignPoint>();
+            if (allPoints != null)
+            {
+                foreach (var designPoint in allPoints)
+                {
+                    list.Add(designPoint);
+                }
+            }
+            return list;
+        }
 
         private IEnumerable<byte> GetBinary(params IChromosome[] x)
         {

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationForms", "Presen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsGA", "TestsGA\TestsGA.csproj", "{5854E237-AE5D-4589-BCF6-453C35373AD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationFormsPart2", "PresentationFormsPart2\PresentationFormsPart2.csproj", "{291C5661-BE70-4A0A-AB62-86D042FA3D9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5854E237-AE5D-4589-BCF6-453C35373AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5854E237-AE5D-4589-BCF6-453C35373AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5854E237-AE5D-4589-BCF6-453C35373AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291C5661-BE70-4A0A-AB62-86D042FA3D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291C5661-BE70-4A0A-AB62-86D042FA3D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291C5661-BE70-4A0A-AB62-86D042FA3D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291C5661-BE70-4A0A-AB62-86D042FA3D9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,6 +28,7 @@ namespace GeneticAlgorithm.FuncCalculator.SearchMethods
         {
             var SDir = GlobalSDir;
             var S = GlobalS;
+
             var countCalculate = 0;
 
             var currentValue = startPoint.FunctionValue;
@@ -87,8 +88,8 @@ namespace GeneticAlgorithm.FuncCalculator.SearchMethods
                 startPoint.X[0].Name);
             var y = new Axis(startPoint.X[1].Accuracy, startPoint.X[1].Left, startPoint.X[1].Right, pointCurrent[1],
                 startPoint.X[1].Name);
-            newPoint = new Point(startPoint.PopulationNumber, ++startPoint.ID, funcCalculator, x,
-                y);
+            var ss = startPoint.PopulationNumber;
+            newPoint = new Point(++ss, startPoint.ID, funcCalculator, x, y);
             return countCalculate;
 
         }
@@ -123,9 +124,6 @@ namespace GeneticAlgorithm.FuncCalculator.SearchMethods
                     } while (exit != true);
                     m--;
                 }
-
-                //arrayAngles.Add(100); arrayAngles.Add(200); arrayAngles.Add(150);
-                //arrayAngles.Add(300); arrayAngles.Add(70); arrayAngles.Add(85);
 
                 var valueAngles = new List<double>();
 
@@ -173,8 +171,8 @@ namespace GeneticAlgorithm.FuncCalculator.SearchMethods
                         startPoint.X[0].Name);
                     var y = new Axis(startPoint.X[1].Accuracy, startPoint.X[1].Left, startPoint.X[1].Right, pointCurrent[1],
                         startPoint.X[1].Name);
-                    newPoint = new Point(startPoint.PopulationNumber, startPoint.ID, funcCalculator, x,
-                        y);
+                    var ss = startPoint.PopulationNumber;
+                    newPoint = new Point(++ss, startPoint.ID, funcCalculator, x, y);
                     return countCalculate;
                 }
             }

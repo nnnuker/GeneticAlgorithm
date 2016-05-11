@@ -11,6 +11,7 @@ namespace GeneticAlgorithm.DesignPoints
         List<IChromosome> X { get; set; }
         IEnumerable<byte> X1X2 { get; set; }
         double FunctionValue { get; set; }
+        IEnumerable<IDesignPoint> AllPoints { get; set; }
         bool IsAlive { get; }
         bool IsMutate { get; set; }
         IDesignPoint Clone();

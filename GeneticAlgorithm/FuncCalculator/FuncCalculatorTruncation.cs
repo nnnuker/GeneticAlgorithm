@@ -12,6 +12,28 @@ namespace GeneticAlgorithm.FuncCalculator
 {
     public class FuncCalculatorTruncation : IFuncCalculator
     {
+        #region Fields
+
+        private readonly Dictionary<int, string> populationDictionary = new Dictionary<int, string>()
+        {
+            {1, "GeneticAlgorithm.Population.RandomPopulation"},
+            {2, "GeneticAlgorithm.Population.NetPopulation"}
+        };
+
+        private readonly Dictionary<int, string> selectDictionary = new Dictionary<int, string>()
+        {
+            {1, "GeneticAlgorithm.SelectPoints.ClassicRouletteSelectPoints"},
+            {2, "GeneticAlgorithm.SelectPoints.RouletteSelectPoints"},
+            {3, "GeneticAlgorithm.SelectPoints.TourSelectPoints"},
+            {4, "GeneticAlgorithm.SelectPoints.RangSelectPoints"},
+        };
+
+        private readonly Dictionary<int, string> searchMethodDictionary = new Dictionary<int, string>()
+        {
+            {1, "GeneticAlgorithm.FuncCalculator.SearchMethods.BestProbe"},
+            {2, "GeneticAlgorithm.FuncCalculator.SearchMethods.HukJivs"},
+        };
+
         private readonly double maxX;
         private readonly double minX;
         private readonly double maxY;
@@ -20,39 +42,22 @@ namespace GeneticAlgorithm.FuncCalculator
         private readonly double sDir;
         private readonly double searchMethodAccuracy;
         private readonly double funcCalculatorTruncationAccuracy;
-
-
-        private Dictionary<int, string> populationDictionary = new Dictionary<int, string>()
-        {
-            {1, "GeneticAlgorithm.Population.RandomPopulation"},
-            {2, "GeneticAlgorithm.Population.NetPopulation"}
-        };
-
-        private Dictionary<int, string> selectDictionary = new Dictionary<int, string>()
-        {
-            {1, "GeneticAlgorithm.SelectPoints.ClassicRouletteSelectPoints"},
-            {2, "GeneticAlgorithm.SelectPoints.RouletteSelectPoints"},
-            {3, "GeneticAlgorithm.SelectPoints.RangSelectPoints"},
-            {4, "GeneticAlgorithm.SelectPoints.TourSelectPoints"}
-        };
-
-        private Dictionary<int, string> searchMethodDictionary = new Dictionary<int, string>()
-        {
-            {1, "GeneticAlgorithm.FuncCalculator.SearchMethods.BestProbe"},
-            {2, "GeneticAlgorithm.FuncCalculator.SearchMethods.HukJivs"},
-        };
-
         private IPopulation population;
         private ISelectPoints selectStartPoints;
         private ISelectPoints selectOtherPoints;
         private ISearchMethod searchMethod;
+        private delegate int Search(IDesignPoint startPoint, out IDesignPoint newPoint);
         private Search search;
 
-        public List<IDesignPoint> allPoints { get; set; }
+        #endregion
 
-        private delegate int Search(IDesignPoint startPoint, out IDesignPoint newPoint);
-
+        #region Properties
+        public List<IDesignPoint> AllPoints { get; set; }
         public string FuncExpression { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         public FuncCalculatorTruncation()
         {
@@ -71,12 +76,18 @@ namespace GeneticAlgorithm.FuncCalculator
             this.searchMethodAccuracy = searchMethodAccuracy;
             this.funcCalculatorTruncationAccuracy = funcCalculatorTruncationAccuracy;
             FuncExpression = expression;
-            allPoints = new List<IDesignPoint>();
+            AllPoints = new List<IDesignPoint>();
         }
+
+        #endregion
+
+        #region Public methods
 
         public double CalculateFunc(params IChromosome[] x)
         {
             InitializeMethods(x);
+
+            AllPoints.Clear();
 
             var startPoints = population.GetPopulation();
 
@@ -84,17 +95,26 @@ namespace GeneticAlgorithm.FuncCalculator
 
             foreach (var designPoint in startPoints)
             {
-                allPoints.Add(designPoint);
+                AllPoints.Add(designPoint);
                 sunNPrevAndNNext.Add(designPoint);
             }
 
             double result = 0;
             IDesignPoint bestNPprev, bestNNext;
-            double k;
+            double xx;
             do
-            { 
-                var nPrev = result == 0 ? selectStartPoints.SelectPoints((int) x[1].Value, sunNPrevAndNNext) : 
-                    selectOtherPoints.SelectPoints((int)x[1].Value, sunNPrevAndNNext);
+            {
+                IEnumerable<IDesignPoint> nPrev;
+                if (result == 0)
+                {
+                    nPrev = selectStartPoints.SelectPoints((int) x[1].Value, sunNPrevAndNNext);
+                }
+                else
+                {
+                    nPrev = selectOtherPoints.SelectPoints((int)x[1].Value, sunNPrevAndNNext);
+                }
+                //var nPrev = result == 0 ? selectStartPoints.SelectPoints((int) x[1].Value, sunNPrevAndNNext) : 
+                //    selectOtherPoints.SelectPoints((int)x[1].Value, sunNPrevAndNNext);
 
                 sunNPrevAndNNext.Clear();
 
@@ -113,17 +133,29 @@ namespace GeneticAlgorithm.FuncCalculator
                     result += search(itemPrev, out newPoint);
 
                     nNext.Add(newPoint);
-                    allPoints.Add(newPoint);
+                    AllPoints.Add(newPoint);
                     sunNPrevAndNNext.Add(newPoint);
                 }
 
                 bestNNext = SelectMinFunctionValue(nNext);
-            } while (Math.Abs(Math.Abs(bestNNext.FunctionValue - bestNPprev.FunctionValue) / bestNPprev.FunctionValue) 
-            > funcCalculatorTruncationAccuracy);
+
+                xx = Math.Abs(Math.Abs(bestNNext.FunctionValue - bestNPprev.FunctionValue)/bestNPprev.FunctionValue);
+            } while (xx >  funcCalculatorTruncationAccuracy);
             return result;
 
         }
-        
+
+        public bool Equals(IFuncCalculator other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+
+            return this.FuncExpression == other.FuncExpression;
+        }
+
+        #endregion
+
+        #region Private methods
+
         private IDesignPoint SelectMinFunctionValue(IEnumerable<IDesignPoint> points)
         {
             var minValue = double.PositiveInfinity;
@@ -152,11 +184,6 @@ namespace GeneticAlgorithm.FuncCalculator
                         new CreatePoint(new FuncCalculatorBasic(FuncExpression)), (int) x[0].Value, 1, chromoX, chromoY); // new NetPopulation() ---
                     break;
                 }
-                else
-                {
-                    throw new ArgumentException();
-                }
-
             }
 
             foreach (var item in selectDictionary)
@@ -169,22 +196,14 @@ namespace GeneticAlgorithm.FuncCalculator
                 {
                     selectOtherPoints = (ISelectPoints)Activator.CreateInstance(Type.GetType(item.Value)); // new RangSelectPoints() new TourSelectPoints() ---
                 }
-                else
-                {
-                    throw new ArgumentException();
-                }
             }
 
             foreach (var item in searchMethodDictionary)
             {
                 if (item.Key == (int) x[4].Value)
                 {
-                    searchMethod = (ISearchMethod) Activator.CreateInstance(Type.GetType(item.Value));//new Huk() ---
+                    searchMethod = (ISearchMethod) Activator.CreateInstance(Type.GetType(item.Value), s, sDir, searchMethodAccuracy);//new Huk() ---
                     break;
-                }
-                else
-                {
-                    throw new ArgumentException();
                 }
             }
 
@@ -201,9 +220,6 @@ namespace GeneticAlgorithm.FuncCalculator
             }
         }
 
-        public bool Equals(IFuncCalculator other)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

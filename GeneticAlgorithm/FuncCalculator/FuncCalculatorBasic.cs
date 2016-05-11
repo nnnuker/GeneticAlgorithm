@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Bestcode.MathParser;
 using GeneticAlgorithm.Chromosome;
+using GeneticAlgorithm.DesignPoints;
 
 namespace GeneticAlgorithm.FuncCalculator
 {
@@ -9,6 +11,7 @@ namespace GeneticAlgorithm.FuncCalculator
         #region Properties
 
         public string FuncExpression { get; set; }
+        public List<IDesignPoint> AllPoints { get; set; }
 
         #endregion
 
